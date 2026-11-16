@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>मार्केट पल्स AI — सोपे व अचूक शेअर्स ट्रेडिंग टर्मिनल</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@600;700;800&display=swap" rel="stylesheet">
@@ -17,10 +17,14 @@
       --green-bg: #f0fdf4;
       --green-border: #bbf7d0;
       --text-main: #0f172a;
-      --text-sub: #475569;
+      --text-sub: #334155;
       --text-muted: #64748b;
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body {
+      width: 100%;
+      overflow-x: hidden;
+    }
     body {
       font-family: 'Inter', -apple-system, sans-serif;
       background: var(--bg);
@@ -30,35 +34,35 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      padding: 1.5rem 1rem;
+      padding: 1rem;
       background-image: 
-        radial-gradient(circle at 15% 15%, rgba(37, 99, 235, 0.05) 0%, transparent 40%),
-        radial-gradient(circle at 85% 85%, rgba(22, 163, 74, 0.05) 0%, transparent 45%);
+        radial-gradient(circle at 15% 15%, rgba(37, 99, 235, 0.04) 0%, transparent 40%),
+        radial-gradient(circle at 85% 85%, rgba(22, 163, 74, 0.04) 0%, transparent 45%);
     }
-    .main-container {
+    .portal-box {
       background: var(--card-bg);
       border: 1px solid var(--border);
-      border-radius: 24px;
-      max-width: 520px;
+      border-radius: 20px;
+      max-width: 460px;
       width: 100%;
-      padding: 2.2rem 1.8rem;
-      box-shadow: 0 10px 30px -5px rgba(15, 23, 42, 0.06), 0 4px 10px -2px rgba(15, 23, 42, 0.03);
+      padding: 1.8rem 1.4rem;
+      box-shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.06), 0 4px 8px -2px rgba(15, 23, 42, 0.03);
       text-align: center;
     }
-    .badge-status {
+    .live-badge {
       display: inline-flex;
       align-items: center;
       gap: 6px;
       background: var(--green-bg);
       color: #15803d;
       border: 1px solid var(--green-border);
-      padding: 6px 14px;
+      padding: 5px 12px;
       border-radius: 20px;
-      font-size: 0.82rem;
+      font-size: 0.80rem;
       font-weight: 700;
-      margin-bottom: 1.2rem;
+      margin-bottom: 1rem;
     }
-    .dot-live {
+    .live-dot {
       width: 8px;
       height: 8px;
       border-radius: 50%;
@@ -67,208 +71,247 @@
     }
     h1 {
       font-family: 'Outfit', sans-serif;
-      font-size: 1.85rem;
+      font-size: 1.7rem;
       font-weight: 800;
       color: var(--text-main);
-      margin-bottom: 0.35rem;
-      letter-spacing: -0.5px;
+      margin-bottom: 0.3rem;
+      letter-spacing: -0.4px;
     }
     h1 span {
       color: var(--primary);
     }
     p.tagline {
       color: var(--text-sub);
-      font-size: 1rem;
+      font-size: 0.92rem;
       font-weight: 500;
-      margin-bottom: 1.6rem;
-      line-height: 1.5;
+      margin-bottom: 1.4rem;
+      line-height: 1.4;
     }
-    
-    /* Easy & Large Clickable Buttons */
-    .action-group {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-      margin-bottom: 1.8rem;
-    }
-    .btn-main {
+
+    /* Main Big Action Button */
+    .btn-launch {
       display: flex;
       align-items: center;
       justify-content: center;
       gap: 10px;
+      width: 100%;
       background: linear-gradient(135deg, #16a34a 0%, #15803d 100%);
       color: #ffffff;
       padding: 16px 20px;
-      border-radius: 16px;
-      font-size: 1.12rem;
+      border-radius: 14px;
+      font-size: 1.15rem;
       font-weight: 800;
       text-decoration: none;
-      box-shadow: 0 6px 20px rgba(22, 163, 74, 0.28);
-      transition: all 0.2s ease;
+      box-shadow: 0 6px 18px rgba(22, 163, 74, 0.28);
+      transition: transform 0.15s, box-shadow 0.15s;
       cursor: pointer;
       border: none;
+      margin-bottom: 12px;
     }
-    .btn-main:hover {
+    .btn-launch:active, .btn-launch:hover {
       transform: translateY(-2px);
-      box-shadow: 0 8px 25px rgba(22, 163, 74, 0.35);
+      box-shadow: 0 8px 22px rgba(22, 163, 74, 0.35);
     }
-    .btn-secondary {
+
+    /* Secondary Mobile Preview Button */
+    .btn-mobile-sim {
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 10px;
+      gap: 8px;
+      width: 100%;
       background: #eff6ff;
       color: var(--primary);
       border: 1px solid #bfdbfe;
-      padding: 14px 20px;
-      border-radius: 14px;
-      font-size: 0.98rem;
+      padding: 12px 18px;
+      border-radius: 12px;
+      font-size: 0.95rem;
       font-weight: 700;
       text-decoration: none;
-      transition: all 0.2s ease;
       cursor: pointer;
+      margin-bottom: 1.4rem;
+      transition: background 0.15s;
     }
-    .btn-secondary:hover {
+    .btn-mobile-sim:hover {
       background: #dbeafe;
-      transform: translateY(-1px);
     }
 
-    /* Clean QR Card */
-    .qr-card {
+    /* QR Code Area */
+    .qr-box {
       background: #f8fafc;
       border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 1.2rem;
-      margin-bottom: 1.6rem;
+      border-radius: 14px;
+      padding: 1rem;
+      margin-bottom: 1.4rem;
     }
-    .qr-card-title {
-      font-size: 0.88rem;
+    .qr-title {
+      font-size: 0.85rem;
       font-weight: 700;
       color: var(--text-main);
-      margin-bottom: 10px;
+      margin-bottom: 8px;
     }
-    .qr-img-box {
+    .qr-img {
       background: #ffffff;
       border: 1px solid var(--border);
-      padding: 10px;
-      border-radius: 12px;
+      padding: 8px;
+      border-radius: 10px;
       display: inline-block;
-      box-shadow: 0 4px 12px rgba(15, 23, 42, 0.04);
+      margin: 0 auto;
     }
-    .qr-img-box img {
+    .qr-img img {
       display: block;
-      width: 150px;
-      height: 150px;
+      width: 140px;
+      height: 140px;
     }
-    .qr-hint {
-      font-size: 0.78rem;
+    .qr-sub {
+      font-size: 0.75rem;
       color: var(--text-muted);
-      margin-top: 8px;
+      margin-top: 6px;
     }
 
-    /* 3 Simple Feature Cards */
-    .feature-list {
+    /* Easy Features */
+    .features-list {
       display: flex;
       flex-direction: column;
       gap: 8px;
       text-align: left;
     }
-    .feature-item {
+    .feature-card {
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 10px;
       background: #f8fafc;
       border: 1px solid var(--border);
-      padding: 10px 14px;
-      border-radius: 12px;
+      padding: 10px 12px;
+      border-radius: 10px;
     }
-    .feature-icon {
-      font-size: 1.25rem;
-      flex-shrink: 0;
+    .feature-card .icon {
+      font-size: 1.2rem;
     }
-    .feature-text h4 {
-      font-size: 0.88rem;
+    .feature-card .txt h4 {
+      font-size: 0.85rem;
       font-weight: 700;
       color: var(--text-main);
-      margin-bottom: 1px;
     }
-    .feature-text p {
-      font-size: 0.78rem;
+    .feature-card .txt p {
+      font-size: 0.75rem;
       color: var(--text-muted);
     }
 
     footer {
-      margin-top: 1.5rem;
-      font-size: 0.80rem;
+      margin-top: 1.2rem;
+      font-size: 0.75rem;
       color: var(--text-muted);
       font-weight: 600;
+    }
+
+    /* Mobile Adaptations */
+    @media (max-width: 480px) {
+      .portal-box {
+        padding: 1.4rem 1.1rem;
+        border-radius: 16px;
+      }
+      h1 {
+        font-size: 1.5rem;
+      }
+      .btn-launch {
+        font-size: 1.05rem;
+        padding: 14px 16px;
+      }
     }
   </style>
 </head>
 <body>
 
-  <div class="main-container">
-    <!-- Live Status Pill -->
-    <div class="badge-status">
-      <span class="dot-live"></span>
-      100% लाईव्ह मार्केट सुरू आहे
+  <div class="portal-box">
+    <!-- Live Status -->
+    <div class="live-badge">
+      <span class="live-dot"></span>
+      थेट लाईव्ह मार्केट सुरू आहे
     </div>
 
-    <!-- Title & Tagline -->
+    <!-- Title & Subtitle -->
     <h1>मार्केट पल्स <span>AI प्रो</span></h1>
     <p class="tagline">NSE व BSE शेअर्सचे थेट लाईव्ह भाव आणि अचूक खरेदी-विक्री सिग्नल्स</p>
 
-    <!-- Main Easy Buttons -->
-    <div class="action-group">
-      <a class="btn-main" href="https://type-english-owner-august.trycloudflare.com" target="_blank">
-        <span>🚀</span>
-        <span>मार्केट टर्मिनल सुरू करा (क्लिक करा)</span>
-      </a>
+    <!-- Main Easy Launch Button (Auto-adjusts for Mobile & Desktop) -->
+    <a class="btn-launch" id="btnLaunchTerminal" href="https://type-english-owner-august.trycloudflare.com">
+      <span>🚀</span>
+      <span>थेट मार्केट सुरू करा</span>
+    </a>
 
-      <button class="btn-secondary" onclick="window.open('https://type-english-owner-august.trycloudflare.com?mobile_sim=1','MarketPulsePhone','width=412,height=915,resizable=yes,scrollbars=yes')">
-        <span>📱</span>
-        <span>मोबाईल प्रिव्ह्यू स्क्रीन उघडा</span>
-      </button>
-    </div>
+    <!-- Secondary Mobile Simulation Option -->
+    <button class="btn-mobile-sim" id="btnMobileSim">
+      <span>📱</span>
+      <span>मोबाईल प्रिव्ह्यू स्क्रीन (Phone View)</span>
+    </button>
 
-    <!-- Mobile QR Scan Box -->
-    <div class="qr-card">
-      <div class="qr-card-title">📲 मोबाईलवर वापरण्यासाठी QR स्कॅन करा:</div>
-      <div class="qr-img-box">
-        <img src="https://api.qrserver.com/v1/create-qr-code/?size=160x160&margin=4&data=https%3A%2F%2Ftype-english-owner-august.trycloudflare.com" alt="Scan QR Code to open on Mobile">
+    <!-- QR Code Scan Box -->
+    <div class="qr-box">
+      <div class="qr-title">📲 मोबाईल कॅमेऱ्याने QR स्कॅन करा:</div>
+      <div class="qr-img">
+        <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&margin=4&data=https%3A%2F%2Ftype-english-owner-august.trycloudflare.com" alt="QR Code for Mobile Access">
       </div>
-      <div class="qr-hint">कॅमेऱ्याने स्कॅन करताच तुमच्या मोबाईलवर टर्मिनल सुरू होईल</div>
+      <div class="qr-sub">स्कॅन करताच तुमच्या मोबाईलवर थेट ओपन होईल</div>
     </div>
 
     <!-- 3 Simple Features -->
-    <div class="feature-list">
-      <div class="feature-item">
-        <span class="feature-icon">🟢</span>
-        <div class="feature-text">
-          <h4>1,000+ शेअर्सचे थेट लाईव्ह दर</h4>
-          <p>Nifty 50, Bank Nifty आणि सर्व आघाडीचे शेअर्स</p>
+    <div class="features-list">
+      <div class="feature-card">
+        <span class="icon">🟢</span>
+        <div class="txt">
+          <h4>1,000+ शेअर्सचे थेट भाव</h4>
+          <p>Nifty 50, Bank Nifty आणि सर्व शेअर्स</p>
         </div>
       </div>
-      <div class="feature-item">
-        <span class="feature-icon">🎯</span>
-        <div class="feature-text">
-          <h4>अचूक खरेदी व विक्री सिग्नल्स</h4>
-          <p>स्पष्ट एन्ट्री लेव्हल, टार्गेट आणि स्टॉप लॉस</p>
+      <div class="feature-card">
+        <span class="icon">🎯</span>
+        <div class="txt">
+          <h4>खरेदी व विक्री सिग्नल्स</h4>
+          <p>स्पष्ट एन्ट्री, टार्गेट आणि स्टॉप लॉस</p>
         </div>
       </div>
-      <div class="feature-item">
-        <span class="feature-icon">🛡️</span>
-        <div class="feature-text">
-          <h4>100% सुरक्षित रिस्क मॅनेजमेंट</h4>
-          <p>कॅपिटल प्रोटेक्शन आणि कडक नियम</p>
+      <div class="feature-card">
+        <span class="icon">🛡️</span>
+        <div class="txt">
+          <h4>कडक रिस्क मॅनेजमेंट</h4>
+          <p>कॅपिटल प्रोटेक्शन आणि सुरक्षित ट्रेडिंग</p>
         </div>
       </div>
     </div>
   </div>
 
   <footer>
-    Market Pulse AI • सोपे • सुरक्षित • 100% रिअल-टाईम
+    Market Pulse AI • 100% रिअल-टाईम • नो पासवर्ड • नो एरर
   </footer>
+
+  <script>
+    const LIVE_URL = "https://type-english-owner-august.trycloudflare.com";
+    const isMobile = /Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent) || window.innerWidth <= 768;
+
+    const btnLaunch = document.getElementById('btnLaunchTerminal');
+    const btnSim = document.getElementById('btnMobileSim');
+
+    if (btnLaunch) {
+      btnLaunch.addEventListener('click', (e) => {
+        if (isMobile) {
+          e.preventDefault();
+          window.location.href = LIVE_URL;
+        }
+      });
+    }
+
+    if (btnSim) {
+      if (isMobile) {
+        // If already on mobile, hide the simulator button to avoid confusion
+        btnSim.style.display = 'none';
+      } else {
+        btnSim.addEventListener('click', () => {
+          window.open(LIVE_URL + '?mobile_sim=1', 'MarketPulseMobile', 'width=412,height=880,resizable=yes,scrollbars=yes');
+        });
+      }
+    }
+  </script>
 
 </body>
 </html>

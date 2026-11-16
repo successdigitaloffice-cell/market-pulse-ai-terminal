@@ -389,9 +389,51 @@ body.theme-white * {
 }
 
 /* 1.10 LIVE TRADE SIGNALS SECTION & SIGNAL CARDS */
+.terminal-container-clean {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 20px !important;
+  width: 100% !important;
+}
+
 [data-theme="white"] .terminal-live-signals-panel {
   background: #ffffff !important;
   border: 1px solid #e2e8f0 !important;
+  border-radius: 18px !important;
+  padding: 20px 22px !important;
+  box-shadow: 0 4px 16px -2px rgba(15, 23, 42, 0.05) !important;
+  width: 100% !important;
+}
+
+[data-theme="white"] .terminal-signals-grid {
+  display: grid !important;
+  grid-template-columns: repeat(auto-fill, minmax(330px, 1fr)) !important;
+  gap: 16px !important;
+  margin-top: 14px !important;
+}
+
+[data-theme="white"] .stock-cards-container {
+  display: grid !important;
+  grid-template-columns: repeat(auto-fill, minmax(290px, 1fr)) !important;
+  gap: 14px !important;
+  margin-top: 14px !important;
+}
+
+/* Mobile Responsive Optimization (<= 768px) */
+@media (max-width: 768px) {
+  .terminal-signals-grid,
+  .stock-cards-container {
+    grid-template-columns: 1fr !important;
+  }
+  .terminal-live-signals-panel,
+  .stocks-section {
+    padding: 14px 12px !important;
+  }
+  .signals-panel-header {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 8px !important;
+  }
 }
 [data-theme="white"] .signals-panel-header h2,
 [data-theme="white"] .section-header h2,

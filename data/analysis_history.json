@@ -9,6 +9,54 @@
     "signalMarathi": "सपोर्टवर एन्ट्रीची प्रतीक्षा करा (Wait for Entry)",
     "technicalScore": 29,
     "fundamentalScore": 98,
+    "timestamp": "2026-11-16T13:54:17.564Z"
+  },
+  {
+    "symbol": "TCS",
+    "exchange": "NSE",
+    "name": "Tata Consultancy Services Limited",
+    "price": 2405,
+    "changePercent": -22.57,
+    "signal": "Wait for Entry",
+    "signalMarathi": "सपोर्टवर एन्ट्रीची प्रतीक्षा करा (Wait for Entry)",
+    "technicalScore": 29,
+    "fundamentalScore": 98,
+    "timestamp": "2026-11-16T13:54:17.073Z"
+  },
+  {
+    "symbol": "TCS",
+    "exchange": "NSE",
+    "name": "Tata Consultancy Services Limited",
+    "price": 2405,
+    "changePercent": -22.57,
+    "signal": "Wait for Entry",
+    "signalMarathi": "सपोर्टवर एन्ट्रीची प्रतीक्षा करा (Wait for Entry)",
+    "technicalScore": 29,
+    "fundamentalScore": 98,
+    "timestamp": "2026-11-16T13:53:25.920Z"
+  },
+  {
+    "symbol": "TCS",
+    "exchange": "NSE",
+    "name": "Tata Consultancy Services Limited",
+    "price": 2405,
+    "changePercent": -22.57,
+    "signal": "Wait for Entry",
+    "signalMarathi": "सपोर्टवर एन्ट्रीची प्रतीक्षा करा (Wait for Entry)",
+    "technicalScore": 29,
+    "fundamentalScore": 98,
+    "timestamp": "2026-11-16T13:29:51.221Z"
+  },
+  {
+    "symbol": "TCS",
+    "exchange": "NSE",
+    "name": "Tata Consultancy Services Limited",
+    "price": 2405,
+    "changePercent": -22.57,
+    "signal": "Wait for Entry",
+    "signalMarathi": "सपोर्टवर एन्ट्रीची प्रतीक्षा करा (Wait for Entry)",
+    "technicalScore": 29,
+    "fundamentalScore": 98,
     "timestamp": "2026-11-16T12:44:22.824Z"
   },
   {
@@ -310,53 +358,5 @@
     "technicalScore": 74,
     "fundamentalScore": 98,
     "timestamp": "2026-10-29T13:51:08.689Z"
-  },
-  {
-    "symbol": "INFY",
-    "exchange": "NSE",
-    "name": "Infosys Limited",
-    "price": 1146.5,
-    "changePercent": -24.09,
-    "signal": "Wait for Entry",
-    "signalMarathi": "सपोर्टवर एन्ट्रीची प्रतीक्षा करा (Wait for Entry)",
-    "technicalScore": 77,
-    "fundamentalScore": 98,
-    "timestamp": "2026-10-29T13:43:37.637Z"
-  },
-  {
-    "symbol": "TCS",
-    "exchange": "NSE",
-    "name": "Tata Consultancy Services Limited",
-    "price": 2478,
-    "changePercent": -18.96,
-    "signal": "Wait for Entry",
-    "signalMarathi": "सपोर्टवर एन्ट्रीची प्रतीक्षा करा (Wait for Entry)",
-    "technicalScore": 74,
-    "fundamentalScore": 98,
-    "timestamp": "2026-10-29T13:43:37.459Z"
-  },
-  {
-    "symbol": "TCS",
-    "exchange": "NSE",
-    "name": "Tata Consultancy Services Limited",
-    "price": 2478,
-    "changePercent": -18.96,
-    "signal": "Wait for Entry",
-    "signalMarathi": "सपोर्टवर एन्ट्रीची प्रतीक्षा करा (Wait for Entry)",
-    "technicalScore": 74,
-    "fundamentalScore": 98,
-    "timestamp": "2026-10-29T13:43:36.951Z"
-  },
-  {
-    "symbol": "TCS",
-    "exchange": "NSE",
-    "name": "Tata Consultancy Services Limited",
-    "price": 2460,
-    "changePercent": -1.48,
-    "signal": "Wait for Entry",
-    "signalMarathi": "सपोर्टवर एन्ट्रीची प्रतीक्षा करा (Wait for Entry)",
-    "technicalScore": 86,
-    "fundamentalScore": 98,
-    "timestamp": "2026-10-28T15:14:59.246Z"
   }
 ]

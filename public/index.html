@@ -9,7 +9,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700&family=Outfit:wght@500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=20261116_1905">
+  <link rel="stylesheet" href="style.css?v=20261116_1935">
 </head>
 <body class="theme-white">
   <div class="app-container">
@@ -70,22 +70,22 @@
         <button class="sidebar-close-btn" id="closeSidebarBtn">&times;</button>
       </div>
       <div class="sidebar-content">
-        <div class="sidebar-section-title">MAIN VIEWS</div>
+        <div class="sidebar-section-title">मुख्य विभाग (VIEWS)</div>
         <button class="sidebar-link active" data-tab="tabBtnTerminal">
-          <span class="link-icon">⚡</span>
-          <span>AI Live Terminal</span>
+          <span class="link-icon">🎯</span>
+          <span>थेट सिग्नल्स व शेअर्स (Signals)</span>
         </button>
         <button class="sidebar-link" data-tab="tabBtnAnalysis">
           <span class="link-icon">📊</span>
-          <span>Stocks Analysis (1,000 Equities)</span>
+          <span>शेअर ॲनालिसिस (Analysis)</span>
         </button>
         <button class="sidebar-link" data-tab="tabBtnTracker">
-          <span class="link-icon">🎯</span>
-          <span>Target/SL Tracker & Audit</span>
+          <span class="link-icon">📜</span>
+          <span>ट्रेड ट्रॅकर व ऑडिट (Tracker)</span>
         </button>
         <button class="sidebar-link" data-tab="tabBtnTimeMachine">
           <span class="link-icon">⏳</span>
-          <span>Time Machine & Risk Gate</span>
+          <span>टाइम मशीन व रिस्क (Simulator)</span>
         </button>
 
         <div class="sidebar-section-title">QUICK ACTIONS</div>
@@ -115,16 +115,16 @@
     <!-- MAIN APPLICATION TABS (Clean, Easy & Responsive) -->
     <nav class="main-tabs-nav card-glass">
       <button class="main-tab-btn active" id="tabBtnTerminal">
-        <span class="tab-icon">⚡</span>
-        <span>टर्मिनल (Live Terminal)</span>
+        <span class="tab-icon">🎯</span>
+        <span>थेट सिग्नल्स व शेअर्स (Live Signals)</span>
       </button>
       <button class="main-tab-btn" id="tabBtnAnalysis">
         <span class="tab-icon">📊</span>
-        <span>शेअर सर्च (Analysis)</span>
+        <span>शेअर ॲनालिसिस (Analysis)</span>
       </button>
       <button class="main-tab-btn" id="tabBtnTracker">
-        <span class="tab-icon">🎯</span>
-        <span>ट्रेड ट्रॅकर (Signals)</span>
+        <span class="tab-icon">📜</span>
+        <span>ट्रेड ट्रॅकर (Tracker)</span>
       </button>
       <button class="main-tab-btn" id="tabBtnTimeMachine">
         <span class="tab-icon">⏳</span>
@@ -204,94 +204,35 @@
     <!-- ==================================================== -->
     <!-- TAB 1: AI LIVE TERMINAL VIEW (EXISTING FUNCTIONALITY) -->
     <!-- ==================================================== -->
+    <!-- TAB 1: LIVE TRADE SIGNALS & WATCHLIST (Clean, Easy & User-Friendly) -->
+    <!-- =================================================================== -->
     <div id="terminalView" class="view-terminal">
-      <main class="content-grid">
+      <div class="terminal-container-clean">
 
-        <!-- LEFT COLUMN: Instant AI "HII" Scanner & Interactive Chat -->
-        <section class="chat-section card-glass">
-          <div class="section-header">
-            <div class="sec-title-box">
-              <div class="status-live-dot"></div>
-              <h2>⚡ AI लाईव्ह स्टॉक टर्मिनल (Live Terminal)</h2>
+        <!-- 1. LIVE TRADE SIGNALS SECTION (Prominent, Big & Easy to Read) -->
+        <section class="terminal-live-signals-panel card-glass" id="terminalLiveSignalsPanel">
+          <div class="signals-panel-header">
+            <div class="panel-header-left">
+              <span class="live-dot-pulse"></span>
+              <span class="panel-title">🎯 आजचे थेट खरेदी / विक्री सिग्नल्स (Live Trade Setups)</span>
+              <span class="badge-signals-count" id="terminalSignalsCount">0 Active</span>
             </div>
-            <span class="badge-status" id="terminalLiveBadge">🟢 100% रिअल-टाईम</span>
-          </div>
-
-          <!-- Quick 1-Tap Action Chips (सोपे शॉर्टकट्स) -->
-          <div class="quick-action-bar">
-            <button class="chip chip-primary" id="chipHii">
-              ⚡ "HII" पाठवा (लाईव्ह स्कॅन)
-            </button>
-            <button class="chip" data-cmd="nifty">📊 Nifty 50</button>
-            <button class="chip" data-cmd="tatamotors">🚗 Tata Motors</button>
-            <button class="chip" data-cmd="sbin">🏦 SBI Bank</button>
-            <button class="chip" data-cmd="zomato">🍕 Zomato</button>
-            <button class="chip" data-cmd="suzlon">⚡ Suzlon</button>
-            <button class="chip" data-cmd="hal">✈️ HAL</button>
-            <button class="chip" data-cmd="itc">🌿 ITC</button>
-            <button class="chip" data-cmd="tcs">🟢 TCS</button>
-            <button class="chip" data-cmd="reliance">🔵 Reliance</button>
-            <button class="chip" data-cmd="rules">⚠️ नियम (Rules)</button>
-          </div>
-
-          <!-- ======================================================== -->
-          <!-- LIVE TRADE SIGNALS SECTION (सोपे व स्पष्ट सिग्नल्स)        -->
-          <!-- ======================================================== -->
-          <div class="terminal-live-signals-panel" id="terminalLiveSignalsPanel">
-            <div class="signals-panel-header">
-              <div class="panel-header-left">
-                <span class="live-dot-pulse"></span>
-                <span class="panel-title">🎯 आजचे थेट खरेदी / विक्री सिग्नल्स</span>
-                <span class="badge-signals-count" id="terminalSignalsCount">0 Active</span>
-              </div>
-              <div class="panel-header-right">
-                <span class="sync-status-pill" id="terminalSyncStatusPill">🟢 Tracker Synced</span>
-                <button type="button" class="btn-panel-action" id="btnRefreshSignals" title="Live Refresh">🔄</button>
-                <button type="button" class="btn-panel-action" id="btnToggleSignals" title="Collapse / Expand">▾</button>
-              </div>
-            </div>
-            <div class="terminal-signals-grid" id="terminalSignalsGrid">
-              <!-- Dynamically populated from unified central signals database -->
+            <div class="panel-header-right">
+              <span class="sync-status-pill" id="terminalSyncStatusPill">🟢 अचूक सिग्नल्स</span>
+              <button type="button" class="btn-panel-action" id="btnRefreshSignals" title="Live Refresh">🔄 रिफ्रेश</button>
+              <button type="button" class="btn-panel-action" id="btnToggleSignals" title="Collapse / Expand">▾</button>
             </div>
           </div>
-
-          <!-- Terminal Chat Output Window -->
-          <div class="chat-messages" id="chatMessages">
-            <div class="msg-bot">
-              <div class="msg-header">
-                <span class="bot-badge">AI LIVE ANALYST</span>
-                <span class="msg-time" id="welcomeTime">Ready</span>
-              </div>
-              <div class="msg-body">
-                <p>👋 <strong>Welcome to the 100% Real-Time NSE/BSE AI Research Terminal!</strong></p>
-                <p>All stock prices, NIFTY 50, and BANK NIFTY update in <strong>real-time with live exchange accuracy</strong>.</p>
-                <p>Tap the glowing <strong>"⚡ Tap to Send 'HII'"</strong> button anytime to generate an institutional multi-factor technical analysis report with exact CMP, Pivots, Buy/Sell Zones, and Stop Losses.</p>
-                <p>💡 <em>टीप: खालील किंवा कोणत्याही शेअरचे नाव (उदा. SBI, Tata Motors, Zomato, Suzlon, Hal) चॅटमध्ये टाईप करा किंवा नवीन <strong>"Stocks Analysis"</strong> टॅब वापरून सखोल विश्लेषण पहा!</em></p>
-              </div>
-            </div>
+          <div class="terminal-signals-grid" id="terminalSignalsGrid">
+            <!-- Dynamically populated from unified central signals database -->
           </div>
-
-          <!-- Input Bar -->
-          <form class="chat-input-bar" id="chatForm">
-            <input 
-              type="text" 
-              id="chatInput" 
-              placeholder="उदा. SBI, TATA MOTORS, ZOMATO, SUZLON, TCS, HAL किंवा कोणताही शेअर विचारा..." 
-              autocomplete="off" 
-              required
-            />
-            <button type="submit" class="btn-send" id="sendBtn">
-              <span>Send</span>
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
-            </button>
-          </form>
         </section>
 
-        <!-- RIGHT COLUMN: Stock Watchlist Cards -->
-        <section class="stocks-section">
+        <!-- 2. LIVE STOCKS WATCHLIST SECTION (With Clean Category Pills) -->
+        <section class="stocks-section card-glass" style="margin-top: 20px;">
           <div class="section-header-compact">
             <div>
-              <h2 id="watchlistHeaderTitle">📈 थेट शेअर्स वॉचलिस्ट (Live Watchlist)</h2>
+              <h2 id="watchlistHeaderTitle">📈 थेट शेअर्स वॉचलिस्ट (Live Stocks Market)</h2>
               <p class="watchlist-sub" id="watchlistSub">NSE व BSE लाईव्ह दर • दर 3 सेकंदांनी ऑटो-अपडेट</p>
             </div>
             <div class="filter-pills" id="watchlistFilter">
@@ -309,21 +250,38 @@
           <div class="stock-cards-container" id="stockCardsContainer">
             <!-- Rendered dynamically with live real-time prices by app.js -->
           </div>
-
-          <!-- Golden Rules Box (सोपे नियम) -->
-          <div class="card-glass rules-box">
-            <h3>⚡ इंट्राडे ट्रेडिंगचे 5 सुवर्ण नियम (Golden Rules)</h3>
-            <ul>
-              <li><strong>सकाळी 9:15 ते 9:30:</strong> पहिल्या 15 मिनिटांत घाई करू नका, मार्केट स्थिर होऊ द्या.</li>
-              <li><strong>VWAP नियम:</strong> भाव VWAP च्या वर असेल तरच खरेदी करा; खाली असेल तरच विक्री करा.</li>
-              <li><strong>गॅप-अप चेस करू नका:</strong> 1.5% पेक्षा जास्त गॅप-अप असल्यास पुलबॅकची वाट पाहा.</li>
-              <li><strong>स्टॉप लॉस सक्तीचा:</strong> प्रत्येक ट्रेडवर जास्तीत जास्त 1% कॅपिटल रिस्क ठेवा.</li>
-              <li><strong>दुपारी 3:10 ला एक्झिट:</strong> सर्व इंट्राडे पोझिशन्स 3:10 वाजता बंद करा.</li>
-            </ul>
-          </div>
         </section>
 
-      </main>
+        <!-- 3. GOLDEN INTRADAY EXECUTION RULES (Simple & Clear) -->
+        <section class="card-glass rules-box" style="margin-top: 20px;">
+          <h3>⚡ इंट्राडे ट्रेडिंगचे 5 सोपे व सुवर्ण नियम (Golden Rules)</h3>
+          <ul>
+            <li><strong>सकाळी 9:15 ते 9:30:</strong> पहिल्या 15 मिनिटांत घाई करू नका, मार्केट स्थिर होऊ द्या.</li>
+            <li><strong>VWAP नियम:</strong> भाव VWAP च्या वर असेल तरच खरेदी करा; खाली असेल तरच विक्री करा.</li>
+            <li><strong>गॅप-अप चेस करू नका:</strong> 1.5% पेक्षा जास्त गॅप-अप असल्यास पुलबॅकची वाट पाहा.</li>
+            <li><strong>स्टॉप लॉस सक्तीचा:</strong> प्रत्येक ट्रेडवर जास्तीत जास्त 1% कॅपिटल रिस्क ठेवा.</li>
+            <li><strong>दुपारी 3:10 ला एक्झिट:</strong> सर्व इंट्राडे पोझिशन्स 3:10 वाजता बंद करा.</li>
+          </ul>
+        </section>
+
+        <!-- Compatibility Elements (Preserves 100% JS Functionality in Background) -->
+        <div style="display:none;" id="legacyChatElements">
+          <div class="chat-section">
+            <span id="terminalLiveBadge"></span>
+            <div class="quick-action-bar">
+              <button id="chipHii"></button>
+            </div>
+            <div class="chat-messages" id="chatMessages">
+              <span id="welcomeTime"></span>
+            </div>
+            <form class="chat-input-bar" id="chatForm">
+              <input type="text" id="chatInput" />
+              <button type="submit" id="sendBtn"></button>
+            </form>
+          </div>
+        </div>
+
+      </div>
     </div>
 
     <!-- ==================================================== -->

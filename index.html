@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Market Pulse AI Terminal & Intraday Trading Bot — Live Portal</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0b1120;
+      --card-bg: #1e293b;
+      --border: #334155;
+      --primary: #2563eb;
+      --primary-glow: rgba(37, 99, 235, 0.4);
+      --green: #10b981;
+      --purple: #8b5cf6;
+      --text: #f8fafc;
+      --muted: #94a3b8;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Inter', -apple-system, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem 1rem;
+      background-image: 
+        radial-gradient(circle at 10% 20%, rgba(37, 99, 235, 0.12) 0%, transparent 40%),
+        radial-gradient(circle at 90% 80%, rgba(16, 185, 129, 0.10) 0%, transparent 45%);
+    }
+    .portal-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      max-width: 600px;
+      width: 100%;
+      padding: 2.5rem 2rem;
+      box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.7);
+      text-align: center;
+    }
+    .badge-live {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(16, 185, 129, 0.15);
+      color: #34d399;
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+    }
+    .live-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #10b981;
+      box-shadow: 0 0 10px #10b981;
+    }
+    h1 {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.85rem;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      color: #ffffff;
+      margin-bottom: 0.5rem;
+    }
+    h1 span {
+      background: linear-gradient(135deg, #38bdf8, #818cf8);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    p.sub {
+      color: var(--muted);
+      font-size: 0.95rem;
+      line-height: 1.5;
+      margin-bottom: 1.8rem;
+    }
+    .qr-container {
+      background: #ffffff;
+      padding: 12px;
+      border-radius: 16px;
+      display: inline-block;
+      margin: 0 auto 1.8rem;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+    }
+    .qr-container img {
+      display: block;
+      width: 160px;
+      height: 160px;
+    }
+    .btn-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-bottom: 1.8rem;
+    }
+    .btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 14px 20px;
+      border-radius: 14px;
+      font-size: 1rem;
+      font-weight: 700;
+      text-decoration: none;
+      transition: all 0.2s ease;
+      cursor: pointer;
+      border: none;
+    }
+    .btn:hover {
+      transform: translateY(-2px);
+    }
+    .btn-launch {
+      background: linear-gradient(135deg, #059669 0%, #10b981 100%);
+      color: #ffffff;
+      box-shadow: 0 6px 20px rgba(16, 185, 129, 0.35);
+    }
+    .btn-preview {
+      background: linear-gradient(135deg, #7c3aed 0%, #9333ea 100%);
+      color: #ffffff;
+      box-shadow: 0 6px 20px rgba(124, 58, 237, 0.35);
+    }
+    .btn-github {
+      background: #0f172a;
+      color: #f8fafc;
+      border: 1px solid #334155;
+    }
+    .btn-github:hover {
+      border-color: #64748b;
+      background: #1e293b;
+    }
+    .btn-data {
+      background: rgba(37, 99, 235, 0.15);
+      color: #60a5fa;
+      border: 1px solid rgba(37, 99, 235, 0.3);
+      font-size: 0.9rem;
+    }
+    .btn-data:hover {
+      background: rgba(37, 99, 235, 0.25);
+    }
+    .grid-links {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+    .features-strip {
+      background: rgba(15, 23, 42, 0.6);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 14px 16px;
+      text-align: left;
+      font-size: 0.82rem;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+    .features-strip strong {
+      color: var(--text);
+    }
+    .features-strip ul {
+      margin-left: 1.2rem;
+      margin-top: 4px;
+    }
+    footer {
+      margin-top: 1.5rem;
+      font-size: 0.78rem;
+      color: #64748b;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="portal-card">
+    <div class="badge-live">
+      <span class="live-dot"></span>
+      100% OPERATIONAL & VERIFIED
+    </div>
+
+    <h1>MARKET PULSE <span>AI PRO</span></h1>
+    <p class="sub">100% Real-Time NSE/BSE Precision Terminal & Intraday Trading Bot Portal with 1,000 Stocks, Time Machine, and Risk Gating.</p>
+
+    <!-- QR Code for Mobile Access -->
+    <div class="qr-container">
+      <img src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&margin=4&data=https%3A%2F%2Ftype-english-owner-august.trycloudflare.com" alt="Mobile QR Code Access">
+    </div>
+
+    <div class="btn-grid">
+      <!-- Direct Cloudflare Tunnel Access -->
+      <a class="btn btn-launch" href="https://type-english-owner-august.trycloudflare.com" target="_blank">
+        🚀 Launch Live AI Terminal (Direct Access)
+      </a>
+
+      <!-- Mobile Device Simulator Window -->
+      <button class="btn btn-preview" onclick="window.open('https://type-english-owner-august.trycloudflare.com?mobile_sim=1','MarketPulsePhone','width=412,height=915,resizable=yes,scrollbars=yes')">
+        📱 Open Smartphone Simulator
+      </button>
+
+      <div class="grid-links">
+        <!-- GitHub Repository Link -->
+        <a class="btn btn-github" href="https://github.com/successdigitaloffice-cell/market-pulse-ai-terminal" target="_blank">
+          📂 GitHub Repository
+        </a>
+        <!-- Master Stock Data Direct Access -->
+        <a class="btn btn-data" href="https://raw.githubusercontent.com/successdigitaloffice-cell/market-pulse-ai-terminal/main/data/nse_bse_master_stocks.json" target="_blank">
+          📊 1,000 Stocks JSON
+        </a>
+      </div>
+    </div>
+
+    <div class="features-strip">
+      <strong>⚡ Portal Features & Architecture:</strong>
+      <ul>
+        <li><strong>1,000 Stocks Universe</strong>: Large, Mid, Small & Micro Cap coverage with &lt; 10ms search benchmark.</li>
+        <li><strong>Time Machine Engine</strong>: 10,000 Monte Carlo session replays & empirical R distribution.</li>
+        <li><strong>15m ORB Breakout Scanner</strong>: Range high/low/mid stops & 1R/2R/3R targets.</li>
+        <li><strong>Pre-Trade Risk Gate</strong>: 4-guard budgeting, strict protective stop loss, and paper trading tickets.</li>
+      </ul>
+    </div>
+  </div>
+
+  <footer>
+    Market Pulse AI Terminal • Open Source under MIT License • GitHub: successdigitaloffice-cell
+  </footer>
+
+</body>
+</html>

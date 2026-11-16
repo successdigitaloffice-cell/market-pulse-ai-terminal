@@ -9,7 +9,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700&family=Outfit:wght@500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=20261029_2145">
+  <link rel="stylesheet" href="style.css?v=20261116_1905">
 </head>
 <body class="theme-white">
   <div class="app-container">
@@ -112,26 +112,23 @@
     </aside>
     <div class="sidebar-backdrop" id="sidebarBackdrop"></div>
 
-    <!-- MAIN APPLICATION TABS (Terminal vs Stocks Analysis vs Trade Tracker) -->
+    <!-- MAIN APPLICATION TABS (Clean, Easy & Responsive) -->
     <nav class="main-tabs-nav card-glass">
       <button class="main-tab-btn active" id="tabBtnTerminal">
         <span class="tab-icon">⚡</span>
-        <span>AI Live Terminal (टर्मिनल)</span>
+        <span>टर्मिनल (Live Terminal)</span>
       </button>
       <button class="main-tab-btn" id="tabBtnAnalysis">
         <span class="tab-icon">📊</span>
-        <span>Stocks Analysis (शेअर्स सखोल विश्लेषण)</span>
-        <span class="tab-badge-new">NEW PRO</span>
+        <span>शेअर सर्च (Analysis)</span>
       </button>
       <button class="main-tab-btn" id="tabBtnTracker">
         <span class="tab-icon">🎯</span>
-        <span>Target/SL Tracker & Audit (ट्रेड ट्रॅकर व ऑडिट)</span>
-        <span class="tab-badge-new">LIVE AUDIT</span>
+        <span>ट्रेड ट्रॅकर (Signals)</span>
       </button>
       <button class="main-tab-btn" id="tabBtnTimeMachine">
         <span class="tab-icon">⏳</span>
-        <span>Time Machine & Risk (टाइम मशीन व रिस्क सिम्युलेटर)</span>
-        <span class="tab-badge-new">DAY TRADER PRO</span>
+        <span>टाइम मशीन (Simulator)</span>
       </button>
     </nav>
 
@@ -150,25 +147,20 @@
       </div>
     </div>
 
-    <!-- Mobile Dual Connection Banner (Cloudflare 4G/5G + Fixed Wi-Fi) -->
+    <!-- Compact Mobile Connection Bar (Easy, Clean & Space-Saving) -->
     <div class="mobile-access-banner" id="mobileAccessBanner">
       <div class="banner-icon">📱</div>
       <div class="banner-links-wrap">
         <div class="banner-link-row">
-          <span class="link-label">🚀 मोबाईल डायरेक्ट लिंक (100% मोफत, नो पासवर्ड, नो एरर):</span>
+          <span class="link-label">🚀 मोबाईल लिंक (Direct 4G/5G Access):</span>
           <a href="https://soundtrack-mat-museum-controlling.trycloudflare.com" target="_blank" class="url-badge highlight-green" id="cfDirectBadge" style="text-decoration:none;cursor:pointer;">https://soundtrack-mat-museum-controlling.trycloudflare.com</a>
           <button class="btn-copy-sm" id="copyCfBtn">Copy</button>
-        </div>
-        <div class="banner-link-row">
-          <span class="link-label">🏠 कायमस्वरूपी Wi-Fi लिंक (कधीही बदलत नाही - Fixed):</span>
-          <a href="http://192.168.101.4:5000" target="_blank" class="url-badge" id="wifiUrlBadge" style="text-decoration:none;cursor:pointer;">http://192.168.101.4:5000</a>
-          <button class="btn-copy-sm" id="copyWifiBtn">Copy</button>
-        </div>
-        <div class="banner-link-row">
-          <span class="link-label">🌐 Localtunnel फिक्स लिंक:</span>
-          <a href="https://market-live-ai-terminal.loca.lt" target="_blank" class="url-badge highlight" id="tunnelUrlBadge" style="text-decoration:none;cursor:pointer;">https://market-live-ai-terminal.loca.lt</a>
-          <button class="btn-copy-sm" id="copyTunnelBtn">Copy</button>
-          <span class="tunnel-pwd-hint" id="tunnelPwdHint" style="font-size:0.78rem;color:#94a3b8;margin-left:6px;">(पासवर्ड: <b id="hostIpDisplay" style="color:#38bdf8;font-family:monospace;">103.176.241.189</b>)</span>
+          <span style="display:none;" id="wifiUrlBadge">http://192.168.101.4:5000</span>
+          <span style="display:none;" id="copyWifiBtn"></span>
+          <span style="display:none;" id="tunnelUrlBadge">https://market-live-ai-terminal.loca.lt</span>
+          <span style="display:none;" id="copyTunnelBtn"></span>
+          <span style="display:none;" id="tunnelPwdHint"></span>
+          <span style="display:none;" id="hostIpDisplay">103.176.241.189</span>
         </div>
       </div>
       <div class="banner-actions-group">
@@ -220,39 +212,36 @@
           <div class="section-header">
             <div class="sec-title-box">
               <div class="status-live-dot"></div>
-              <h2>Live AI Stock Command Terminal</h2>
+              <h2>⚡ AI लाईव्ह स्टॉक टर्मिनल (Live Terminal)</h2>
             </div>
-            <span class="badge-status" id="terminalLiveBadge">⚡ 100% Real-time</span>
+            <span class="badge-status" id="terminalLiveBadge">🟢 100% रिअल-टाईम</span>
           </div>
 
-          <!-- Quick 1-Tap Action Chips -->
+          <!-- Quick 1-Tap Action Chips (सोपे शॉर्टकट्स) -->
           <div class="quick-action-bar">
             <button class="chip chip-primary" id="chipHii">
-              ⚡ Tap to Send "HII" (Full Live Scan)
+              ⚡ "HII" पाठवा (लाईव्ह स्कॅन)
             </button>
-            <button class="chip" data-cmd="nifty">📊 Nifty Live</button>
+            <button class="chip" data-cmd="nifty">📊 Nifty 50</button>
             <button class="chip" data-cmd="tatamotors">🚗 Tata Motors</button>
-            <button class="chip" data-cmd="sbin">🏦 SBI Live</button>
-            <button class="chip" data-cmd="zomato">🍕 Zomato Live</button>
-            <button class="chip" data-cmd="suzlon">⚡ Suzlon Live</button>
-            <button class="chip" data-cmd="hal">✈️ HAL Live</button>
-            <button class="chip" data-cmd="itc">🌿 ITC Live</button>
-            <button class="chip" data-cmd="tcs">🟢 TCS Live</button>
-            <button class="chip" data-cmd="reliance">🔵 Reliance Live</button>
-            <button class="chip" data-cmd="techm">🟢 TECHM Live</button>
-            <button class="chip" data-cmd="jswsteel">🔴 JSW Steel</button>
-            <button class="chip" data-cmd="adanient">🔴 Adani Ent</button>
-            <button class="chip" data-cmd="rules">⚠️ Rules</button>
+            <button class="chip" data-cmd="sbin">🏦 SBI Bank</button>
+            <button class="chip" data-cmd="zomato">🍕 Zomato</button>
+            <button class="chip" data-cmd="suzlon">⚡ Suzlon</button>
+            <button class="chip" data-cmd="hal">✈️ HAL</button>
+            <button class="chip" data-cmd="itc">🌿 ITC</button>
+            <button class="chip" data-cmd="tcs">🟢 TCS</button>
+            <button class="chip" data-cmd="reliance">🔵 Reliance</button>
+            <button class="chip" data-cmd="rules">⚠️ नियम (Rules)</button>
           </div>
 
           <!-- ======================================================== -->
-          <!-- NEW: LIVE TRADE SIGNALS SECTION (SECTION 2 MASTER PROMPT) -->
+          <!-- LIVE TRADE SIGNALS SECTION (सोपे व स्पष्ट सिग्नल्स)        -->
           <!-- ======================================================== -->
           <div class="terminal-live-signals-panel" id="terminalLiveSignalsPanel">
             <div class="signals-panel-header">
               <div class="panel-header-left">
                 <span class="live-dot-pulse"></span>
-                <span class="panel-title">⚡ Live Trade Signals & Options</span>
+                <span class="panel-title">🎯 आजचे थेट खरेदी / विक्री सिग्नल्स</span>
                 <span class="badge-signals-count" id="terminalSignalsCount">0 Active</span>
               </div>
               <div class="panel-header-right">
@@ -302,19 +291,18 @@
         <section class="stocks-section">
           <div class="section-header-compact">
             <div>
-              <h2 id="watchlistHeaderTitle">🎯 Live Real-Time Watchlist</h2>
-              <p class="watchlist-sub" id="watchlistSub">Live Exchange Feeds • Auto-updating every 3s</p>
+              <h2 id="watchlistHeaderTitle">📈 थेट शेअर्स वॉचलिस्ट (Live Watchlist)</h2>
+              <p class="watchlist-sub" id="watchlistSub">NSE व BSE लाईव्ह दर • दर 3 सेकंदांनी ऑटो-अपडेट</p>
             </div>
             <div class="filter-pills" id="watchlistFilter">
-              <button class="filter-btn active" data-filter="all">All (<span id="totalStocksCount">26</span>)</button>
-              <button class="filter-btn" data-filter="buy">Buy Only</button>
-              <button class="filter-btn" data-filter="sell">Short Only</button>
-              <button class="filter-btn" data-filter="banking">🏦 Banking</button>
-              <button class="filter-btn" data-filter="it">💻 IT</button>
-              <button class="filter-btn" data-filter="auto">🚗 Auto</button>
-              <button class="filter-btn" data-filter="energy">⚡ Energy</button>
-              <button class="filter-btn" data-filter="metals">⛏️ Metals</button>
-              <button class="filter-btn" data-filter="trending">🔥 Trending</button>
+              <button class="filter-btn active" data-filter="all">सर्व शेअर्स (<span id="totalStocksCount">26</span>)</button>
+              <button class="filter-btn" data-filter="buy">🟢 खरेदी (Buy)</button>
+              <button class="filter-btn" data-filter="sell">🔴 विक्री (Sell)</button>
+              <button class="filter-btn" data-filter="banking">🏦 बँका</button>
+              <button class="filter-btn" data-filter="it">💻 आयटी</button>
+              <button class="filter-btn" data-filter="auto">🚗 ऑटो</button>
+              <button class="filter-btn" data-filter="energy">⚡ ऊर्जा</button>
+              <button class="filter-btn" data-filter="trending">🔥 ट्रेंडिंग</button>
             </div>
           </div>
 
@@ -322,15 +310,15 @@
             <!-- Rendered dynamically with live real-time prices by app.js -->
           </div>
 
-          <!-- Golden Rules Box -->
+          <!-- Golden Rules Box (सोपे नियम) -->
           <div class="card-glass rules-box">
-            <h3>⚡ Intraday Golden Execution Guidelines</h3>
+            <h3>⚡ इंट्राडे ट्रेडिंगचे 5 सुवर्ण नियम (Golden Rules)</h3>
             <ul>
-              <li><strong>9:15 - 9:30 AM Rule:</strong> Do NOT trade the first 15 mins. Let opening range settle.</li>
-              <li><strong>VWAP Filter:</strong> Only BUY if price is <em>above VWAP</em>; only SHORT if price is <em>below VWAP</em>.</li>
-              <li><strong>No Gap Chasing:</strong> Avoid buying gap-ups > 1.5%. Wait for a pullback to 20 EMA.</li>
-              <li><strong>Strict Risk:</strong> Risk max 0.5% to 1% capital per trade. Move SL to Cost once Target 1 is hit.</li>
-              <li><strong>3:10 PM Exit:</strong> Mandatory square-off for all open positions.</li>
+              <li><strong>सकाळी 9:15 ते 9:30:</strong> पहिल्या 15 मिनिटांत घाई करू नका, मार्केट स्थिर होऊ द्या.</li>
+              <li><strong>VWAP नियम:</strong> भाव VWAP च्या वर असेल तरच खरेदी करा; खाली असेल तरच विक्री करा.</li>
+              <li><strong>गॅप-अप चेस करू नका:</strong> 1.5% पेक्षा जास्त गॅप-अप असल्यास पुलबॅकची वाट पाहा.</li>
+              <li><strong>स्टॉप लॉस सक्तीचा:</strong> प्रत्येक ट्रेडवर जास्तीत जास्त 1% कॅपिटल रिस्क ठेवा.</li>
+              <li><strong>दुपारी 3:10 ला एक्झिट:</strong> सर्व इंट्राडे पोझिशन्स 3:10 वाजता बंद करा.</li>
             </ul>
           </div>
         </section>
@@ -354,7 +342,7 @@
               type="text" 
               id="saSearchInput" 
               class="sa-search-input" 
-              placeholder="कंपनीचे नाव, NSE सिम्बॉल (TCS, RELIANCE), BSE कोड (500325) किंवा ISIN टाका..." 
+              placeholder="🔍 शेअरचे नाव किंवा सिम्बॉल शोधा... उदा. TATA, RELIANCE, SBI, INFY, ZOMATO..." 
               autocomplete="off"
             />
             <div id="saSearchSuggestions" class="sa-suggestions-box" style="display:none;"></div>

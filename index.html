@@ -1,199 +1,273 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="mr">
 <head>
   <meta charset="UTF-8">
-  <title>Market Pulse AI Terminal & Intraday Trading Bot — Live Portal</title>
+  <title>मार्केट पल्स AI — सोपे व अचूक शेअर्स ट्रेडिंग टर्मिनल</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@600;700;800&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg: #0b1120;
-      --card-bg: #1e293b;
-      --border: #334155;
+      --bg: #f8fafc;
+      --card-bg: #ffffff;
+      --border: #e2e8f0;
       --primary: #2563eb;
-      --primary-glow: rgba(37, 99, 235, 0.4);
-      --green: #10b981;
-      --purple: #8b5cf6;
-      --text: #f8fafc;
-      --muted: #94a3b8;
+      --green: #16a34a;
+      --green-bg: #f0fdf4;
+      --green-border: #bbf7d0;
+      --text-main: #0f172a;
+      --text-sub: #475569;
+      --text-muted: #64748b;
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
       font-family: 'Inter', -apple-system, sans-serif;
       background: var(--bg);
-      color: var(--text);
+      color: var(--text-main);
       min-height: 100vh;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      padding: 2rem 1rem;
+      padding: 1.5rem 1rem;
       background-image: 
-        radial-gradient(circle at 10% 20%, rgba(37, 99, 235, 0.12) 0%, transparent 40%),
-        radial-gradient(circle at 90% 80%, rgba(16, 185, 129, 0.10) 0%, transparent 45%);
+        radial-gradient(circle at 15% 15%, rgba(37, 99, 235, 0.05) 0%, transparent 40%),
+        radial-gradient(circle at 85% 85%, rgba(22, 163, 74, 0.05) 0%, transparent 45%);
     }
-    .portal-card {
+    .main-container {
       background: var(--card-bg);
       border: 1px solid var(--border);
       border-radius: 24px;
-      max-width: 600px;
+      max-width: 520px;
       width: 100%;
-      padding: 2.5rem 2rem;
-      box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.7);
+      padding: 2.2rem 1.8rem;
+      box-shadow: 0 10px 30px -5px rgba(15, 23, 42, 0.06), 0 4px 10px -2px rgba(15, 23, 42, 0.03);
       text-align: center;
     }
-    .badge-live {
+    .badge-status {
       display: inline-flex;
       align-items: center;
       gap: 6px;
-      background: rgba(16, 185, 129, 0.15);
-      color: #34d399;
-      border: 1px solid rgba(16, 185, 129, 0.3);
-      padding: 4px 12px;
+      background: var(--green-bg);
+      color: #15803d;
+      border: 1px solid var(--green-border);
+      padding: 6px 14px;
       border-radius: 20px;
-      font-size: 0.78rem;
+      font-size: 0.82rem;
       font-weight: 700;
-      margin-bottom: 1rem;
+      margin-bottom: 1.2rem;
     }
-    .live-dot {
+    .dot-live {
       width: 8px;
       height: 8px;
       border-radius: 50%;
-      background: #10b981;
-      box-shadow: 0 0 10px #10b981;
+      background: var(--green);
+      box-shadow: 0 0 0 3px rgba(22, 163, 74, 0.2);
     }
     h1 {
       font-family: 'Outfit', sans-serif;
       font-size: 1.85rem;
       font-weight: 800;
+      color: var(--text-main);
+      margin-bottom: 0.35rem;
       letter-spacing: -0.5px;
-      color: #ffffff;
-      margin-bottom: 0.5rem;
     }
     h1 span {
-      background: linear-gradient(135deg, #38bdf8, #818cf8);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
+      color: var(--primary);
     }
-    p.sub {
-      color: var(--muted);
-      font-size: 0.95rem;
+    p.tagline {
+      color: var(--text-sub);
+      font-size: 1rem;
+      font-weight: 500;
+      margin-bottom: 1.6rem;
       line-height: 1.5;
-      margin-bottom: 1.8rem;
     }
-    .qr-container {
-      background: #ffffff;
-      padding: 12px;
-      border-radius: 16px;
-      display: inline-block;
-      margin: 0 auto 1.8rem;
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
-    }
-    .qr-container img {
-      display: block;
-      width: 160px;
-      height: 160px;
-    }
-    .btn-grid {
+    
+    /* Easy & Large Clickable Buttons */
+    .action-group {
       display: flex;
       flex-direction: column;
       gap: 12px;
       margin-bottom: 1.8rem;
     }
-    .btn {
+    .btn-main {
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 8px;
-      padding: 14px 20px;
-      border-radius: 14px;
-      font-size: 1rem;
-      font-weight: 700;
+      gap: 10px;
+      background: linear-gradient(135deg, #16a34a 0%, #15803d 100%);
+      color: #ffffff;
+      padding: 16px 20px;
+      border-radius: 16px;
+      font-size: 1.12rem;
+      font-weight: 800;
       text-decoration: none;
+      box-shadow: 0 6px 20px rgba(22, 163, 74, 0.28);
       transition: all 0.2s ease;
       cursor: pointer;
       border: none;
     }
-    .btn:hover {
+    .btn-main:hover {
       transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(22, 163, 74, 0.35);
     }
-    .btn-launch {
-      background: linear-gradient(135deg, #059669 0%, #10b981 100%);
-      color: #ffffff;
-      box-shadow: 0 6px 20px rgba(16, 185, 129, 0.35);
-    }
-    .btn-preview {
-      background: linear-gradient(135deg, #7c3aed 0%, #9333ea 100%);
-      color: #ffffff;
-      box-shadow: 0 6px 20px rgba(124, 58, 237, 0.35);
-    }
-    .features-strip {
-      background: rgba(15, 23, 42, 0.6);
-      border: 1px solid var(--border);
+    .btn-secondary {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      background: #eff6ff;
+      color: var(--primary);
+      border: 1px solid #bfdbfe;
+      padding: 14px 20px;
       border-radius: 14px;
-      padding: 14px 16px;
+      font-size: 0.98rem;
+      font-weight: 700;
+      text-decoration: none;
+      transition: all 0.2s ease;
+      cursor: pointer;
+    }
+    .btn-secondary:hover {
+      background: #dbeafe;
+      transform: translateY(-1px);
+    }
+
+    /* Clean QR Card */
+    .qr-card {
+      background: #f8fafc;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 1.2rem;
+      margin-bottom: 1.6rem;
+    }
+    .qr-card-title {
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: var(--text-main);
+      margin-bottom: 10px;
+    }
+    .qr-img-box {
+      background: #ffffff;
+      border: 1px solid var(--border);
+      padding: 10px;
+      border-radius: 12px;
+      display: inline-block;
+      box-shadow: 0 4px 12px rgba(15, 23, 42, 0.04);
+    }
+    .qr-img-box img {
+      display: block;
+      width: 150px;
+      height: 150px;
+    }
+    .qr-hint {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      margin-top: 8px;
+    }
+
+    /* 3 Simple Feature Cards */
+    .feature-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
       text-align: left;
-      font-size: 0.82rem;
-      color: var(--muted);
-      line-height: 1.6;
     }
-    .features-strip strong {
-      color: var(--text);
+    .feature-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: #f8fafc;
+      border: 1px solid var(--border);
+      padding: 10px 14px;
+      border-radius: 12px;
     }
-    .features-strip ul {
-      margin-left: 1.2rem;
-      margin-top: 4px;
+    .feature-icon {
+      font-size: 1.25rem;
+      flex-shrink: 0;
     }
+    .feature-text h4 {
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: var(--text-main);
+      margin-bottom: 1px;
+    }
+    .feature-text p {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+    }
+
     footer {
       margin-top: 1.5rem;
-      font-size: 0.78rem;
-      color: #64748b;
+      font-size: 0.80rem;
+      color: var(--text-muted);
+      font-weight: 600;
     }
   </style>
 </head>
 <body>
 
-  <div class="portal-card">
-    <div class="badge-live">
-      <span class="live-dot"></span>
-      100% OPERATIONAL & VERIFIED
+  <div class="main-container">
+    <!-- Live Status Pill -->
+    <div class="badge-status">
+      <span class="dot-live"></span>
+      100% लाईव्ह मार्केट सुरू आहे
     </div>
 
-    <h1>MARKET PULSE <span>AI PRO</span></h1>
-    <p class="sub">100% Real-Time NSE/BSE Precision Terminal & Intraday Trading Bot Portal with 1,000 Stocks, Time Machine, and Risk Gating.</p>
+    <!-- Title & Tagline -->
+    <h1>मार्केट पल्स <span>AI प्रो</span></h1>
+    <p class="tagline">NSE व BSE शेअर्सचे थेट लाईव्ह भाव आणि अचूक खरेदी-विक्री सिग्नल्स</p>
 
-    <!-- QR Code for Mobile Access -->
-    <div class="qr-container">
-      <img src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&margin=4&data=https%3A%2F%2Ftype-english-owner-august.trycloudflare.com" alt="Mobile QR Code Access">
-    </div>
-
-    <div class="btn-grid">
-      <!-- Direct Cloudflare Tunnel Access -->
-      <a class="btn btn-launch" href="https://type-english-owner-august.trycloudflare.com" target="_blank">
-        🚀 Launch Live AI Terminal (Direct Access)
+    <!-- Main Easy Buttons -->
+    <div class="action-group">
+      <a class="btn-main" href="https://type-english-owner-august.trycloudflare.com" target="_blank">
+        <span>🚀</span>
+        <span>मार्केट टर्मिनल सुरू करा (क्लिक करा)</span>
       </a>
 
-      <!-- Mobile Device Simulator Window -->
-      <button class="btn btn-preview" onclick="window.open('https://type-english-owner-august.trycloudflare.com?mobile_sim=1','MarketPulsePhone','width=412,height=915,resizable=yes,scrollbars=yes')">
-        📱 Open Smartphone Simulator
+      <button class="btn-secondary" onclick="window.open('https://type-english-owner-august.trycloudflare.com?mobile_sim=1','MarketPulsePhone','width=412,height=915,resizable=yes,scrollbars=yes')">
+        <span>📱</span>
+        <span>मोबाईल प्रिव्ह्यू स्क्रीन उघडा</span>
       </button>
     </div>
 
-    <div class="features-strip">
-      <strong>⚡ Portal Features & Architecture:</strong>
-      <ul>
-        <li><strong>1,000 Stocks Universe</strong>: Large, Mid, Small & Micro Cap coverage with &lt; 10ms search benchmark.</li>
-        <li><strong>Time Machine Engine</strong>: 10,000 Monte Carlo session replays & empirical R distribution.</li>
-        <li><strong>15m ORB Breakout Scanner</strong>: Range high/low/mid stops & 1R/2R/3R targets.</li>
-        <li><strong>Pre-Trade Risk Gate</strong>: 4-guard budgeting, strict protective stop loss, and paper trading tickets.</li>
-      </ul>
+    <!-- Mobile QR Scan Box -->
+    <div class="qr-card">
+      <div class="qr-card-title">📲 मोबाईलवर वापरण्यासाठी QR स्कॅन करा:</div>
+      <div class="qr-img-box">
+        <img src="https://api.qrserver.com/v1/create-qr-code/?size=160x160&margin=4&data=https%3A%2F%2Ftype-english-owner-august.trycloudflare.com" alt="Scan QR Code to open on Mobile">
+      </div>
+      <div class="qr-hint">कॅमेऱ्याने स्कॅन करताच तुमच्या मोबाईलवर टर्मिनल सुरू होईल</div>
+    </div>
+
+    <!-- 3 Simple Features -->
+    <div class="feature-list">
+      <div class="feature-item">
+        <span class="feature-icon">🟢</span>
+        <div class="feature-text">
+          <h4>1,000+ शेअर्सचे थेट लाईव्ह दर</h4>
+          <p>Nifty 50, Bank Nifty आणि सर्व आघाडीचे शेअर्स</p>
+        </div>
+      </div>
+      <div class="feature-item">
+        <span class="feature-icon">🎯</span>
+        <div class="feature-text">
+          <h4>अचूक खरेदी व विक्री सिग्नल्स</h4>
+          <p>स्पष्ट एन्ट्री लेव्हल, टार्गेट आणि स्टॉप लॉस</p>
+        </div>
+      </div>
+      <div class="feature-item">
+        <span class="feature-icon">🛡️</span>
+        <div class="feature-text">
+          <h4>100% सुरक्षित रिस्क मॅनेजमेंट</h4>
+          <p>कॅपिटल प्रोटेक्शन आणि कडक नियम</p>
+        </div>
+      </div>
     </div>
   </div>
 
   <footer>
-    Market Pulse AI Terminal • 100% Real-Time NSE/BSE Precision Terminal
+    Market Pulse AI • सोपे • सुरक्षित • 100% रिअल-टाईम
   </footer>
 
 </body>

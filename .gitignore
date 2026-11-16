@@ -1,0 +1,31 @@
+# Dependencies
+node_modules/
+package-lock.json
+
+# Backups & Archives
+.backups/
+*.zip
+*.tar.gz
+
+# Binaries & Executables
+bin/*.exe
+bin/cloudflared.exe
+*.exe
+
+# Logs & PIDs
+logs/
+*.log
+*.pid
+data/*.pid
+tunnel_info.json
+
+# Cloudflare & Tunnel Runtime State
+CLOUDFLARE_URL.txt
+tunnel_url.txt
+
+# OS and Editor Metadata
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+.reference/

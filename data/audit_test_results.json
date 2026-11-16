@@ -1,0 +1,114 @@
+{
+  "executionTime": "2026-10-14T10:53:09.836Z",
+  "totalTests": 15,
+  "passed": 15,
+  "failed": 0,
+  "passRate": "100.0%",
+  "testCases": [
+    {
+      "testNumber": 1,
+      "name": "योग्य BUY Signal तयार होतो",
+      "status": "PASS",
+      "timestamp": "2026-10-14T10:53:09.113Z",
+      "details": "Signal ID: TEST-BUY-9107-001, Entry: ₹1150, SL: ₹1140, T1: ₹1170"
+    },
+    {
+      "testNumber": 2,
+      "name": "योग्य SELL Signal तयार होतो",
+      "status": "PASS",
+      "timestamp": "2026-10-14T10:53:09.115Z",
+      "details": "Signal ID: TEST-SELL-9107-002, Entry: ₹1020, SL: ₹1030, T1: ₹1000"
+    },
+    {
+      "testNumber": 3,
+      "name": "BUY CALL आणि BUY PUT योग्य Contract शी जोडले जातात",
+      "status": "PASS",
+      "timestamp": "2026-10-14T10:53:09.118Z",
+      "details": "NIFTY CE (Strike: 22600, Lot: 25) & BANK NIFTY PE (Strike: 54900, Lot: 15)"
+    },
+    {
+      "testNumber": 4,
+      "name": "Entry Trigger होते",
+      "status": "PASS",
+      "timestamp": "2026-10-14T10:53:09.124Z",
+      "details": "Entry Triggered: true, Time: 16:23:09 IST"
+    },
+    {
+      "testNumber": 5,
+      "name": "Entry Trigger होत नाही",
+      "status": "PASS",
+      "timestamp": "2026-10-14T10:53:09.127Z",
+      "details": "actualEntryTriggered: false, Price High: 711.85 < Entry: 950.00"
+    },
+    {
+      "testNumber": 6,
+      "name": "Target Hit होतो",
+      "status": "PASS",
+      "timestamp": "2026-10-14T10:53:09.133Z",
+      "details": "Outcome: TARGET 1 HIT, Exit: ₹1500, Net PnL: ₹568.44"
+    },
+    {
+      "testNumber": 7,
+      "name": "Stop Loss Hit होतो",
+      "status": "PASS",
+      "timestamp": "2026-10-14T10:53:09.139Z",
+      "details": "Outcome: STOP LOSS HIT, Exit: ₹254, Net PnL: ₹-627.19, SL Hit At: 16:23:09 IST"
+    },
+    {
+      "testNumber": 8,
+      "name": "Target आणि SL एकाच कँडलमध्ये येतात",
+      "status": "PASS",
+      "timestamp": "2026-10-14T10:53:09.144Z",
+      "details": "Outcome: AMBIGUOUS — NOT VERIFIED, Status: AMBIGUOUS"
+    },
+    {
+      "testNumber": 9,
+      "name": "Live Data बंद पडतो (Graceful fallback, no crash or fake prices)",
+      "status": "PASS",
+      "timestamp": "2026-10-14T10:53:09.604Z",
+      "details": "Session: 🔴 MARKET CLOSED (OFF), Data Status: MARKET_CLOSED_EOD"
+    },
+    {
+      "testNumber": 10,
+      "name": "API पुन्हा जोडला जातो (Reconnection & Resync)",
+      "status": "PASS",
+      "timestamp": "2026-10-14T10:53:09.827Z",
+      "details": "NIFTY Spot CMP: ₹22622.7, Timestamp: 3:31:12 pm"
+    },
+    {
+      "testNumber": 11,
+      "name": "वेबसाइट Refresh होते (Persistent Disk Persistence)",
+      "status": "PASS",
+      "timestamp": "2026-10-14T10:53:09.828Z",
+      "details": "Signals Persisted on Disk: 21 entries in data/trade_signals.json"
+    },
+    {
+      "testNumber": 12,
+      "name": "नवीन सिग्नल तयार होतो",
+      "status": "PASS",
+      "timestamp": "2026-10-14T10:53:09.831Z",
+      "details": "Count increased from 21 to 22, ID: TEST-NEW-9107-012"
+    },
+    {
+      "testNumber": 13,
+      "name": "जुना सिग्नल अपडेट होतो (v1.0 preserved, v2.0 created)",
+      "status": "PASS",
+      "timestamp": "2026-10-14T10:53:09.833Z",
+      "details": "Original v1.0 T1: ₹575 intact, Revised v2.0 T1: ₹585, Reason: \"Q2 Global EV Deliveries beat institutional estimates\""
+    },
+    {
+      "testNumber": 14,
+      "name": "डेटाबेसमध्ये Duplicate Entry तयार होण्याचा प्रयत्न होतो",
+      "status": "PASS",
+      "timestamp": "2026-10-14T10:53:09.834Z",
+      "details": "Duplicate registration blocked. Database count maintained at 23"
+    },
+    {
+      "testNumber": 15,
+      "name": "P&L आणि Trading Costs पुन्हा तपासले जातात",
+      "status": "PASS",
+      "timestamp": "2026-10-14T10:53:09.834Z",
+      "details": "Equity Gross: ₹1192.50, Charges: ₹84.99, Net: ₹1107.51 | Option Gross: ₹1250.00, Charges: ₹55.88, Net: ₹1194.12"
+    }
+  ]
+}

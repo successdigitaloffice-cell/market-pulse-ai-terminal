@@ -1,0 +1,21 @@
+{
+  "name": "share-market-intraday-portal",
+  "version": "1.0.0",
+  "description": "Live NSE/BSE Stock Market Mobile Intraday Research Terminal",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "keywords": [
+    "stock-market",
+    "nse",
+    "intraday",
+    "tcs",
+    "nifty"
+  ],
+  "author": "Antigravity AI",
+  "license": "MIT",
+  "dependencies": {
+    "localtunnel": "^2.0.2"
+  }
+}

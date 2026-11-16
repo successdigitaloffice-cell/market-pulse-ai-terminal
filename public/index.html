@@ -1,0 +1,1244 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="white">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>NSE/BSE Live Intraday AI Research Terminal</title>
+  <meta name="description" content="100% Real-Time NSE/BSE Intraday Stock Market Scanner, Live Ticks, Breakout Triggers, Pivots & AI Analyst">
+  <!-- Google Fonts: Outfit & Inter & JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700&family=Outfit:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css?v=20261029_2145">
+</head>
+<body class="theme-white">
+  <div class="app-container">
+
+    <!-- Top Navigation Bar -->
+    <header class="top-nav">
+      <div class="brand">
+        <button class="btn-sidebar-toggle" id="btnSidebarToggle" title="Toggle Quick Navigation Menu">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+        </button>
+        <div class="pulse-indicator">
+          <span class="pulse-dot" id="headerPulseDot"></span>
+        </div>
+        <div>
+          <h1 class="logo-text">MARKET PULSE <span class="badge-ai">AI PRO</span></h1>
+          <p class="tagline">100% Real-Time NSE/BSE Precision Terminal</p>
+        </div>
+      </div>
+      <div class="nav-right">
+        <!-- Live Manual Refresh Control -->
+        <button class="nav-btn-action" id="btnManualRefresh" title="Refresh Live Market Data">
+          <svg class="refresh-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"/></svg>
+          <span class="hide-mobile">Refresh</span>
+        </button>
+
+        <!-- Theme Toggle: Clean White vs Dark Glass -->
+        <button class="nav-btn-action theme-toggle-btn" id="btnThemeToggle" title="Toggle Clean White / Dark Theme">
+          <span id="themeToggleIcon">☀️</span>
+          <span id="themeToggleText" class="hide-mobile">White UI</span>
+        </button>
+
+        <div class="ist-clock-pill" id="istClockBox">
+          <span class="clock-label">IST</span>
+          <span class="clock-time" id="istTimeDisplay">--:--:--</span>
+        </div>
+        <button class="btn-mobile-preview" id="btnOpenMobilePreview" title="Interactive Mobile Device Preview Simulator">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="3" ry="3"></rect><line x1="12" y1="18" x2="12.01" y2="18"></line></svg>
+          <span class="hide-mobile">Mobile Preview</span>
+          <span class="sim-badge">LIVE SIM</span>
+        </button>
+        <button class="btn-qr" id="openQrBtn" title="Mobile QR Access">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+          <span class="hide-mobile">Mobile QR</span>
+        </button>
+      </div>
+    </header>
+
+    <!-- Slide-Out Sidebar Navigation Menu -->
+    <aside class="app-sidebar" id="appSidebar">
+      <div class="sidebar-header">
+        <div class="sidebar-brand">
+          <span class="sidebar-logo">📈</span>
+          <div>
+            <h3 class="sidebar-title">Market Pulse AI</h3>
+            <span class="sidebar-sub">Navigation & Tools</span>
+          </div>
+        </div>
+        <button class="sidebar-close-btn" id="closeSidebarBtn">&times;</button>
+      </div>
+      <div class="sidebar-content">
+        <div class="sidebar-section-title">MAIN VIEWS</div>
+        <button class="sidebar-link active" data-tab="tabBtnTerminal">
+          <span class="link-icon">⚡</span>
+          <span>AI Live Terminal</span>
+        </button>
+        <button class="sidebar-link" data-tab="tabBtnAnalysis">
+          <span class="link-icon">📊</span>
+          <span>Stocks Analysis (1,000 Equities)</span>
+        </button>
+        <button class="sidebar-link" data-tab="tabBtnTracker">
+          <span class="link-icon">🎯</span>
+          <span>Target/SL Tracker & Audit</span>
+        </button>
+        <button class="sidebar-link" data-tab="tabBtnTimeMachine">
+          <span class="link-icon">⏳</span>
+          <span>Time Machine & Risk Gate</span>
+        </button>
+
+        <div class="sidebar-section-title">QUICK ACTIONS</div>
+        <button class="sidebar-link" id="sidebarOrbScan">
+          <span class="link-icon">🔍</span>
+          <span>15m ORB Breakout Scanner</span>
+        </button>
+        <button class="sidebar-link" id="sidebarRiskGate">
+          <span class="link-icon">🛡️</span>
+          <span>Pre-Trade Risk Gate Check</span>
+        </button>
+        <a href="/api/tracker/export-csv" class="sidebar-link" id="sidebarCsvExport" style="text-decoration:none;">
+          <span class="link-icon">📥</span>
+          <span>Download Audit CSV Report</span>
+        </a>
+
+        <div class="sidebar-footer-box">
+          <div class="sidebar-footer-label">UI Appearance</div>
+          <button class="btn-theme-pill" id="sidebarThemeSwitch">
+            <span id="sidebarThemeText">☀️ White Theme Active</span>
+          </button>
+        </div>
+      </div>
+    </aside>
+    <div class="sidebar-backdrop" id="sidebarBackdrop"></div>
+
+    <!-- MAIN APPLICATION TABS (Terminal vs Stocks Analysis vs Trade Tracker) -->
+    <nav class="main-tabs-nav card-glass">
+      <button class="main-tab-btn active" id="tabBtnTerminal">
+        <span class="tab-icon">⚡</span>
+        <span>AI Live Terminal (टर्मिनल)</span>
+      </button>
+      <button class="main-tab-btn" id="tabBtnAnalysis">
+        <span class="tab-icon">📊</span>
+        <span>Stocks Analysis (शेअर्स सखोल विश्लेषण)</span>
+        <span class="tab-badge-new">NEW PRO</span>
+      </button>
+      <button class="main-tab-btn" id="tabBtnTracker">
+        <span class="tab-icon">🎯</span>
+        <span>Target/SL Tracker & Audit (ट्रेड ट्रॅकर व ऑडिट)</span>
+        <span class="tab-badge-new">LIVE AUDIT</span>
+      </button>
+      <button class="main-tab-btn" id="tabBtnTimeMachine">
+        <span class="tab-icon">⏳</span>
+        <span>Time Machine & Risk (टाइम मशीन व रिस्क सिम्युलेटर)</span>
+        <span class="tab-badge-new">DAY TRADER PRO</span>
+      </button>
+    </nav>
+
+    <!-- LIVE MARKET SESSION RIBBON (Real-time Market ON / OFF indicator) -->
+    <div class="market-status-ribbon card-glass" id="marketStatusRibbon">
+      <div class="status-left">
+        <span class="status-pulse-dot dot-closed" id="marketStatusDot"></span>
+        <span class="status-title" id="marketStatusTitle">🔴 MARKET CLOSED (OFF)</span>
+      </div>
+      <div class="status-center">
+        <span class="countdown-badge" id="marketCountdown">Calculating schedule...</span>
+      </div>
+      <div class="status-right">
+        <span class="accuracy-badge">⚡ 100% Real-Time NSE/BSE Accuracy</span>
+        <span class="last-sync-badge" id="lastSyncTime">Syncing...</span>
+      </div>
+    </div>
+
+    <!-- Mobile Dual Connection Banner (Cloudflare 4G/5G + Fixed Wi-Fi) -->
+    <div class="mobile-access-banner" id="mobileAccessBanner">
+      <div class="banner-icon">📱</div>
+      <div class="banner-links-wrap">
+        <div class="banner-link-row">
+          <span class="link-label">🚀 मोबाईल डायरेक्ट लिंक (100% मोफत, नो पासवर्ड, नो एरर):</span>
+          <a href="https://soundtrack-mat-museum-controlling.trycloudflare.com" target="_blank" class="url-badge highlight-green" id="cfDirectBadge" style="text-decoration:none;cursor:pointer;">https://soundtrack-mat-museum-controlling.trycloudflare.com</a>
+          <button class="btn-copy-sm" id="copyCfBtn">Copy</button>
+        </div>
+        <div class="banner-link-row">
+          <span class="link-label">🏠 कायमस्वरूपी Wi-Fi लिंक (कधीही बदलत नाही - Fixed):</span>
+          <a href="http://192.168.101.4:5000" target="_blank" class="url-badge" id="wifiUrlBadge" style="text-decoration:none;cursor:pointer;">http://192.168.101.4:5000</a>
+          <button class="btn-copy-sm" id="copyWifiBtn">Copy</button>
+        </div>
+        <div class="banner-link-row">
+          <span class="link-label">🌐 Localtunnel फिक्स लिंक:</span>
+          <a href="https://market-live-ai-terminal.loca.lt" target="_blank" class="url-badge highlight" id="tunnelUrlBadge" style="text-decoration:none;cursor:pointer;">https://market-live-ai-terminal.loca.lt</a>
+          <button class="btn-copy-sm" id="copyTunnelBtn">Copy</button>
+          <span class="tunnel-pwd-hint" id="tunnelPwdHint" style="font-size:0.78rem;color:#94a3b8;margin-left:6px;">(पासवर्ड: <b id="hostIpDisplay" style="color:#38bdf8;font-family:monospace;">103.176.241.189</b>)</span>
+        </div>
+      </div>
+      <div class="banner-actions-group">
+        <button class="btn-open-preview" id="bannerPreviewBtn" title="Launch Interactive Mobile Preview Simulator">📱 Mobile Preview</button>
+        <button class="btn-open-qr" id="bannerQrBtn" title="Scan QR Code to open on phone">📷 QR Code</button>
+      </div>
+    </div>
+
+    <!-- Real-time Ticker / Market Bar -->
+    <section class="market-bar" id="marketBar">
+      <div class="ticker-item" id="tickerNifty">
+        <span class="ticker-label">NIFTY 50</span>
+        <span class="ticker-val" id="niftyVal">--</span>
+        <span class="ticker-change" id="niftyChange">--</span>
+      </div>
+      <div class="ticker-item" id="tickerBankNifty">
+        <span class="ticker-label">BANK NIFTY</span>
+        <span class="ticker-val" id="bankNiftyVal">--</span>
+        <span class="ticker-change" id="bankNiftyChange">--</span>
+      </div>
+      <div class="ticker-item" id="tickerVix">
+        <span class="ticker-label">INDIA VIX</span>
+        <span class="ticker-val" id="vixVal">--</span>
+        <span class="ticker-change" id="vixChange">--</span>
+      </div>
+      <div class="ticker-item" id="tickerCrude">
+        <span class="ticker-label">BRENT CRUDE</span>
+        <span class="ticker-val" id="crudeVal">--</span>
+        <span class="ticker-change" id="crudeChange">--</span>
+      </div>
+      <div class="ticker-item">
+        <span class="ticker-label">FII FLOW</span>
+        <span class="ticker-val down" id="fiiVal">-₹6,121 Cr</span>
+      </div>
+      <div class="ticker-item">
+        <span class="ticker-label">DII FLOW</span>
+        <span class="ticker-val up" id="diiVal">+₹4,596 Cr</span>
+      </div>
+    </section>
+
+    <!-- ==================================================== -->
+    <!-- TAB 1: AI LIVE TERMINAL VIEW (EXISTING FUNCTIONALITY) -->
+    <!-- ==================================================== -->
+    <div id="terminalView" class="view-terminal">
+      <main class="content-grid">
+
+        <!-- LEFT COLUMN: Instant AI "HII" Scanner & Interactive Chat -->
+        <section class="chat-section card-glass">
+          <div class="section-header">
+            <div class="sec-title-box">
+              <div class="status-live-dot"></div>
+              <h2>Live AI Stock Command Terminal</h2>
+            </div>
+            <span class="badge-status" id="terminalLiveBadge">⚡ 100% Real-time</span>
+          </div>
+
+          <!-- Quick 1-Tap Action Chips -->
+          <div class="quick-action-bar">
+            <button class="chip chip-primary" id="chipHii">
+              ⚡ Tap to Send "HII" (Full Live Scan)
+            </button>
+            <button class="chip" data-cmd="nifty">📊 Nifty Live</button>
+            <button class="chip" data-cmd="tatamotors">🚗 Tata Motors</button>
+            <button class="chip" data-cmd="sbin">🏦 SBI Live</button>
+            <button class="chip" data-cmd="zomato">🍕 Zomato Live</button>
+            <button class="chip" data-cmd="suzlon">⚡ Suzlon Live</button>
+            <button class="chip" data-cmd="hal">✈️ HAL Live</button>
+            <button class="chip" data-cmd="itc">🌿 ITC Live</button>
+            <button class="chip" data-cmd="tcs">🟢 TCS Live</button>
+            <button class="chip" data-cmd="reliance">🔵 Reliance Live</button>
+            <button class="chip" data-cmd="techm">🟢 TECHM Live</button>
+            <button class="chip" data-cmd="jswsteel">🔴 JSW Steel</button>
+            <button class="chip" data-cmd="adanient">🔴 Adani Ent</button>
+            <button class="chip" data-cmd="rules">⚠️ Rules</button>
+          </div>
+
+          <!-- ======================================================== -->
+          <!-- NEW: LIVE TRADE SIGNALS SECTION (SECTION 2 MASTER PROMPT) -->
+          <!-- ======================================================== -->
+          <div class="terminal-live-signals-panel" id="terminalLiveSignalsPanel">
+            <div class="signals-panel-header">
+              <div class="panel-header-left">
+                <span class="live-dot-pulse"></span>
+                <span class="panel-title">⚡ Live Trade Signals & Options</span>
+                <span class="badge-signals-count" id="terminalSignalsCount">0 Active</span>
+              </div>
+              <div class="panel-header-right">
+                <span class="sync-status-pill" id="terminalSyncStatusPill">🟢 Tracker Synced</span>
+                <button type="button" class="btn-panel-action" id="btnRefreshSignals" title="Live Refresh">🔄</button>
+                <button type="button" class="btn-panel-action" id="btnToggleSignals" title="Collapse / Expand">▾</button>
+              </div>
+            </div>
+            <div class="terminal-signals-grid" id="terminalSignalsGrid">
+              <!-- Dynamically populated from unified central signals database -->
+            </div>
+          </div>
+
+          <!-- Terminal Chat Output Window -->
+          <div class="chat-messages" id="chatMessages">
+            <div class="msg-bot">
+              <div class="msg-header">
+                <span class="bot-badge">AI LIVE ANALYST</span>
+                <span class="msg-time" id="welcomeTime">Ready</span>
+              </div>
+              <div class="msg-body">
+                <p>👋 <strong>Welcome to the 100% Real-Time NSE/BSE AI Research Terminal!</strong></p>
+                <p>All stock prices, NIFTY 50, and BANK NIFTY update in <strong>real-time with live exchange accuracy</strong>.</p>
+                <p>Tap the glowing <strong>"⚡ Tap to Send 'HII'"</strong> button anytime to generate an institutional multi-factor technical analysis report with exact CMP, Pivots, Buy/Sell Zones, and Stop Losses.</p>
+                <p>💡 <em>टीप: खालील किंवा कोणत्याही शेअरचे नाव (उदा. SBI, Tata Motors, Zomato, Suzlon, Hal) चॅटमध्ये टाईप करा किंवा नवीन <strong>"Stocks Analysis"</strong> टॅब वापरून सखोल विश्लेषण पहा!</em></p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Input Bar -->
+          <form class="chat-input-bar" id="chatForm">
+            <input 
+              type="text" 
+              id="chatInput" 
+              placeholder="उदा. SBI, TATA MOTORS, ZOMATO, SUZLON, TCS, HAL किंवा कोणताही शेअर विचारा..." 
+              autocomplete="off" 
+              required
+            />
+            <button type="submit" class="btn-send" id="sendBtn">
+              <span>Send</span>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+            </button>
+          </form>
+        </section>
+
+        <!-- RIGHT COLUMN: Stock Watchlist Cards -->
+        <section class="stocks-section">
+          <div class="section-header-compact">
+            <div>
+              <h2 id="watchlistHeaderTitle">🎯 Live Real-Time Watchlist</h2>
+              <p class="watchlist-sub" id="watchlistSub">Live Exchange Feeds • Auto-updating every 3s</p>
+            </div>
+            <div class="filter-pills" id="watchlistFilter">
+              <button class="filter-btn active" data-filter="all">All (<span id="totalStocksCount">26</span>)</button>
+              <button class="filter-btn" data-filter="buy">Buy Only</button>
+              <button class="filter-btn" data-filter="sell">Short Only</button>
+              <button class="filter-btn" data-filter="banking">🏦 Banking</button>
+              <button class="filter-btn" data-filter="it">💻 IT</button>
+              <button class="filter-btn" data-filter="auto">🚗 Auto</button>
+              <button class="filter-btn" data-filter="energy">⚡ Energy</button>
+              <button class="filter-btn" data-filter="metals">⛏️ Metals</button>
+              <button class="filter-btn" data-filter="trending">🔥 Trending</button>
+            </div>
+          </div>
+
+          <div class="stock-cards-container" id="stockCardsContainer">
+            <!-- Rendered dynamically with live real-time prices by app.js -->
+          </div>
+
+          <!-- Golden Rules Box -->
+          <div class="card-glass rules-box">
+            <h3>⚡ Intraday Golden Execution Guidelines</h3>
+            <ul>
+              <li><strong>9:15 - 9:30 AM Rule:</strong> Do NOT trade the first 15 mins. Let opening range settle.</li>
+              <li><strong>VWAP Filter:</strong> Only BUY if price is <em>above VWAP</em>; only SHORT if price is <em>below VWAP</em>.</li>
+              <li><strong>No Gap Chasing:</strong> Avoid buying gap-ups > 1.5%. Wait for a pullback to 20 EMA.</li>
+              <li><strong>Strict Risk:</strong> Risk max 0.5% to 1% capital per trade. Move SL to Cost once Target 1 is hit.</li>
+              <li><strong>3:10 PM Exit:</strong> Mandatory square-off for all open positions.</li>
+            </ul>
+          </div>
+        </section>
+
+      </main>
+    </div>
+
+    <!-- ==================================================== -->
+    <!-- TAB 2: ADVANCED STOCKS ANALYSIS VIEW (NEW STANDALONE) -->
+    <!-- ==================================================== -->
+    <div id="stocksAnalysisView" class="view-analysis" style="display: none;">
+
+      <!-- Top Control Bar: Search, Exchange, Timeframe, Mode, Actions -->
+      <section class="sa-control-panel card-glass">
+        <div class="sa-search-row">
+          
+          <!-- Stock Search Input with Suggestions -->
+          <div class="sa-search-wrapper">
+            <svg class="search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+            <input 
+              type="text" 
+              id="saSearchInput" 
+              class="sa-search-input" 
+              placeholder="कंपनीचे नाव, NSE सिम्बॉल (TCS, RELIANCE), BSE कोड (500325) किंवा ISIN टाका..." 
+              autocomplete="off"
+            />
+            <div id="saSearchSuggestions" class="sa-suggestions-box" style="display:none;"></div>
+          </div>
+
+          <!-- Exchange Selector: NSE / BSE -->
+          <div class="sa-exchange-toggle">
+            <button class="sa-exch-btn active" id="saExchNse">NSE</button>
+            <button class="sa-exch-btn" id="saExchBse">BSE</button>
+          </div>
+
+          <!-- Main Actions -->
+          <div class="sa-actions-group">
+            <button class="sa-btn-action primary" id="saBtnRefresh" title="नवीन डेटा घेऊन पुन्हा विश्लेषण चालवा">
+              <span>🔄 पुन्हा विश्लेषण करा</span>
+            </button>
+            <button class="sa-btn-action" id="saBtnAddWatchlist">
+              <span>⭐ वॉचलिस्ट</span>
+            </button>
+            <button class="sa-btn-action" id="saBtnOpenCompare">
+              <span>⚖️ तुलना करा</span>
+            </button>
+            <button class="sa-btn-action" id="saBtnOpenHistory">
+              <span>📜 इतिहास</span>
+            </button>
+          </div>
+
+        </div>
+
+        <!-- Filter Row: Timeframes and Analysis Mode -->
+        <div class="sa-filter-row">
+          
+          <div class="sa-filter-group">
+            <span class="filter-label">टाइमफ्रेम (Timeframe):</span>
+            <div class="sa-pill-group">
+              <button class="sa-tf-btn" data-tf="1m">1m</button>
+              <button class="sa-tf-btn" data-tf="5m">5m</button>
+              <button class="sa-tf-btn" data-tf="15m">15m</button>
+              <button class="sa-tf-btn" data-tf="30m">30m</button>
+              <button class="sa-tf-btn" data-tf="1h">1 तास</button>
+              <button class="sa-tf-btn active" data-tf="1d">दैनिक (Daily)</button>
+              <button class="sa-tf-btn" data-tf="1wk">साप्ताहिक</button>
+              <button class="sa-tf-btn" data-tf="1mo">मासिक</button>
+            </div>
+          </div>
+
+          <div class="sa-filter-group">
+            <span class="filter-label">विश्लेषण मोड (Mode):</span>
+            <div class="sa-pill-group">
+              <button class="sa-mode-btn active" data-mode="intraday">⚡ इंट्राडे (Intraday)</button>
+              <button class="sa-mode-btn" data-mode="swing">🌊 स्विंग ट्रेडिंग (Swing)</button>
+              <button class="sa-mode-btn" data-mode="longTerm">💎 दीर्घकालीन (Long-Term)</button>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- Loading State -->
+      <div id="saLoadingOverlay" class="sa-loading-box card-glass" style="display:none;">
+        <div class="spinner-ring"></div>
+        <p>भारतीय शेअर बाजार एक्सचेंज (NSE/BSE) वरून सखोल विश्लेषण तयार होत आहे...</p>
+        <small class="muted">70 इंडिकेटर्स, DCF मॉडेल आणि फंडामेंटल गुणोत्तरे मोजली जात आहेत...</small>
+      </div>
+
+      <!-- Error State -->
+      <div id="saErrorContainer" style="display:none;"></div>
+
+      <!-- Main Analysis Content Container -->
+      <div id="saContentContainer">
+        
+        <!-- 1. Stock Header Banner -->
+        <section id="saHeaderBanner" class="sa-header-banner card-glass"></section>
+
+        <!-- 2. Final Decision & 12 Q&A Summary Card -->
+        <section id="saDecisionCard" class="card-glass sa-decision-card"></section>
+
+        <!-- 2.5 100-Point Composite Scoring System & Capital Protection Card (Sections 13 & 14) -->
+        <section id="saCompositeScoreContainer"></section>
+
+        <!-- 2.6 Mandatory 6-Part Institutional Report (Section 19) -->
+        <section id="saInstitutionalReportContainer"></section>
+
+        <!-- 3. The 15-Point Simple Marathi Report -->
+        <section id="saMarathiReportContainer"></section>
+
+        <!-- 4. Trading Setup Card (Intraday / Swing / Long-Term) -->
+        <section id="saTradingSetupContainer"></section>
+
+        <!-- 5. Fundamental Analysis & Valuation Scenarios -->
+        <section id="saFundamentalsContainer"></section>
+
+        <!-- 6. 70 Technical Indicators Interactive Table -->
+        <section id="saIndicatorsContainer"></section>
+
+        <!-- 7. News & Corporate Actions -->
+        <section id="saNewsContainer"></section>
+
+      </div>
+
+    </div>
+
+    <!-- =================================================================== -->
+    <!-- TAB 3: TRADE PERFORMANCE & TARGET/SL TRACKER (NEW MASTER AUDIT TAB) -->
+    <!-- =================================================================== -->
+    <div id="tradeTrackerView" class="view-tracker" style="display: none;">
+
+      <!-- Data Verification & Latency Status Strip (Section 2 & 12) -->
+      <section class="tracker-verif-strip card-glass">
+        <div class="verif-item">
+          <span class="verif-lbl">अधिकृत डेटा स्रोत:</span>
+          <span class="verif-val text-glow" id="verifSource">National Stock Exchange (NSE) / BSE Cash Feed</span>
+        </div>
+        <div class="verif-item">
+          <span class="verif-lbl">एक्सचेंज टाइमस्टॅम्प:</span>
+          <span class="verif-val mono" id="verifExchangeTime">--:--:-- IST</span>
+        </div>
+        <div class="verif-item">
+          <span class="verif-lbl">एजंट सिंक वेळ:</span>
+          <span class="verif-val mono" id="verifLastSync">--:--:-- IST</span>
+        </div>
+        <div class="verif-item">
+          <span class="verif-lbl">डेटा लेटन्सी:</span>
+          <span class="verif-val mono" id="verifLatency">Real-Time</span>
+        </div>
+        <div class="verif-item">
+          <span class="verif-lbl">डेटा पडताळणी स्थिती:</span>
+          <span class="status-badge badge-verified" id="verifStatusBadge">🟢 100% VERIFIED LIVE DATA</span>
+        </div>
+        <div class="verif-notice">
+          <span>⚡ Spot Cash Indices are isolated from Futures & ETFs to prevent basis mismatch.</span>
+        </div>
+      </section>
+
+      <!-- KPI Executive Summary Cards Grid (Section 9) -->
+      <section class="tracker-kpi-grid">
+        <div class="kpi-card card-glass kpi-primary">
+          <div class="kpi-icon">🏆</div>
+          <div class="kpi-body">
+            <span class="kpi-lbl">यशस्वी दर (Win Rate %):</span>
+            <span class="kpi-val text-green" id="kpiWinRate">--%</span>
+            <small class="muted">केवळ पूर्ण झालेल्या व पडताळलेल्या ट्रेड्सवर</small>
+          </div>
+        </div>
+
+        <div class="kpi-card card-glass kpi-pnl">
+          <div class="kpi-icon">💰</div>
+          <div class="kpi-body">
+            <span class="kpi-lbl">एकूण निव्वळ नफा (Net Realized P&L):</span>
+            <span class="kpi-val" id="kpiNetPnl">₹0.00</span>
+            <span class="kpi-sub-val" id="kpiGrossPnl">खर्चापूर्वी (Gross): ₹0.00</span>
+          </div>
+        </div>
+
+        <div class="kpi-card card-glass">
+          <div class="kpi-icon">🎯</div>
+          <div class="kpi-body">
+            <span class="kpi-lbl">टार्गेट गाठलेले (Target Hit):</span>
+            <span class="kpi-val text-green" id="kpiTargetHits">0</span>
+            <small class="muted">यशस्वी ट्रेड संख्या</small>
+          </div>
+        </div>
+
+        <div class="kpi-card card-glass">
+          <div class="kpi-icon">🛑</div>
+          <div class="kpi-body">
+            <span class="kpi-lbl">स्टॉप लॉस (Stop Loss Hit):</span>
+            <span class="kpi-val text-red" id="kpiSlHits">0</span>
+            <small class="muted">कठोर भांडवल संरक्षण</small>
+          </div>
+        </div>
+
+        <div class="kpi-card card-glass">
+          <div class="kpi-icon">⏱️</div>
+          <div class="kpi-body">
+            <span class="kpi-lbl">सध्या सुरू असलेले (Open Trades):</span>
+            <span class="kpi-val text-cyan" id="kpiOpenTrades">0</span>
+            <small class="muted">लाईव्ह मॉनिटरिंग सुरू</small>
+          </div>
+        </div>
+
+        <div class="kpi-card card-glass">
+          <div class="kpi-icon">⚖️</div>
+          <div class="kpi-body">
+            <span class="kpi-lbl">नफा-तोटा प्रमाण (Realized R:R):</span>
+            <span class="kpi-val" id="kpiRealizedRR">1 : 2.5</span>
+            <small class="muted">सरासरी नफा vs तोटा</small>
+          </div>
+        </div>
+
+        <div class="kpi-card card-glass">
+          <div class="kpi-icon">📉</div>
+          <div class="kpi-body">
+            <span class="kpi-lbl">कमाल घसरण (Max Drawdown):</span>
+            <span class="kpi-val text-amber" id="kpiMaxDrawdown">₹0.00 (0%)</span>
+            <small class="muted">जोखीम नियंत्रण मर्यादा</small>
+          </div>
+        </div>
+
+        <div class="kpi-card card-glass">
+          <div class="kpi-icon">⚡</div>
+          <div class="kpi-body">
+            <span class="kpi-lbl">सलग नफा (Win Streak):</span>
+            <span class="kpi-val text-purple" id="kpiWinStreak">0 Trades</span>
+            <span class="muted small">प्रॉफिट फॅक्टर: <b id="kpiProfitFactor">0.0</b></span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Tracker Filter and Control Toolbar (Section 5 & 9) -->
+      <section class="tracker-controls card-glass">
+        <div class="tracker-filter-row">
+          
+          <!-- Period Pills -->
+          <div class="filter-pill-group">
+            <button class="tracker-period-btn active" data-period="all">सर्व (All)</button>
+            <button class="tracker-period-btn" data-period="today">दैनिक (Today)</button>
+            <button class="tracker-period-btn" data-period="week">साप्ताहिक (Week)</button>
+            <button class="tracker-period-btn" data-period="month">मासिक (Month)</button>
+          </div>
+
+          <!-- Outcome Dropdown -->
+          <div class="select-wrapper">
+            <select id="trackerOutcomeFilter" class="tracker-select">
+              <option value="ALL">सर्व निकाल (All Outcomes)</option>
+              <option value="TARGET HIT">🎯 सर्व TARGET HITS (T1 / T2 / T3)</option>
+              <option value="TARGET 1 HIT">🎯 TARGET 1 HIT</option>
+              <option value="TARGET 2 HIT">🎯 TARGET 2 HIT</option>
+              <option value="TARGET 3 HIT">🎯 TARGET 3 HIT</option>
+              <option value="STOP LOSS HIT">🛑 STOP LOSS HIT</option>
+              <option value="OPEN">⏱️ OPEN (सध्या सुरू असलेले)</option>
+              <option value="ENTRY NOT TRIGGERED">⏳ ENTRY NOT TRIGGERED (एन्ट्री न मिळालेले)</option>
+              <option value="AMBIGUOUS — NOT VERIFIED">⚠️ AMBIGUOUS — NOT VERIFIED</option>
+              <option value="EXITED MANUALLY">🚪 EXITED MANUALLY</option>
+              <option value="EXPIRED">⌛ EXPIRED</option>
+              <option value="CANCELLED">🚫 CANCELLED</option>
+              <option value="UNVERIFIED">❓ UNVERIFIED</option>
+            </select>
+          </div>
+
+          <!-- Instrument Dropdown -->
+          <div class="select-wrapper">
+            <select id="trackerInstrumentFilter" class="tracker-select">
+              <option value="ALL">सर्व शेअर्स / इंडेक्स (All Instruments)</option>
+              <option value="NIFTY">NIFTY 50 SPOT</option>
+              <option value="BANK NIFTY">BANK NIFTY SPOT</option>
+              <option value="FINNIFTY">FINNIFTY SPOT</option>
+              <option value="SENSEX">SENSEX SPOT</option>
+              <option value="TCS">TCS</option>
+              <option value="RELIANCE">RELIANCE</option>
+              <option value="TECHM">TECHM</option>
+              <option value="HDFCBANK">HDFCBANK</option>
+              <option value="INFY">INFY</option>
+              <option value="ADANIENT">ADANIENT</option>
+            </select>
+          </div>
+
+          <!-- Version Dropdown (Section 10: Original vs Live Updated) -->
+          <div class="select-wrapper">
+            <select id="trackerVersionFilter" class="tracker-select">
+              <option value="all">सर्व आवृत्त्या (All Versions)</option>
+              <option value="original">मूळ सिग्नल (Original v1.0)</option>
+              <option value="revised">सुधारित सिग्नल (Reanalyzed v2.0+)</option>
+            </select>
+          </div>
+
+          <!-- Search Box -->
+          <div class="tracker-search-box">
+            <input type="text" id="trackerSearchInput" placeholder="सिग्नल ID, शेअर किंवा निकाल शोधा..." />
+          </div>
+
+          <!-- Action Buttons -->
+          <div class="tracker-actions-right">
+            <button class="btn-tracker-action" id="btnRefreshTracker" title="डेटा पुन्हा ताजा करा">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 4 23 10 17 10"></polyline><polyline points="1 20 1 14 7 14"></polyline><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path></svg>
+              <span>रिफ्रेश करा</span>
+            </button>
+            <button class="btn-tracker-action highlight" id="btnExportCsv" title="CSV फाईल डाउनलोड करा">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+              <span>Export to CSV</span>
+            </button>
+            <button class="btn-tracker-action primary" id="btnOpenAddSignal" title="नवीन सिग्नल नोंदवा">
+              <span>➕ नवीन सिग्नल</span>
+            </button>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- Master Signal Tracking Table (All 17 Mandatory Columns) (Section 5, 7, 8) -->
+      <section class="tracker-table-section card-glass">
+        <div class="table-header-row">
+          <div>
+            <h3>📋 सर्व ट्रेड सिग्नल्स मॉनिटरिंग टेबल (Master Signals & Target/SL Tracker)</h3>
+            <p class="muted">नोंदणी झालेले एकूण सिग्नल्स: <strong id="trackerSignalsCount">0</strong> | प्रत्येक सिग्नलचा मूळ डेटा व निकाल लॉक केलेला आहे.</p>
+          </div>
+        </div>
+
+        <div class="tracker-table-wrap">
+          <table class="tracker-table" id="trackerMasterTable">
+            <thead>
+              <tr>
+                <th>Signal ID & आवृत्ती</th>
+                <th>तारीख व वेळ</th>
+                <th>इन्स्ट्रुमेंट व प्रमाण</th>
+                <th>दिशा</th>
+                <th>मार्केट भाव (CMP)</th>
+                <th>एन्ट्री किंमत व स्थिती</th>
+                <th>स्टॉप लॉस</th>
+                <th>टार्गेट्स (T1/T2)</th>
+                <th>एक्झिट भाव व वेळ</th>
+                <th>अंतिम निकाल (Outcome)</th>
+                <th>एकूण P&L (Gross ₹)</th>
+                <th>निव्वळ P&L (Net ₹)</th>
+                <th>परतावा %</th>
+                <th>डेटा पुरावा (Evidence)</th>
+                <th>कृती (Actions)</th>
+              </tr>
+            </thead>
+            <tbody id="trackerTableBody">
+              <!-- Rendered dynamically by tracker.js -->
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- Daily & Historical Performance Breakdown Section (Section 9) -->
+      <section class="tracker-breakdown-section">
+        <div class="breakdown-grid">
+          
+          <!-- Stock-wise Performance -->
+          <div class="breakdown-card card-glass">
+            <div class="card-header-clean">
+              <h4>📊 शेअरनुसार कामगिरी (Stock-wise Realized Performance)</h4>
+            </div>
+            <div class="table-responsive">
+              <table class="sub-table">
+                <thead>
+                  <tr>
+                    <th>इन्स्ट्रुमेंट</th>
+                    <th>एकूण ट्रेड्स</th>
+                    <th>यशस्वी (Wins)</th>
+                    <th>तोटा (Losses)</th>
+                    <th>निव्वळ नफा/तोटा (Net ₹)</th>
+                  </tr>
+                </thead>
+                <tbody id="stockBreakdownBody">
+                  <!-- Populated by tracker.js -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Strategy-wise Performance -->
+          <div class="breakdown-card card-glass">
+            <div class="card-header-clean">
+              <h4>🎯 पद्धतीनुसार कामगिरी (Strategy-wise Realized Performance)</h4>
+            </div>
+            <div class="table-responsive">
+              <table class="sub-table">
+                <thead>
+                  <tr>
+                    <th>ट्रेडिंग पद्धत / स्ट्रॅटेजी</th>
+                    <th>एकूण ट्रेड्स</th>
+                    <th>यशस्वी (Wins)</th>
+                    <th>तोटा (Losses)</th>
+                    <th>निव्वळ नफा/तोटा (Net ₹)</th>
+                  </tr>
+                </thead>
+                <tbody id="strategyBreakdownBody">
+                  <!-- Populated by tracker.js -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+    </div>
+
+    <!-- =================================================================== -->
+    <!-- TAB 4: TIME MACHINE & RISK SIMULATOR (DAY TRADER SKILL UPGRADE)     -->
+    <!-- =================================================================== -->
+    <div id="timeMachineView" class="view-timemachine" style="display: none;">
+
+      <!-- Banner Header -->
+      <section class="tm-banner card-glass">
+        <div class="tm-banner-content">
+          <div class="tm-badge-strip">
+            <span class="badge-tm-pro">⚡ 10,000 MONTE CARLO REPLAYS</span>
+            <span class="badge-tm-model">EMPIRICAL ODDS VERIFICATION</span>
+          </div>
+          <h2>⏳ TIME MACHINE (टाइम मशीन) & INSTITUTIONAL RISK GATE</h2>
+          <p class="tm-subtitle">
+            भांडवल धोक्यात घालण्यापूर्वी आजच्या सत्राचे १०,००० वेळा रीप्ले करा. 
+            प्रवेशापूर्वी टार्गेट हिट होण्याची खरी संभाव्यता, पोझिशन साईझ आणि रिस्क गेट तपासा.
+          </p>
+        </div>
+      </section>
+
+      <!-- Grid: Simulator & Sizing -->
+      <div class="tm-main-grid">
+
+        <!-- Column 1: Time Machine Simulator -->
+        <div class="tm-card card-glass">
+          <div class="tm-card-header">
+            <h3>🎯 1. Time Machine Setup Replay (सेटअप रीप्ले)</h3>
+            <span class="muted">10,000 रीप्ले चालवून प्रामाणिक निकाल जाणून घ्या</span>
+          </div>
+
+          <div class="time-machine-controls">
+            <div class="form-row-2">
+              <div class="form-group">
+                <label>शेअर / इंडेक्स नाव:</label>
+                <input type="text" id="tmSymbolInput" class="sa-search-input" value="TCS" placeholder="उदा. TCS, NIFTY, RELIANCE" />
+              </div>
+              <div class="form-group">
+                <label>ट्रेड दिशा (Side):</label>
+                <select id="tmSideSelect" class="sa-select">
+                  <option value="BUY">🟢 BUY (लाँग ट्रेड)</option>
+                  <option value="SELL">🔴 SELL (शॉर्ट ट्रेड)</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-row-3">
+              <div class="form-group">
+                <label>प्रवेश किंमत (Entry ₹):</label>
+                <input type="number" id="tmEntryInput" class="sa-search-input" value="3500.00" step="0.05" />
+              </div>
+              <div class="form-group">
+                <label>स्टॉप लॉस (Stop Loss ₹):</label>
+                <input type="number" id="tmStopInput" class="sa-search-input" value="3465.00" step="0.05" />
+              </div>
+              <div class="form-group">
+                <label>टार्गेट (Target 1 ₹):</label>
+                <input type="number" id="tmTargetInput" class="sa-search-input" value="3570.00" step="0.05" />
+              </div>
+            </div>
+
+            <!-- Live R:R & Validation Feedback Strip -->
+            <div id="tmLiveFeedback" class="tm-live-feedback" style="margin-bottom: 12px; font-size: 0.85rem; padding: 6px 12px; border-radius: 6px; background: rgba(59, 130, 246, 0.1); border: 1px solid rgba(59, 130, 246, 0.2); color: #93c5fd;">
+              📊 R:R Ratio: 1 : 2.00 | Risk: ₹35.00 | Target Reward: ₹70.00
+            </div>
+
+            <div class="form-row-2">
+              <div class="form-group">
+                <label>रीप्ले संख्या (Monte Carlo Runs):</label>
+                <select id="tmReplaysSelect" class="sa-select">
+                  <option value="2000">2,000 Replays (Fast)</option>
+                  <option value="5000">5,000 Replays (Balanced)</option>
+                  <option value="10000" selected>10,000 Replays (Institutional Standard)</option>
+                </select>
+              </div>
+              <div class="form-group btn-align-bottom">
+                <button class="chip chip-primary btn-full-width" id="btnRunSimulation">⚡ Run Time Machine (सिम्युलेशन चालवा)</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Simulation Result Box -->
+          <div id="tmResultBox" style="display:none; margin-top: 15px;"></div>
+        </div>
+
+        <!-- Column 2: Position Sizing & Pre-Trade Risk Gate -->
+        <div class="tm-card card-glass">
+          <div class="tm-card-header">
+            <h3>⚖️ 2. Institutional Risk Gate & Sizing (जोखीम व्यवस्थापन)</h3>
+            <span class="muted">भांडवल संरक्षणासाठी अचूक शेअर्स संख्या व नियम पडताळणी</span>
+          </div>
+
+          <div class="risk-controls">
+            <div class="form-row-2">
+              <div class="form-group">
+                <label>एकूण खाते भांडवल (Capital ₹):</label>
+                <input type="number" id="riskCapitalInput" class="sa-search-input" value="100000" step="1000" />
+              </div>
+              <div class="form-group">
+                <label>कमाल जोखीम प्रति ट्रेड (Max Loss ₹):</label>
+                <input type="number" id="riskMaxLossInput" class="sa-search-input" value="1000" step="100" />
+              </div>
+            </div>
+
+            <div class="form-row-2">
+              <div class="form-group">
+                <label>प्रवेश किंमत (Entry ₹):</label>
+                <input type="number" id="riskEntryInput" class="sa-search-input" value="3500.00" step="0.05" />
+              </div>
+              <div class="form-group">
+                <label>स्टॉप लॉस (Stop Loss ₹):</label>
+                <input type="number" id="riskStopInput" class="sa-search-input" value="3465.00" step="0.05" />
+              </div>
+            </div>
+
+            <div class="risk-btn-row">
+              <button class="chip chip-secondary" id="btnCalcSize">📐 Calculate Sizing (शेअर्स संख्या काढा)</button>
+              <button class="chip chip-primary" id="btnCheckRiskGate">🛡️ Evaluate Risk Gate (नियम तपासा)</button>
+            </div>
+          </div>
+
+          <!-- Position Size Result Box -->
+          <div id="riskResultBox" style="display:none; margin-top: 15px;"></div>
+
+          <!-- Risk Ticket Result Box -->
+          <div id="riskTicketBox" style="display:none; margin-top: 15px;"></div>
+        </div>
+
+      </div>
+
+      <!-- Section: Opening Range Breakout (ORB) Scanner -->
+      <section class="orb-scanner-section card-glass">
+        <div class="orb-header-row">
+          <div>
+            <h3>🔍 3. 15-Minute Opening Range Breakout Scanner (ORB स्कॅनर)</h3>
+            <p class="muted">बाजाराच्या पहिल्या 15 मिनिटांतील (09:15 - 09:30) ब्रेकआउट्स व मिडपॉइंट स्टॉप लेव्हल्स</p>
+          </div>
+          <button class="chip chip-primary" id="btnScanOrb">🔄 Refresh ORB Scan</button>
+        </div>
+
+        <div id="orbResultsContainer" class="orb-table-container">
+          <div class="muted">ORB डेटा लोड होत आहे...</div>
+        </div>
+      </section>
+
+    </div>
+
+    <!-- Trade Detail & Evidence Modal -->
+    <div class="modal-backdrop" id="tradeDetailModal" style="display:none;">
+      <div class="modal-card card-glass modal-lg">
+        <div class="modal-header">
+          <h3>🔍 ट्रेड तपशील, पुरावा आणि कर हिशोब (Trade Evidence & Audit)</h3>
+          <button class="modal-close" id="closeTradeModal">&times;</button>
+        </div>
+        <div class="modal-body" id="tradeModalBody">
+          <!-- Populated dynamically by tracker.js -->
+        </div>
+      </div>
+    </div>
+
+    <!-- Add Signal Modal -->
+    <div class="modal-backdrop" id="addSignalModal" style="display:none;">
+      <div class="modal-card card-glass">
+        <div class="modal-header">
+          <h3>➕ नवीन ट्रेड सिग्नल नोंदवा (Register Trade Signal)</h3>
+          <button class="modal-close" id="closeAddSignalModal">&times;</button>
+        </div>
+        <div class="modal-body">
+          <form id="addSignalForm" class="modal-form">
+            <div class="form-row">
+              <label>इन्स्ट्रुमेंट (उदा. TCS, NIFTY 50 SPOT, RELIANCE):</label>
+              <input type="text" id="addSigInstrument" placeholder="TCS किंवा NIFTY 50 SPOT" required />
+            </div>
+            <div class="form-row-2">
+              <div>
+                <label>दिशा (Direction):</label>
+                <select id="addSigDirection">
+                  <option value="BUY (LONG)">BUY (LONG)</option>
+                  <option value="SELL (SHORT)">SELL (SHORT)</option>
+                  <option value="BUY (CALL / CE)">BUY (CALL / CE)</option>
+                  <option value="BUY (PUT / PE)">BUY (PUT / PE)</option>
+                </select>
+              </div>
+              <div>
+                <label>प्रमाण / लॉट (Quantity):</label>
+                <input type="number" id="addSigQty" value="50" min="1" required />
+              </div>
+            </div>
+            <div class="form-row-3">
+              <div>
+                <label>एन्ट्री किंमत (Entry ₹):</label>
+                <input type="number" id="addSigEntry" step="0.05" required />
+              </div>
+              <div>
+                <label>स्टॉप लॉस (Stop Loss ₹):</label>
+                <input type="number" id="addSigSl" step="0.05" required />
+              </div>
+              <div>
+                <label>टार्गेट 1 (Target ₹):</label>
+                <input type="number" id="addSigT1" step="0.05" required />
+              </div>
+            </div>
+            <div class="form-row-2">
+              <div>
+                <label>टार्गेट 2 (ऐच्छिक):</label>
+                <input type="number" id="addSigT2" step="0.05" />
+              </div>
+              <div>
+                <label>स्ट्रॅटेजी नाव:</label>
+                <input type="text" id="addSigStrategy" value="VWAP & CPR Breakout" />
+              </div>
+            </div>
+            <p class="form-tip">💡 सिग्नल नोंदवल्यानंतर त्याची मूळ एन्ट्री, SL आणि टार्गेट लॉक केले जाईल. नंतर कोणताही बदल झाल्यास नवीन आवृत्ती तयार होईल.</p>
+            <div class="form-actions">
+              <button type="submit" class="chip chip-primary" style="width:100%;padding:12px;">✅ सिग्नल जतन करा (Save & Lock)</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- Live News Reanalysis Modal (Section 4 & 10) -->
+    <div class="modal-backdrop" id="reanalyzeModal" style="display:none;">
+      <div class="modal-card card-glass">
+        <div class="modal-header">
+          <h3>⚡ बातमीनुसार सिग्नल Reanalyze करा (Live News Reanalysis)</h3>
+          <button class="modal-close" id="closeReanalyzeModal">&times;</button>
+        </div>
+        <div class="modal-body">
+          <form id="reanalyzeForm" class="modal-form">
+            <input type="hidden" id="reanalyzeSignalId" />
+            <div class="reanalyze-current-box card-glass">
+              <div class="muted small">सध्याचा चालू सिग्नल:</div>
+              <strong id="reanalyzeInstrumentName">--</strong>
+              <div class="muted small" style="margin-top:4px;">
+                Entry: <span id="reanalyzeOldEntry">--</span> | SL: <span id="reanalyzeOldSl">--</span> | T1: <span id="reanalyzeOldT1">--</span>
+              </div>
+            </div>
+            <div class="form-row">
+              <label>ताज्या बातमीचे शीर्षक (News Headline / Event):</label>
+              <input type="text" id="reanalyzeNewsTitle" placeholder="उदा. RBI रेपो रेट निर्णय, कच्च्या तेलाचा भडका, तिमाही निकाल..." required />
+            </div>
+            <div class="form-row">
+              <label>बातमीचा संभाव्य परिणाम (Sentiment):</label>
+              <select id="reanalyzeSentiment">
+                <option value="Neutral">Neutral (तटस्थ / सामान्य)</option>
+                <option value="Positive">Positive (सकारात्मक / तेजी पोषक)</option>
+                <option value="Negative">Negative (नकारात्मक / सावधगिरी)</option>
+              </select>
+            </div>
+            <div class="form-row-2">
+              <div>
+                <label>सुधारित स्टॉप लॉस (Revised SL ₹):</label>
+                <input type="number" id="reanalyzeNewSl" step="0.05" required />
+              </div>
+              <div>
+                <label>सुधारित टार्गेट 1 (Revised T1 ₹):</label>
+                <input type="number" id="reanalyzeNewT1" step="0.05" required />
+              </div>
+            </div>
+            <div class="form-row">
+              <label>बदल करण्याचे कारण (Revision Reason):</label>
+              <textarea id="reanalyzeReason" rows="2" placeholder="तांत्रिक पातळी किंवा बातमीमुळे स्टॉप लॉस घट्ट केला..." required></textarea>
+            </div>
+            <p class="form-tip">💡 महत्त्वाचे: मूळ सिग्नल नष्ट न करता नवीन Version 2.0 तयार होईल आणि दोघांचे निकाल स्वतंत्र तपासले जातील.</p>
+            <div class="form-actions">
+              <button type="submit" class="chip chip-primary" style="width:100%;padding:12px;">⚡ सुधारित सिग्नल v2.0 लागू करा</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mobile Bottom Navigation (Floating) -->
+    <nav class="mobile-bottom-nav">
+      <button class="bottom-nav-item active" id="navChat">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+        <span>AI Terminal</span>
+      </button>
+      <button class="bottom-nav-item" id="navStocks">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>
+        <span>विश्लेषण</span>
+      </button>
+      <button class="bottom-nav-item" id="navTrackerBtn">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 14 14"></polyline></svg>
+        <span>ट्रेड ट्रॅकर</span>
+      </button>
+      <button class="bottom-nav-item" id="navScanTrigger">
+        <div class="bottom-glow-btn">⚡ HII</div>
+      </button>
+      <button class="bottom-nav-item" id="navQr">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+        <span>Mobile</span>
+      </button>
+    </nav>
+
+
+    <!-- ==================================================== -->
+    <!-- MOBILE DEVICE PREVIEW SIMULATOR MODAL (INTERACTIVE) -->
+    <!-- ==================================================== -->
+    <div class="modal-backdrop mobile-sim-backdrop" id="mobilePreviewModal" style="display:none;">
+      <div class="mobile-sim-shell card-glass">
+        <!-- Simulator Toolbar Header -->
+        <div class="sim-toolbar">
+          <div class="sim-toolbar-left">
+            <div class="sim-logo">
+              <span class="sim-dot"></span>
+              <strong>📱 Mobile Live Preview Simulator</strong>
+            </div>
+            <div class="sim-controls-group">
+              <label for="simDeviceSelect" class="sim-lbl">डिव्हाइस:</label>
+              <select id="simDeviceSelect" class="sim-select">
+                <option value="iphone15pro" data-w="393" data-h="852" data-name="Apple iPhone 15 Pro" selected>🍏 iPhone 15 Pro (393 × 852)</option>
+                <option value="iphone15promax" data-w="430" data-h="932" data-name="Apple iPhone 15 Pro Max">🍏 iPhone 15 Pro Max (430 × 932)</option>
+                <option value="galaxys24" data-w="412" data-h="915" data-name="Samsung Galaxy S24">🤖 Samsung Galaxy S24 (412 × 915)</option>
+                <option value="pixel8" data-w="412" data-h="892" data-name="Google Pixel 8">📱 Google Pixel 8 (412 × 892)</option>
+                <option value="iphonese" data-w="375" data-h="667" data-name="iPhone SE Compact">📱 iPhone SE Compact (375 × 667)</option>
+                <option value="ipadmini" data-w="768" data-h="1024" data-name="iPad Mini / Tablet">📟 iPad Mini / Tablet (768 × 1024)</option>
+              </select>
+
+              <button class="sim-btn" id="simRotateBtn" title="Rotate Orientation (Portrait / Landscape)">
+                <span id="simRotateIcon">🔄</span>
+                <span id="simOrientationLabel" class="sim-btn-text">Portrait</span>
+              </button>
+
+              <label for="simZoomSelect" class="sim-lbl">झूम:</label>
+              <select id="simZoomSelect" class="sim-select sim-select-sm">
+                <option value="0.75">75%</option>
+                <option value="0.85">85%</option>
+                <option value="1" selected>100%</option>
+                <option value="1.1">110%</option>
+              </select>
+
+              <label for="simSourceSelect" class="sim-lbl">स्रोत:</label>
+              <select id="simSourceSelect" class="sim-select">
+                <option value="local" selected>💻 Localhost (5000)</option>
+                <option value="cf">🚀 Cloudflare Direct (Live)</option>
+                <option value="wifi">🏠 Wi-Fi Network</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="sim-toolbar-right">
+            <button class="sim-btn-action" id="simRefreshBtn" title="Reload Frame">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="23 4 23 10 17 10"></polyline><polyline points="1 20 1 14 7 14"></polyline><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path></svg>
+              <span>Reload</span>
+            </button>
+            <button class="sim-btn-action primary" id="simPopupBtn" title="Open in Standalone Mobile Window">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+              <span>Popup Window</span>
+            </button>
+            <button class="sim-btn-action" id="simOpenQrBtn" title="Open QR Code for Real Phone">
+              <span>📷 QR</span>
+            </button>
+            <button class="modal-close sim-close" id="closeMobileSimBtn">&times;</button>
+          </div>
+        </div>
+
+        <!-- Simulator Viewport Workspace -->
+        <div class="sim-workspace" id="simWorkspace">
+          <div class="phone-stage" id="phoneStage">
+            <!-- Smartphone Chassis Frame -->
+            <div class="phone-chassis" id="phoneChassis">
+              <!-- Side Hardware Buttons -->
+              <div class="phone-btn phone-btn-vol-up"></div>
+              <div class="phone-btn phone-btn-vol-down"></div>
+              <div class="phone-btn phone-btn-power"></div>
+
+              <!-- Phone Outer Bezel -->
+              <div class="phone-screen-frame">
+                <!-- Top Status Bar & Dynamic Island / Camera Notch -->
+                <div class="phone-top-bar">
+                  <span class="phone-clock" id="phoneSimClock">09:41</span>
+                  <div class="phone-dynamic-island">
+                    <span class="di-cam"></span>
+                    <span class="di-sensor"></span>
+                  </div>
+                  <div class="phone-status-icons">
+                    <span>5G</span>
+                    <span>📶</span>
+                    <span>🔋</span>
+                  </div>
+                </div>
+
+                <!-- Live Iframe Viewport -->
+                <div class="phone-screen-container" id="phoneScreenContainer">
+                  <iframe id="mobileSimIframe" src="/?mobile_sim=1" frameborder="0"></iframe>
+                </div>
+
+                <!-- Bottom Home Bar / Indicator -->
+                <div class="phone-home-indicator">
+                  <div class="home-pill"></div>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Quick Info Hint under Chassis -->
+            <div class="sim-stage-footer">
+              <span class="sim-device-meta" id="simDeviceMeta">Apple iPhone 15 Pro • 393 × 852 px • Portrait</span>
+              <span class="sim-hint">💡 सर्व बटने, टॅब आणि लाइव्ह सिग्नल्स थेट चालतात. चाचणीसाठी टॅप करा!</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- QR Code Modal (Enhanced for 100% Mobile Access) -->
+    <div class="modal-backdrop" id="qrModal" style="display:none;">
+      <div class="modal-card card-glass modal-qr-enhanced">
+        <div class="modal-header">
+          <div>
+            <h3>📱 मोबाईलवर उघडा (Mobile Access)</h3>
+            <p class="modal-sub">कोणत्याही स्मार्टफोनवरून (Android / iPhone) 1 सेकंदात स्कॅन करा</p>
+          </div>
+          <button class="modal-close" id="closeQrModal">&times;</button>
+        </div>
+        <div class="modal-body">
+          <!-- 3-Tab Switcher -->
+          <div class="qr-tab-switcher">
+            <button class="qr-tab-btn active" id="qrTabCf">🚀 क्लाउडफ्लेअर 4G/5G (Direct)</button>
+            <button class="qr-tab-btn" id="qrTabWifi">🏠 घरचे Wi-Fi (Fixed)</button>
+            <button class="qr-tab-btn" id="qrTabLt">🌐 Localtunnel</button>
+          </div>
+
+          <div class="qr-status-pill-row">
+            <span class="qr-status-pill green" id="qrStatusPill">⚡ 100% पासवर्ड-फ्री • थेट ओपन</span>
+            <span class="qr-speed-badge">⚡ Real-Time Sync</span>
+          </div>
+
+          <p class="qr-desc" id="qrActiveDesc">कोणत्याही मोबाईलच्या कॅमेऱ्याने खालील QR कोड स्कॅन करा, थेट चालू होईल:</p>
+
+          <div class="qr-display-box">
+            <div class="qr-img-wrapper" id="qrContainer">
+              <!-- QR code image injected here -->
+            </div>
+          </div>
+
+          <div class="qr-link-box">
+            <span id="modalQrUrl">https://soundtrack-mat-museum-controlling.trycloudflare.com</span>
+            <button class="btn-copy-url" id="modalCopyBtn">📋 Copy</button>
+          </div>
+
+          <!-- Quick Action Buttons for Mobiles -->
+          <div class="qr-quick-actions">
+            <a href="https://api.whatsapp.com/send?text=Market%20Live%20AI%20Terminal%20Link:%20https://soundtrack-mat-museum-controlling.trycloudflare.com" target="_blank" class="btn-qr-action btn-wa" id="qrShareWhatsAppBtn">
+              <span>💬 WhatsApp वर पाठवा</span>
+            </a>
+            <button class="btn-qr-action btn-sim" id="qrOpenSimBtn">
+              <span>📱 फोन सिम्युलेटर उघडा</span>
+            </button>
+            <button class="btn-qr-action btn-win" id="qrOpenWindowBtn">
+              <span>💻 मोबाईल विंडो (Popup)</span>
+            </button>
+          </div>
+
+          <p class="qr-tip" id="qrActiveTip">🚀 टीप: ही लिंक कोणत्याही मोबाईलवर (Android/iPhone) थेट उघडते, कसलाही पासवर्ड किंवा 403 एरर येत नाही!</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Compare Stocks Modal -->
+    <div class="modal-backdrop" id="saCompareModal" style="display:none;">
+      <div class="modal-card card-glass modal-lg">
+        <div class="modal-header">
+          <h3>⚖️ भारतीय शेअर्स तुलना (Compare Stocks)</h3>
+          <button class="modal-close" id="saCloseCompareModal">&times;</button>
+        </div>
+        <div class="modal-body">
+          <p class="qr-desc">तुलना करण्यासाठी 2 ते 4 शेअर्सचे सिम्बॉल्स स्वल्पविरामाने (comma) वेगळे करून टाका:</p>
+          <div class="compare-input-row">
+            <input type="text" id="saCompareInput" class="sa-search-input" placeholder="उदा. TCS, INFY, TECHM, WIPRO" />
+            <button class="chip chip-primary" id="saBtnRunCompare">तुलना करा (Compare)</button>
+          </div>
+          <div id="saCompareContainer" class="compare-results-box">
+            <p class="muted">वर सिम्बॉल्स टाकून 'तुलना करा' वर क्लिक करा.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Analysis History Modal -->
+    <div class="modal-backdrop" id="saHistoryModal" style="display:none;">
+      <div class="modal-card card-glass modal-lg">
+        <div class="modal-header">
+          <h3>📜 मागील विश्लेषण इतिहास (Analysis History)</h3>
+          <button class="modal-close" id="saCloseHistoryModal">&times;</button>
+        </div>
+        <div class="modal-body">
+          <p class="qr-desc">आधी विश्लेषण केलेल्या शेअर्सची तारीख, वेळ, भाव आणि सिग्नल:</p>
+          <div id="saHistoryContainer" class="history-results-box">
+            <p class="muted">इतिहास लोड होत आहे...</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Scripts -->
+  <script src="app.js"></script>
+  <script src="stocksAnalysis.js"></script>
+  <script src="tracker.js"></script>
+  <script src="timeMachine.js"></script>
+</body>
+</html>
+
+

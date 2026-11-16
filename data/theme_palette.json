@@ -1,0 +1,48 @@
+{
+  "white_theme": {
+    "canvas_bg": "#f8fafc",
+    "card_bg": "#ffffff",
+    "card_hover": "#f1f5f9",
+    "border": "#e2e8f0",
+    "border_focus": "#2563eb",
+    "shadow": "0 4px 20px -2px rgba(15, 23, 42, 0.05), 0 2px 6px -1px rgba(15, 23, 42, 0.03)",
+    "text_primary": "#0f172a",
+    "text_secondary": "#334155",
+    "text_muted": "#64748b"
+  },
+  "bullish_green": {
+    "primary": "#16a34a",
+    "light": "#22c55e",
+    "bg": "#f0fdf4",
+    "border": "#bbf7d0",
+    "text": "#15803d"
+  },
+  "bearish_red": {
+    "primary": "#dc2626",
+    "light": "#ef4444",
+    "bg": "#fef2f2",
+    "border": "#fecaca",
+    "text": "#991b1b"
+  },
+  "ai_purple": {
+    "primary": "#7c3aed",
+    "light": "#8b5cf6",
+    "bg": "#faf5ff",
+    "border": "#e9d5ff",
+    "text": "#6d28d9"
+  },
+  "terminal_cyan": {
+    "primary": "#0891b2",
+    "light": "#06b6d4",
+    "bg": "#ecfeff",
+    "border": "#a5f3fc",
+    "text": "#0e7490"
+  },
+  "warning_amber": {
+    "primary": "#d97706",
+    "light": "#f59e0b",
+    "bg": "#fffbeb",
+    "border": "#fde68a",
+    "text": "#b45309"
+  }
+}

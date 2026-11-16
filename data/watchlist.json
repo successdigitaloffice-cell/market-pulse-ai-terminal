@@ -1,0 +1,32 @@
+[
+  {
+    "symbol": "TCS",
+    "exchange": "NSE",
+    "name": "Tata Consultancy Services",
+    "addedAt": "2026-10-12T14:03:31.684Z"
+  },
+  {
+    "symbol": "RELIANCE",
+    "exchange": "NSE",
+    "name": "Reliance Industries Ltd",
+    "addedAt": "2026-10-12T14:03:31.684Z"
+  },
+  {
+    "symbol": "HDFCBANK",
+    "exchange": "NSE",
+    "name": "HDFC Bank Limited",
+    "addedAt": "2026-10-12T14:03:31.684Z"
+  },
+  {
+    "symbol": "INFY",
+    "exchange": "NSE",
+    "name": "Infosys Limited",
+    "addedAt": "2026-10-12T14:03:31.684Z"
+  },
+  {
+    "symbol": "TATAMOTORS",
+    "exchange": "NSE",
+    "name": "Tata Motors Limited",
+    "addedAt": "2026-10-12T14:03:31.684Z"
+  }
+]

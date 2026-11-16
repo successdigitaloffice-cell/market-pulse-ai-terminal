@@ -1,0 +1,12 @@
+{
+  "watchdogPid": 20328,
+  "serverPid": 21724,
+  "tunnelPid": 13648,
+  "port": 5000,
+  "serverRestartCount": 0,
+  "tunnelRestartCount": 0,
+  "tunnelUrl": "https://type-english-owner-august.trycloudflare.com",
+  "updatedAt": "2026-11-16T13:06:27.265Z",
+  "status": "healthy",
+  "lastHealthCheck": "2026-11-16T13:06:27.263Z"
+}

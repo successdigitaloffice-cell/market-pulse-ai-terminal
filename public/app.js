@@ -88,9 +88,12 @@ document.addEventListener('DOMContentLoaded', () => {
   const qrActiveDesc = document.getElementById('qrActiveDesc');
   const qrActiveTip = document.getElementById('qrActiveTip');
 
-  let currentWifiUrl = 'http://192.168.101.4:5000';
-  let currentTunnelUrl = 'https://market-live-ai-terminal.loca.lt';
-  let currentCloudflareUrl = 'https://soundtrack-mat-museum-controlling.trycloudflare.com';
+  const PERMANENT_GITHUB_PORTAL_URL = 'https://successdigitaloffice-cell.github.io/market-pulse-ai-terminal/';
+  const isHostedOnGitHub = window.location.hostname.includes('github.io');
+
+  let currentWifiUrl = isHostedOnGitHub ? PERMANENT_GITHUB_PORTAL_URL : 'http://localhost:5000';
+  let currentTunnelUrl = PERMANENT_GITHUB_PORTAL_URL;
+  let currentCloudflareUrl = isHostedOnGitHub ? PERMANENT_GITHUB_PORTAL_URL : (window.location.origin.includes('trycloudflare') ? window.location.origin : PERMANENT_GITHUB_PORTAL_URL);
   let currentHostIp = '103.176.241.189';
   let activeModalUrl = currentCloudflareUrl;
   let activeFilter = 'all';
@@ -157,6 +160,13 @@ document.addEventListener('DOMContentLoaded', () => {
       if (data.localtunnelUrl) currentTunnelUrl = data.localtunnelUrl;
       if (data.cloudflareUrl) currentCloudflareUrl = data.cloudflareUrl;
       else if (data.tunnelUrl && data.tunnelUrl.includes('cloudflare')) currentCloudflareUrl = data.tunnelUrl;
+
+      // When hosted on GitHub Pages or in standalone mode, guarantee the permanent URL is used
+      if (isHostedOnGitHub || data.mode === 'github_pages_standalone') {
+        currentCloudflareUrl = PERMANENT_GITHUB_PORTAL_URL;
+        currentWifiUrl = PERMANENT_GITHUB_PORTAL_URL;
+        currentTunnelUrl = PERMANENT_GITHUB_PORTAL_URL;
+      }
 
       if (data.publicIp) {
         currentHostIp = data.publicIp;

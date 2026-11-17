@@ -1,12 +1,12 @@
 {
-  "watchdogPid": 20328,
-  "serverPid": 21724,
-  "tunnelPid": 13648,
+  "watchdogPid": 13596,
+  "serverPid": 4900,
+  "tunnelPid": 3064,
   "port": 5000,
   "serverRestartCount": 0,
   "tunnelRestartCount": 0,
-  "tunnelUrl": "https://type-english-owner-august.trycloudflare.com",
-  "updatedAt": "2026-11-16T14:03:28.619Z",
+  "tunnelUrl": "https://goes-bailey-looked-personals.trycloudflare.com",
+  "updatedAt": "2026-11-17T09:11:25.141Z",
   "status": "healthy",
-  "lastHealthCheck": "2026-11-16T14:03:28.617Z"
+  "lastHealthCheck": "2026-11-17T09:11:25.139Z"
 }

@@ -82,41 +82,19 @@
   const viewAnalysis = document.getElementById('stocksAnalysisView');
 
   function initTabSwitching() {
-    if (!tabBtnTracker) return;
-
-    tabBtnTracker.addEventListener('click', () => {
-      // Deactivate other tabs
-      const tabBtnTM = document.getElementById('tabBtnTimeMachine');
-      const viewTM = document.getElementById('timeMachineView');
-      if (tabBtnTerminal) tabBtnTerminal.classList.remove('active');
-      if (tabBtnAnalysis) tabBtnAnalysis.classList.remove('active');
-      if (tabBtnTM) tabBtnTM.classList.remove('active');
-      tabBtnTracker.classList.add('active');
-
-      if (viewTerminal) viewTerminal.style.display = 'none';
-      if (viewAnalysis) viewAnalysis.style.display = 'none';
-      if (viewTM) viewTM.style.display = 'none';
-      if (trackerContainer) trackerContainer.style.display = 'block';
-
-      // Load fresh data
+    window.initTrackerPolling = () => {
       loadTrackerData();
       startPolling();
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    });
+    };
 
-    if (tabBtnTerminal) {
-      tabBtnTerminal.addEventListener('click', () => {
-        if (tabBtnTracker) tabBtnTracker.classList.remove('active');
-        if (trackerContainer) trackerContainer.style.display = 'none';
-        stopPolling();
-      });
-    }
-
-    if (tabBtnAnalysis) {
-      tabBtnAnalysis.addEventListener('click', () => {
-        if (tabBtnTracker) tabBtnTracker.classList.remove('active');
-        if (trackerContainer) trackerContainer.style.display = 'none';
-        stopPolling();
+    if (tabBtnTracker) {
+      tabBtnTracker.addEventListener('click', () => {
+        if (typeof window.switchMainTab === 'function') {
+          window.switchMainTab('tracker');
+        } else {
+          loadTrackerData();
+          startPolling();
+        }
       });
     }
   }

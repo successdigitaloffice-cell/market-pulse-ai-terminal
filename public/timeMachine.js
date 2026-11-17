@@ -110,45 +110,31 @@ document.addEventListener('DOMContentLoaded', () => {
   if (tmTargetInput) tmTargetInput.addEventListener('input', updateLiveFeedbackAndSync);
   if (tmSideSelect) tmSideSelect.addEventListener('change', updateLiveFeedbackAndSync);
 
+  // Expose loadOrbSetups globally for unified tab orchestrator
+  window.loadOrbSetups = loadOrbSetups;
+
   // Tab switching logic
   function showTimeMachineTab() {
-    if (tabBtnTerminal) tabBtnTerminal.classList.remove('active');
-    if (tabBtnAnalysis) tabBtnAnalysis.classList.remove('active');
-    if (tabBtnTracker) tabBtnTracker.classList.remove('active');
-    if (tabBtnTimeMachine) tabBtnTimeMachine.classList.add('active');
+    if (typeof window.switchMainTab === 'function') {
+      window.switchMainTab('timemachine');
+    } else {
+      if (tabBtnTerminal) tabBtnTerminal.classList.remove('active');
+      if (tabBtnAnalysis) tabBtnAnalysis.classList.remove('active');
+      if (tabBtnTracker) tabBtnTracker.classList.remove('active');
+      if (tabBtnTimeMachine) tabBtnTimeMachine.classList.add('active');
 
-    if (viewTerminal) viewTerminal.style.display = 'none';
-    if (viewAnalysis) viewAnalysis.style.display = 'none';
-    if (viewTracker) viewTracker.style.display = 'none';
-    if (viewTimeMachine) viewTimeMachine.style.display = 'block';
+      if (viewTerminal) viewTerminal.style.display = 'none';
+      if (viewAnalysis) viewAnalysis.style.display = 'none';
+      if (viewTracker) viewTracker.style.display = 'none';
+      if (viewTimeMachine) viewTimeMachine.style.display = 'block';
 
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-    // Automatically trigger fresh ORB scan on opening tab
-    loadOrbSetups();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      loadOrbSetups();
+    }
   }
 
   if (tabBtnTimeMachine) {
     tabBtnTimeMachine.addEventListener('click', showTimeMachineTab);
-  }
-
-  // Ensure other tab buttons hide Time Machine view
-  if (tabBtnTerminal) {
-    tabBtnTerminal.addEventListener('click', () => {
-      if (tabBtnTimeMachine) tabBtnTimeMachine.classList.remove('active');
-      if (viewTimeMachine) viewTimeMachine.style.display = 'none';
-    });
-  }
-  if (tabBtnAnalysis) {
-    tabBtnAnalysis.addEventListener('click', () => {
-      if (tabBtnTimeMachine) tabBtnTimeMachine.classList.remove('active');
-      if (viewTimeMachine) viewTimeMachine.style.display = 'none';
-    });
-  }
-  if (tabBtnTracker) {
-    tabBtnTracker.addEventListener('click', () => {
-      if (tabBtnTimeMachine) tabBtnTimeMachine.classList.remove('active');
-      if (viewTimeMachine) viewTimeMachine.style.display = 'none';
-    });
   }
 
   // 1. Run Time Machine Simulation

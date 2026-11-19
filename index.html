@@ -235,15 +235,18 @@
               <h2 id="watchlistHeaderTitle">📈 थेट शेअर्स वॉचलिस्ट (Live Stocks Market)</h2>
               <p class="watchlist-sub" id="watchlistSub">NSE व BSE लाईव्ह दर • दर 3 सेकंदांनी ऑटो-अपडेट</p>
             </div>
-            <div class="filter-pills" id="watchlistFilter">
-              <button class="filter-btn active" data-filter="all">सर्व शेअर्स (<span id="totalStocksCount">26</span>)</button>
-              <button class="filter-btn" data-filter="buy">🟢 खरेदी (Buy)</button>
-              <button class="filter-btn" data-filter="sell">🔴 विक्री (Sell)</button>
-              <button class="filter-btn" data-filter="banking">🏦 बँका</button>
-              <button class="filter-btn" data-filter="it">💻 आयटी</button>
-              <button class="filter-btn" data-filter="auto">🚗 ऑटो</button>
-              <button class="filter-btn" data-filter="energy">⚡ ऊर्जा</button>
-              <button class="filter-btn" data-filter="trending">🔥 ट्रेंडिंग</button>
+            <div class="watchlist-controls-row">
+              <input type="text" id="searchFilter" class="watchlist-quick-search" placeholder="🔍 शेअर शोधा (उदा. RELIANCE, TCS, SBIN, TATA)..." />
+              <div class="filter-pills" id="watchlistFilter">
+                <button class="filter-btn active" data-filter="all">सर्व शेअर्स (<span id="totalStocksCount">1,000</span>)</button>
+                <button class="filter-btn" data-filter="buy">🟢 खरेदी (Buy)</button>
+                <button class="filter-btn" data-filter="sell">🔴 विक्री (Sell)</button>
+                <button class="filter-btn" data-filter="banking">🏦 बँका</button>
+                <button class="filter-btn" data-filter="it">💻 आयटी</button>
+                <button class="filter-btn" data-filter="auto">🚗 ऑटो</button>
+                <button class="filter-btn" data-filter="energy">⚡ ऊर्जा</button>
+                <button class="filter-btn" data-filter="trending">🔥 ट्रेंडिंग</button>
+              </div>
             </div>
           </div>
 

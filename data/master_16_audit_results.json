@@ -1,5 +1,5 @@
 {
-  "executionTime": "2026-11-17T10:10:48.267Z",
+  "executionTime": "2026-11-19T15:54:37.979Z",
   "totalTests": 16,
   "passed": 16,
   "failed": 0,
@@ -9,112 +9,112 @@
       "testNumber": 1,
       "name": "Live Data उपलब्ध आणि अनुपलब्ध असतानाची स्थिती",
       "status": "PASS",
-      "timestamp": "2026-11-17T10:10:47.938Z",
-      "details": "Market Session: 🟠 POST-MARKET CLOSING, Data Status: MARKET_CLOSED_EOD"
+      "timestamp": "2026-11-19T15:54:37.790Z",
+      "details": "Market Session: 🔴 MARKET CLOSED (OFF), Data Status: MARKET_CLOSED_EOD"
     },
     {
       "testNumber": 2,
       "name": "Stale Data आणि Timestamp Mismatch (Latency Tracking)",
       "status": "PASS",
-      "timestamp": "2026-11-17T10:10:47.939Z",
-      "details": "Exchange Time: 3:31:07 pm, Latency: 580s, Warning Flag: MARKET_CLOSED_EOD"
+      "timestamp": "2026-11-19T15:54:37.791Z",
+      "details": "Exchange Time: 3:31:07 pm, Latency: 21210s, Warning Flag: MARKET_CLOSED_EOD"
     },
     {
       "testNumber": 3,
       "name": "योग्य व चुकीचा Instrument Symbol (Exchange & Ticker Normalization)",
       "status": "PASS",
-      "timestamp": "2026-11-17T10:10:47.939Z",
+      "timestamp": "2026-11-19T15:54:37.791Z",
       "details": "TCS -> TCS.NS, RELIANCE BSE -> RELIANCE.BO, TATAMOTORS -> TMCV.NS"
     },
     {
       "testNumber": 4,
       "name": "BUY आणि SELL Direction (Level Logic Consistency)",
       "status": "PASS",
-      "timestamp": "2026-11-17T10:10:47.947Z",
+      "timestamp": "2026-11-19T15:54:37.797Z",
       "details": "BUY: Entry ₹1150 > SL ₹1140 | SELL: Entry ₹1020 < SL ₹1030"
     },
     {
       "testNumber": 5,
       "name": "CALL आणि PUT Contract Mapping (Options Schema & Lot Sizes)",
       "status": "PASS",
-      "timestamp": "2026-11-17T10:10:47.953Z",
+      "timestamp": "2026-11-19T15:54:37.801Z",
       "details": "NIFTY CE (Strike: 22600, Lot: 25) & BANK NIFTY PE (Strike: 54900, Lot: 15)"
     },
     {
       "testNumber": 6,
       "name": "Entry Trigger आणि Entry Not Triggered",
       "status": "PASS",
-      "timestamp": "2026-11-17T10:10:47.959Z",
-      "details": "Triggered: true (at 15:40:47 IST) | Untriggered: false"
+      "timestamp": "2026-11-19T15:54:37.806Z",
+      "details": "Triggered: true (at 21:24:37 IST) | Untriggered: false"
     },
     {
       "testNumber": 7,
       "name": "Target Hit आणि Stop-Loss Hit",
       "status": "PASS",
-      "timestamp": "2026-11-17T10:10:47.966Z",
+      "timestamp": "2026-11-19T15:54:37.812Z",
       "details": "Target: TARGET 1 HIT (Exit ₹1500, Net ₹568.44) | SL: STOP LOSS HIT (Exit ₹254, Net ₹-627.19)"
     },
     {
       "testNumber": 8,
       "name": "एकाच Candle मधील Target/SL Ambiguity (Intrabar Conflict Resolution)",
       "status": "PASS",
-      "timestamp": "2026-11-17T10:10:47.972Z",
+      "timestamp": "2026-11-19T15:54:37.817Z",
       "details": "Outcome: AMBIGUOUS — NOT VERIFIED, Data Status: AMBIGUOUS"
     },
     {
       "testNumber": 9,
       "name": "Manual Exit आणि Expired Signal (Supported Status Lifecycle)",
       "status": "PASS",
-      "timestamp": "2026-11-17T10:10:47.975Z",
+      "timestamp": "2026-11-19T15:54:37.819Z",
       "details": "Status: EXITED MANUALLY, Exit: ₹2135, Time: 14:30:00 IST"
     },
     {
       "testNumber": 10,
       "name": "Refresh, Restart आणि Login नंतर History टिकणे (Persistent Storage)",
       "status": "PASS",
-      "timestamp": "2026-11-17T10:10:47.976Z",
+      "timestamp": "2026-11-19T15:54:37.821Z",
       "details": "Disk Database: 26 signals stored persistently in data/trade_signals.json"
     },
     {
       "testNumber": 11,
       "name": "Duplicate Signal व Duplicate Order नियंत्रण (Idempotent Guard)",
       "status": "PASS",
-      "timestamp": "2026-11-17T10:10:47.978Z",
+      "timestamp": "2026-11-19T15:54:37.823Z",
       "details": "Attempted duplicate signal rejected. Maintained database count without duplicate."
     },
     {
       "testNumber": 12,
       "name": "P&L आणि शुल्कांची स्वतंत्र गणना (Indian Statutory Tax Breakdown)",
       "status": "PASS",
-      "timestamp": "2026-11-17T10:10:47.978Z",
+      "timestamp": "2026-11-19T15:54:37.823Z",
       "details": "Equity Net: ₹1107.51 (Charges: ₹84.99) | Option Net: ₹1194.12 (Charges: ₹55.88)"
     },
     {
       "testNumber": 13,
       "name": "Dashboard आणि Tracker यांतील डेटा जुळणे (Signal Sync Integrity)",
       "status": "PASS",
-      "timestamp": "2026-11-17T10:10:47.979Z",
+      "timestamp": "2026-11-19T15:54:37.824Z",
       "details": "Tracker Signals: 27, Report Signals: 27, Verified Win Rate: 66.7%"
     },
     {
       "testNumber": 14,
       "name": "API Disconnect/Reconnect आणि Error Recovery",
       "status": "PASS",
-      "timestamp": "2026-11-17T10:10:48.259Z",
-      "details": "Reconnected successfully: NIFTY Spot CMP ₹25387.4, Time: 3:31:07 pm"
+      "timestamp": "2026-11-19T15:54:37.972Z",
+      "details": "Reconnected successfully: NIFTY Spot CMP ₹25514.3, Time: 3:31:07 pm"
     },
     {
       "testNumber": 15,
       "name": "जुना Signal बदलल्याशिवाय नवीन Version तयार होणे (Signal Versioning v1.0 & v2.0)",
       "status": "PASS",
-      "timestamp": "2026-11-17T10:10:48.265Z",
+      "timestamp": "2026-11-19T15:54:37.978Z",
       "details": "Original v1.0 T1: ₹575 intact, Revised v2.0 T1: ₹585, Reason: \"Global EV delivery numbers beat estimates\""
     },
     {
       "testNumber": 16,
       "name": "ब्रोकर पुरावा नसताना Actual Execution दाखवले जात नाही याची खात्री (Zero False Claims)",
       "status": "PASS",
-      "timestamp": "2026-11-17T10:10:48.265Z",
+      "timestamp": "2026-11-19T15:54:37.978Z",
       "details": "All trades strictly classified as \"SIGNAL TRACKING\" with simulated status disclosures."
     }
   ]

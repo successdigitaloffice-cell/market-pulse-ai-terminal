@@ -839,6 +839,42 @@ body {
   margin-top: 2px;
 }
 
+.watchlist-controls-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.watchlist-quick-search {
+  padding: 6px 14px;
+  border-radius: 20px;
+  border: 1px solid var(--border-glass);
+  background: rgba(255, 255, 255, 0.06);
+  color: #fff;
+  font-size: 0.8rem;
+  outline: none;
+  min-width: 220px;
+  transition: all 0.2s ease;
+}
+
+.watchlist-quick-search:focus {
+  border-color: #3b82f6;
+  background: rgba(255, 255, 255, 0.12);
+  box-shadow: 0 0 10px rgba(59, 130, 246, 0.3);
+}
+
+[data-theme="white"] .watchlist-quick-search {
+  background: #ffffff !important;
+  color: #0f172a !important;
+  border: 1px solid #cbd5e1 !important;
+}
+
+[data-theme="white"] .watchlist-quick-search:focus {
+  border-color: #2563eb !important;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15) !important;
+}
+
 .filter-pills {
   display: flex;
   gap: 6px;

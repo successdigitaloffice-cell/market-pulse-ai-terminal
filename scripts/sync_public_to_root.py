@@ -3,6 +3,7 @@ import hashlib
 import os
 
 files = [
+    'index.html',
     'standaloneMarketEngine.js',
     'stocksAnalysis.js',
     'app.js',

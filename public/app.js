@@ -1033,8 +1033,14 @@ document.addEventListener('DOMContentLoaded', () => {
     } else if (activeFilter === 'metals') {
       filtered = stocks.filter(s => (s.sector || '').toLowerCase().includes('metal') || (s.sector || '').toLowerCase().includes('steel'));
     } else if (activeFilter === 'trending') {
-      const trendingSyms = ['SUZLON', 'ZOMATO', 'ETERNAL', 'TMCV', 'TATAMOTORS', 'HAL', 'BEL', 'IRFC'];
-      filtered = stocks.filter(s => trendingSyms.includes(s.symbol) || ['suzlon', 'zomato', 'tatamotors', 'hal', 'bel', 'irfc'].includes(s.id));
+      const trendingSyms = ['SUZLON', 'ZOMATO', 'ETERNAL', 'TMCV', 'TATAMOTORS', 'HAL', 'BEL', 'IRFC', 'YESBANK', 'IDEA', 'SAIL'];
+      filtered = stocks.filter(s => trendingSyms.includes(s.symbol) || ['suzlon', 'zomato', 'tatamotors', 'hal', 'bel', 'irfc', 'yesbank', 'idea', 'sail'].includes(s.id));
+    }
+
+    const searchInput = document.getElementById('searchFilter');
+    const isSearching = searchInput && typeof searchInput.value === 'string' && searchInput.value.trim().length > 0;
+    if (!isSearching && activeFilter === 'all' && filtered.length > 40) {
+      filtered = filtered.slice(0, 40);
     }
 
     const currentRenderedCards = stockCardsContainer.querySelectorAll('.stock-card');
@@ -1073,11 +1079,16 @@ document.addEventListener('DOMContentLoaded', () => {
   if (searchFilterInput) {
     searchFilterInput.addEventListener('input', (e) => {
       const q = e.target.value.toLowerCase().trim();
+      let pool = cachedStocksList;
+      if (window.StandaloneMarketEngine && typeof window.StandaloneMarketEngine.getWatchlistStocks === 'function') {
+        const full = window.StandaloneMarketEngine.getWatchlistStocks();
+        if (full && full.length > pool.length) pool = full;
+      }
       if (!q) {
-        renderStockCards(cachedStocksList);
+        renderStockCards(pool);
         return;
       }
-      const filtered = cachedStocksList.filter(s => 
+      const filtered = pool.filter(s => 
         (s.symbol && s.symbol.toLowerCase().includes(q)) ||
         (s.name && s.name.toLowerCase().includes(q)) ||
         (s.sector && s.sector.toLowerCase().includes(q)) ||

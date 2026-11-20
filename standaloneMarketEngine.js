@@ -22,41 +22,114 @@
 
   // --- TOP 30 MEGA-CAP STOCKS IN-MEMORY CACHE (Instant millisecond-1 render) ---
   const TOP_MEGA_CAPS = [
-    { symbol: 'RELIANCE', name: 'Reliance Industries Limited', cmp: 1285.50, change: 14.20, pct: 1.12, exchange: 'NSE', sector: 'Energy / Telecom', high: 1292.00, low: 1272.00, volume: '8.4M', pe: 24.3, pb: 2.15, rsi: 62.4, trend: 'BULLISH', signal: 'STRONG BUY' },
-    { symbol: 'TCS', name: 'Tata Consultancy Services Ltd', cmp: 4160.00, change: 38.50, pct: 0.93, exchange: 'NSE', sector: 'Information Technology', high: 4185.00, low: 4125.00, volume: '2.1M', pe: 29.8, pb: 12.4, rsi: 58.1, trend: 'BULLISH', signal: 'BUY' },
-    { symbol: 'HDFCBANK', name: 'HDFC Bank Limited', cmp: 1748.00, change: 11.40, pct: 0.66, exchange: 'NSE', sector: 'Banking & Financials', high: 1756.00, low: 1735.00, volume: '14.2M', pe: 18.9, pb: 2.75, rsi: 55.4, trend: 'BULLISH', signal: 'BUY' },
-    { symbol: 'INFY', name: 'Infosys Limited', cmp: 1872.00, change: 18.60, pct: 1.00, exchange: 'NSE', sector: 'Information Technology', high: 1888.00, low: 1855.00, volume: '6.7M', pe: 27.2, pb: 7.8, rsi: 64.2, trend: 'BULLISH', signal: 'STRONG BUY' },
-    { symbol: 'ICICIBANK', name: 'ICICI Bank Limited', cmp: 1262.00, change: 8.80, pct: 0.70, exchange: 'NSE', sector: 'Banking & Financials', high: 1268.00, low: 1250.00, volume: '11.5M', pe: 17.6, pb: 3.1, rsi: 59.8, trend: 'BULLISH', signal: 'BUY' },
-    { symbol: 'SBIN', name: 'State Bank of India', cmp: 818.00, change: 7.20, pct: 0.89, exchange: 'NSE', sector: 'Public Sector Banking', high: 824.00, low: 811.00, volume: '16.8M', pe: 10.4, pb: 1.45, rsi: 61.2, trend: 'BULLISH', signal: 'BUY' },
-    { symbol: 'BHARTIARTL', name: 'Bharti Airtel Limited', cmp: 1610.00, change: 12.00, pct: 0.75, exchange: 'NSE', sector: 'Telecommunications', high: 1622.00, low: 1598.00, volume: '4.8M', pe: 54.2, pb: 8.9, rsi: 57.3, trend: 'BULLISH', signal: 'BUY' },
-    { symbol: 'ITC', name: 'ITC Limited', cmp: 482.50, change: -1.20, pct: -0.25, exchange: 'NSE', sector: 'FMCG / Tobacco', high: 486.00, low: 481.00, volume: '9.2M', pe: 28.1, pb: 7.2, rsi: 48.7, trend: 'NEUTRAL', signal: 'NEUTRAL' },
-    { symbol: 'KOTAKBANK', name: 'Kotak Mahindra Bank Ltd', cmp: 1765.00, change: 6.50, pct: 0.37, exchange: 'NSE', sector: 'Banking & Financials', high: 1775.00, low: 1754.00, volume: '3.4M', pe: 19.8, pb: 2.8, rsi: 52.4, trend: 'BULLISH', signal: 'BUY' },
-    { symbol: 'LT', name: 'Larsen & Toubro Limited', cmp: 3680.00, change: 42.00, pct: 1.15, exchange: 'NSE', sector: 'Capital Goods & Infra', high: 3710.00, low: 3640.00, volume: '2.8M', pe: 34.6, pb: 5.1, rsi: 63.8, trend: 'BULLISH', signal: 'STRONG BUY' },
-    { symbol: 'TATAMOTORS', name: 'Tata Motors Limited', cmp: 945.00, change: 12.80, pct: 1.37, exchange: 'NSE', sector: 'Automobile & EV', high: 955.00, low: 932.00, volume: '13.1M', pe: 11.2, pb: 3.4, rsi: 65.4, trend: 'BULLISH', signal: 'STRONG BUY' },
-    { symbol: 'HINDUNILVR', name: 'Hindustan Unilever Limited', cmp: 2420.00, change: -8.00, pct: -0.33, exchange: 'NSE', sector: 'FMCG', high: 2435.00, low: 2410.00, volume: '1.9M', pe: 53.4, pb: 11.2, rsi: 46.2, trend: 'NEUTRAL', signal: 'NEUTRAL' },
-    { symbol: 'AXISBANK', name: 'Axis Bank Limited', cmp: 1185.00, change: 9.50, pct: 0.81, exchange: 'NSE', sector: 'Banking & Financials', high: 1195.00, low: 1175.00, volume: '7.8M', pe: 14.2, pb: 2.1, rsi: 58.7, trend: 'BULLISH', signal: 'BUY' },
-    { symbol: 'MARUTI', name: 'Maruti Suzuki India Ltd', cmp: 11950.00, change: 120.00, pct: 1.01, exchange: 'NSE', sector: 'Automobile', high: 12050.00, low: 11840.00, volume: '0.8M', pe: 27.8, pb: 4.2, rsi: 60.5, trend: 'BULLISH', signal: 'BUY' },
-    { symbol: 'SUNPHARMA', name: 'Sun Pharmaceutical Industries', cmp: 1780.00, change: 15.00, pct: 0.85, exchange: 'NSE', sector: 'Pharmaceuticals', high: 1795.00, low: 1765.00, volume: '2.6M', pe: 38.4, pb: 6.5, rsi: 62.1, trend: 'BULLISH', signal: 'BUY' },
-    { symbol: 'BAJFINANCE', name: 'Bajaj Finance Limited', cmp: 6850.00, change: 65.00, pct: 0.96, exchange: 'NSE', sector: 'Non-Banking Financial', high: 6920.00, low: 6780.00, volume: '1.4M', pe: 26.5, pb: 5.4, rsi: 58.9, trend: 'BULLISH', signal: 'BUY' },
-    { symbol: 'TITAN', name: 'Titan Company Limited', cmp: 3290.00, change: 24.00, pct: 0.73, exchange: 'NSE', sector: 'Consumer Discretionary', high: 3315.00, low: 3260.00, volume: '1.2M', pe: 74.5, pb: 19.8, rsi: 56.4, trend: 'BULLISH', signal: 'BUY' },
-    { symbol: 'ADANIENT', name: 'Adani Enterprises Limited', cmp: 2940.00, change: 35.00, pct: 1.20, exchange: 'NSE', sector: 'Diversified Conglomerate', high: 2975.00, low: 2905.00, volume: '3.9M', pe: 88.2, pb: 8.1, rsi: 64.8, trend: 'BULLISH', signal: 'STRONG BUY' },
-    { symbol: 'NTPC', name: 'NTPC Limited', cmp: 378.00, change: 3.50, pct: 0.93, exchange: 'NSE', sector: 'Power Generation', high: 382.00, low: 374.00, volume: '12.4M', pe: 16.8, pb: 2.1, rsi: 61.5, trend: 'BULLISH', signal: 'BUY' },
-    { symbol: 'POWERGRID', name: 'Power Grid Corp of India', cmp: 324.00, change: 2.80, pct: 0.87, exchange: 'NSE', sector: 'Power Transmission', high: 328.00, low: 321.00, volume: '8.6M', pe: 18.2, pb: 3.4, rsi: 59.4, trend: 'BULLISH', signal: 'BUY' },
-    { symbol: 'TATASTEEL', name: 'Tata Steel Limited', cmp: 154.50, change: 1.80, pct: 1.18, exchange: 'NSE', sector: 'Metals & Mining', high: 156.00, low: 152.50, volume: '28.5M', pe: 42.1, pb: 2.0, rsi: 63.2, trend: 'BULLISH', signal: 'STRONG BUY' },
-    { symbol: 'ULTRACEMCO', name: 'UltraTech Cement Limited', cmp: 11450.00, change: 95.00, pct: 0.84, exchange: 'NSE', sector: 'Cement & Building', high: 11550.00, low: 11340.00, volume: '0.5M', pe: 46.2, pb: 5.3, rsi: 57.8, trend: 'BULLISH', signal: 'BUY' },
-    { symbol: 'ASIANPAINT', name: 'Asian Paints Limited', cmp: 2540.00, change: -12.00, pct: -0.47, exchange: 'NSE', sector: 'Paints & Coatings', high: 2565.00, low: 2530.00, volume: '1.6M', pe: 48.7, pb: 13.5, rsi: 44.8, trend: 'BEARISH', signal: 'SELL' },
-    { symbol: 'COALINDIA', name: 'Coal India Limited', cmp: 428.00, change: 3.20, pct: 0.75, exchange: 'NSE', sector: 'Energy & Mining', high: 432.00, low: 424.00, volume: '7.4M', pe: 8.4, pb: 3.1, rsi: 58.2, trend: 'BULLISH', signal: 'BUY' },
-    { symbol: 'BAJAJFINSV', name: 'Bajaj Finserv Limited', cmp: 1680.00, change: 14.00, pct: 0.84, exchange: 'NSE', sector: 'Financial Services', high: 1695.00, low: 1664.00, volume: '2.3M', pe: 31.4, pb: 4.8, rsi: 57.6, trend: 'BULLISH', signal: 'BUY' },
-    { symbol: 'M&M', name: 'Mahindra & Mahindra Limited', cmp: 2980.00, change: 38.00, pct: 1.29, exchange: 'NSE', sector: 'Automobile & Tractors', high: 3010.00, low: 2940.00, volume: '4.1M', pe: 32.1, pb: 5.2, rsi: 65.8, trend: 'BULLISH', signal: 'STRONG BUY' },
-    { symbol: 'JSWSTEEL', name: 'JSW Steel Limited', cmp: 968.00, change: 10.50, pct: 1.10, exchange: 'NSE', sector: 'Metals & Steel', high: 976.00, low: 955.00, volume: '5.2M', pe: 28.4, pb: 3.1, rsi: 62.4, trend: 'BULLISH', signal: 'STRONG BUY' },
-    { symbol: 'NESTLEIND', name: 'Nestle India Limited', cmp: 2310.00, change: -4.00, pct: -0.17, exchange: 'NSE', sector: 'FMCG / Food', high: 2325.00, low: 2302.00, volume: '0.7M', pe: 72.8, pb: 58.4, rsi: 49.1, trend: 'NEUTRAL', signal: 'NEUTRAL' },
-    { symbol: 'TECHM', name: 'Tech Mahindra Limited', cmp: 1675.00, change: 19.00, pct: 1.15, exchange: 'NSE', sector: 'Information Technology', high: 1690.00, low: 1652.00, volume: '3.1M', pe: 41.2, pb: 5.6, rsi: 61.9, trend: 'BULLISH', signal: 'STRONG BUY' },
-    { symbol: 'WIPRO', name: 'Wipro Limited', cmp: 565.00, change: 4.80, pct: 0.86, exchange: 'NSE', sector: 'Information Technology', high: 572.00, low: 559.00, volume: '9.8M', pe: 24.6, pb: 3.4, rsi: 59.2, trend: 'BULLISH', signal: 'BUY' }
+    { symbol: 'RELIANCE', name: 'Reliance Industries Ltd.', cmp: 1377.50, change: 1.90, pct: 0.14, exchange: 'NSE', sector: 'Oil Gas & Consumable Fuels', high: 1383.00, low: 1356.10, volume: '13.2M', pe: 25.0, pb: 3.5, rsi: 55.0, trend: 'BULLISH', signal: 'BUY' },
+    { symbol: 'TCS', name: 'Tata Consultancy Services Ltd.', cmp: 2376.20, change: 33.50, pct: 1.43, exchange: 'NSE', sector: 'Information Technology', high: 2414.80, low: 2317.00, volume: '3.0M', pe: 25.0, pb: 3.5, rsi: 55.0, trend: 'BULLISH', signal: 'STRONG BUY' },
+    { symbol: 'HDFCBANK', name: 'HDFC Bank Ltd.', cmp: 846.00, change: 24.20, pct: 2.94, exchange: 'NSE', sector: 'Financial Services', high: 850.35, low: 815.50, volume: '70.1M', pe: 25.0, pb: 3.5, rsi: 55.0, trend: 'BULLISH', signal: 'STRONG BUY' },
+    { symbol: 'ICICIBANK', name: 'ICICI Bank Ltd.', cmp: 1640.00, change: 31.10, pct: 1.93, exchange: 'NSE', sector: 'Financial Services', high: 1645.00, low: 1600.90, volume: '18.0M', pe: 25.0, pb: 3.5, rsi: 55.0, trend: 'BULLISH', signal: 'STRONG BUY' },
+    { symbol: 'INFY', name: 'Infosys Ltd.', cmp: 1098.00, change: 6.10, pct: 0.56, exchange: 'NSE', sector: 'Information Technology', high: 1118.80, low: 1081.70, volume: '13.7M', pe: 25.0, pb: 3.5, rsi: 55.0, trend: 'BULLISH', signal: 'BUY' },
+    { symbol: 'SBIN', name: 'State Bank of India', cmp: 1165.10, change: 9.10, pct: 0.79, exchange: 'NSE', sector: 'Financial Services', high: 1174.90, low: 1144.00, volume: '17.5M', pe: 25.0, pb: 3.5, rsi: 55.0, trend: 'BULLISH', signal: 'BUY' },
+    { symbol: 'BHARTIARTL', name: 'Bharti Airtel Ltd.', cmp: 2161.70, change: 17.70, pct: 0.83, exchange: 'NSE', sector: 'Telecommunication', high: 2164.80, low: 2131.00, volume: '5.3M', pe: 25.0, pb: 3.5, rsi: 55.0, trend: 'BULLISH', signal: 'BUY' },
+    { symbol: 'ITC', name: 'ITC Ltd.', cmp: 299.10, change: -1.90, pct: -0.63, exchange: 'NSE', sector: 'Fast Moving Consumer Goods', high: 301.00, low: 294.30, volume: '28.3M', pe: 25.0, pb: 3.5, rsi: 55.0, trend: 'BEARISH', signal: 'SELL' },
+    { symbol: 'KOTAKBANK', name: 'Kotak Mahindra Bank Ltd.', cmp: 515.80, change: 12.80, pct: 2.54, exchange: 'NSE', sector: 'Financial Services', high: 516.60, low: 499.00, volume: '18.9M', pe: 25.0, pb: 3.5, rsi: 55.0, trend: 'BULLISH', signal: 'STRONG BUY' },
+    { symbol: 'LT', name: 'Larsen & Toubro Ltd.', cmp: 4209.10, change: -1.90, pct: -0.05, exchange: 'NSE', sector: 'Construction', high: 4210.10, low: 4129.10, volume: '2.2M', pe: 25.0, pb: 3.5, rsi: 55.0, trend: 'BEARISH', signal: 'SELL' },
+    { symbol: 'TATAMOTORS', name: 'TATAMOTORS Limited', cmp: 456.75, change: 10.90, pct: 2.44, exchange: 'NSE', sector: 'Equities', high: 458.75, low: 440.25, volume: '5.0M', pe: 25.0, pb: 3.5, rsi: 55.0, trend: 'BULLISH', signal: 'STRONG BUY' },
+    { symbol: 'HINDUNILVR', name: 'Hindustan Unilever Ltd.', cmp: 2052.50, change: -21.70, pct: -1.05, exchange: 'NSE', sector: 'Fast Moving Consumer Goods', high: 2063.40, low: 2040.50, volume: '1.6M', pe: 25.0, pb: 3.5, rsi: 55.0, trend: 'BEARISH', signal: 'SELL' },
+    { symbol: 'AXISBANK', name: 'Axis Bank Ltd.', cmp: 1446.00, change: 65.20, pct: 4.72, exchange: 'NSE', sector: 'Financial Services', high: 1450.00, low: 1368.80, volume: '21.5M', pe: 25.0, pb: 3.5, rsi: 55.0, trend: 'BULLISH', signal: 'STRONG BUY' },
+    { symbol: 'MARUTI', name: 'Maruti Suzuki India Ltd.', cmp: 14011.00, change: 422.00, pct: 3.11, exchange: 'NSE', sector: 'Automobile and Auto Components', high: 14047.00, low: 13505.00, volume: '1.6M', pe: 25.0, pb: 3.5, rsi: 55.0, trend: 'BULLISH', signal: 'STRONG BUY' },
+    { symbol: 'SUNPHARMA', name: 'Sun Pharmaceutical Industries Ltd.', cmp: 1884.90, change: -15.10, pct: -0.79, exchange: 'NSE', sector: 'Healthcare', high: 1910.00, low: 1883.00, volume: '1.9M', pe: 25.0, pb: 3.5, rsi: 55.0, trend: 'BEARISH', signal: 'SELL' },
+    { symbol: 'TITAN', name: 'Titan Company Ltd.', cmp: 4620.00, change: -80.00, pct: -1.70, exchange: 'NSE', sector: 'Consumer Durables', high: 4620.00, low: 4524.00, volume: '1.5M', pe: 25.0, pb: 3.5, rsi: 55.0, trend: 'BEARISH', signal: 'SELL' },
+    { symbol: 'BAJFINANCE', name: 'Bajaj Finance Ltd.', cmp: 1122.00, change: 29.15, pct: 2.67, exchange: 'NSE', sector: 'Financial Services', high: 1125.00, low: 1078.15, volume: '9.2M', pe: 25.0, pb: 3.5, rsi: 55.0, trend: 'BULLISH', signal: 'STRONG BUY' },
+    { symbol: 'TATASTEEL', name: 'Tata Steel Ltd.', cmp: 178.00, change: -2.89, pct: -1.60, exchange: 'NSE', sector: 'Metals & Mining', high: 179.07, low: 173.88, volume: '46.2M', pe: 25.0, pb: 3.5, rsi: 55.0, trend: 'BEARISH', signal: 'SELL' },
+    { symbol: 'ADANIENT', name: 'Adani Enterprises Ltd.', cmp: 2709.00, change: 5.90, pct: 0.22, exchange: 'NSE', sector: 'Metals & Mining', high: 2726.00, low: 2673.40, volume: '870K', pe: 25.0, pb: 3.5, rsi: 55.0, trend: 'BULLISH', signal: 'BUY' },
+    { symbol: 'WIPRO', name: 'Wipro Ltd.', cmp: 185.70, change: 1.77, pct: 0.96, exchange: 'NSE', sector: 'Information Technology', high: 187.81, low: 181.00, volume: '14.7M', pe: 25.0, pb: 3.5, rsi: 55.0, trend: 'BULLISH', signal: 'BUY' },
+    { symbol: 'HCLTECH', name: 'HCL Technologies Ltd.', cmp: 1344.40, change: 11.50, pct: 0.86, exchange: 'NSE', sector: 'Information Technology', high: 1363.00, low: 1317.50, volume: '3.6M', pe: 25.0, pb: 3.5, rsi: 55.0, trend: 'BULLISH', signal: 'BUY' },
+    { symbol: 'NTPC', name: 'NTPC Ltd.', cmp: 321.50, change: -3.50, pct: -1.08, exchange: 'NSE', sector: 'Power', high: 324.00, low: 318.80, volume: '9.5M', pe: 25.0, pb: 3.5, rsi: 55.0, trend: 'BEARISH', signal: 'SELL' },
+    { symbol: 'POWERGRID', name: 'Power Grid Corporation of India Ltd.', cmp: 269.00, change: 4.50, pct: 1.70, exchange: 'NSE', sector: 'Power', high: 269.00, low: 260.15, volume: '13.0M', pe: 25.0, pb: 3.5, rsi: 55.0, trend: 'BULLISH', signal: 'STRONG BUY' },
+    { symbol: 'ONGC', name: 'Oil & Natural Gas Corporation Ltd.', cmp: 223.46, change: -1.06, pct: -0.47, exchange: 'NSE', sector: 'Oil Gas & Consumable Fuels', high: 224.90, low: 221.95, volume: '14.9M', pe: 25.0, pb: 3.5, rsi: 55.0, trend: 'BEARISH', signal: 'SELL' },
+    { symbol: 'COALINDIA', name: 'Coal India Ltd.', cmp: 390.00, change: -1.50, pct: -0.38, exchange: 'NSE', sector: 'Oil Gas & Consumable Fuels', high: 394.00, low: 387.85, volume: '9.4M', pe: 25.0, pb: 3.5, rsi: 55.0, trend: 'BEARISH', signal: 'SELL' },
+    { symbol: 'M&M', name: 'Mahindra & Mahindra Ltd.', cmp: 3545.00, change: 36.00, pct: 1.03, exchange: 'NSE', sector: 'Automobile and Auto Components', high: 3570.00, low: 3479.20, volume: '3.5M', pe: 25.0, pb: 3.5, rsi: 55.0, trend: 'BULLISH', signal: 'BUY' },
+    { symbol: 'JSWSTEEL', name: 'JSW Steel Ltd.', cmp: 1337.00, change: 0.20, pct: 0.01, exchange: 'NSE', sector: 'Metals & Mining', high: 1337.00, low: 1284.10, volume: '2.3M', pe: 25.0, pb: 3.5, rsi: 55.0, trend: 'BULLISH', signal: 'BUY' },
+    { symbol: 'ULTRACEMCO', name: 'UltraTech Cement Ltd.', cmp: 12939.00, change: 379.00, pct: 3.02, exchange: 'NSE', sector: 'Construction Materials', high: 12939.00, low: 12575.00, volume: '495K', pe: 25.0, pb: 3.5, rsi: 55.0, trend: 'BULLISH', signal: 'STRONG BUY' },
+    { symbol: 'ASIANPAINT', name: 'Asian Paints Ltd.', cmp: 2608.30, change: 13.30, pct: 0.51, exchange: 'NSE', sector: 'Consumer Durables', high: 2610.90, low: 2577.10, volume: '469K', pe: 25.0, pb: 3.5, rsi: 55.0, trend: 'BULLISH', signal: 'BUY' },
+    { symbol: 'BAJAJFINSV', name: 'Bajaj Finserv Ltd.', cmp: 1892.00, change: 7.00, pct: 0.37, exchange: 'NSE', sector: 'Financial Services', high: 1913.40, low: 1857.30, volume: '1.5M', pe: 25.0, pb: 3.5, rsi: 55.0, trend: 'BULLISH', signal: 'BUY' },
   ];
 
   // Global stocks registry
   let masterStocks = [...TOP_MEGA_CAPS];
   let isFullDbLoaded = false;
+
+  // Real-time NSE Micro-Tick Engine (Calculates dynamic live ticks every 2s)
+  function getLiveTickedPrice(symbol, baseCmp) {
+    const now = Date.now();
+    const tickCycle = Math.floor(now / 2000);
+    const hash = (symbol || 'STOCK').split('').reduce((acc, c, i) => acc + c.charCodeAt(0) * (i + 1), 0);
+    const phase = (tickCycle * 0.65) + (hash % 19);
+    const pctDelta = Math.sin(phase) * 0.22 + (Math.cos(phase * 1.3) * 0.08);
+    let liveCmp = Number((baseCmp * (1 + (pctDelta / 100))).toFixed(2));
+    liveCmp = Math.round(liveCmp * 20) / 20; // Exact NSE ₹0.05 tick increment
+    return Number(liveCmp.toFixed(2));
+  }
+
+  // Helper to format any stock for the Live Terminal Watchlist
+  function formatStockForWatchlist(s) {
+    const baseCmp = Number(s.cmp || s.price || 100);
+    const cmp = getLiveTickedPrice(s.symbol || 'STOCK', baseCmp);
+    const basePct = (s.pct !== undefined ? s.pct : (s.changePercent !== undefined ? s.changePercent : 0.8));
+    const pctDiff = Number(((cmp - baseCmp) / (baseCmp || 1) * 100).toFixed(2));
+    const changePercent = Number((basePct + pctDiff).toFixed(2));
+    const isUp = changePercent >= 0;
+    const change = Number((cmp * (changePercent / 100)).toFixed(2));
+    const dayHigh = Number(Math.max(s.high || s.dayHigh || cmp * 1.012, cmp).toFixed(2));
+    const dayLow = Number(Math.min(s.low || s.dayLow || cmp * 0.988, cmp).toFixed(2));
+    const pivot = Number(((dayHigh + dayLow + cmp) / 3).toFixed(2));
+    const r1 = Number((2 * pivot - dayLow).toFixed(2));
+    const r2 = Number((pivot + (dayHigh - dayLow)).toFixed(2));
+    const r3 = Number((dayHigh + 2 * (pivot - dayLow)).toFixed(2));
+    const s1 = Number((2 * pivot - dayHigh).toFixed(2));
+    const s2 = Number((pivot - (dayHigh - dayLow)).toFixed(2));
+    const s3 = Number((dayLow - 2 * (dayHigh - pivot)).toFixed(2));
+
+    const riskDistance = Number((cmp * 0.007).toFixed(2));
+    const isBullish = isUp;
+    const action = isBullish ? 'BUY (LONG)' : 'SELL (SHORT)';
+    const badgeClass = isBullish ? 'badge-buy' : 'badge-sell';
+
+    const slVal = isBullish ? Number((cmp - riskDistance).toFixed(2)) : Number((cmp + riskDistance).toFixed(2));
+    const t1Val = isBullish ? Number((cmp + (riskDistance * 1.6)).toFixed(2)) : Number((cmp - (riskDistance * 1.6)).toFixed(2));
+    const t2Val = isBullish ? Number((cmp + (riskDistance * 2.5)).toFixed(2)) : Number((cmp - (riskDistance * 2.5)).toFixed(2));
+    const t3Val = isBullish ? Number((cmp + (riskDistance * 3.6)).toFixed(2)) : Number((cmp - (riskDistance * 3.6)).toFixed(2));
+
+    return {
+      id: (s.symbol || 'STOCK').toLowerCase(),
+      symbol: (s.symbol || 'STOCK').toUpperCase(),
+      name: s.name || `${s.symbol} Ltd`,
+      sector: s.sector || s.industry || 'Equities',
+      action,
+      badgeClass,
+      cmp,
+      prevClose: Number((cmp - change).toFixed(2)),
+      dayHigh,
+      dayLow,
+      change,
+      changePercent,
+      pivot,
+      r1, r2, r3, s1, s2, s3,
+      entryAggressive: isBullish ? `₹${cmp.toFixed(2)} – ₹${(cmp * 1.002).toFixed(2)}` : `Below ₹${(cmp * 0.998).toFixed(2)}`,
+      entryBreakout: isBullish ? `Above ₹${(dayHigh * 1.001).toFixed(2)}` : `Sell on Rise @ ₹${(cmp * 1.002).toFixed(2)}`,
+      entryPullback: isBullish ? `₹${(cmp * 0.997).toFixed(2)} – ₹${cmp.toFixed(2)}` : `Rejection @ ₹${(cmp * 1.004).toFixed(2)}`,
+      stopLoss: slVal,
+      target1: t1Val,
+      target2: t2Val,
+      target3: t3Val,
+      riskReward: '1 : 2.5',
+      vwapStatus: isBullish ? 'Trading Above VWAP' : 'Trading Below VWAP',
+      rsi14: Number((s.rsi || (isBullish ? 61.5 : 42.0)).toFixed(1)),
+      emaTrend: isBullish ? 'Golden Cross (9 EMA > 21 EMA)' : 'Bearish Slope (9 EMA < 21 EMA)',
+      supertrend: isBullish ? `Green Bullish (Support @ ₹${slVal.toFixed(2)})` : `Red Bearish (Cap @ ₹${slVal.toFixed(2)})`,
+      catalyst: isBullish ? 'Institutional volume accumulation & strong trend continuation.' : 'Distribution pattern near resistance with weak volume.',
+      lastTickTime: new Date().toISOString()
+    };
+  }
 
   // Asynchronously load the master 1,000+ stocks JSON
   async function loadFullDatabase() {
@@ -169,152 +242,46 @@
 
   // --- INSTITUTIONAL CENTRALIZED LIVE SETUPS ---
   function getTodaySetups() {
-    return [
-      {
-        signalId: 'SIG-RELIANCE-01',
-        instrument: 'RELIANCE',
-        direction: 'BUY',
-        marketPrice: 1285.50,
-        entryPrice: 1285.50,
-        stopLoss: 1276.00,
-        target1: 1298.00,
-        target2: 1312.00,
-        target3: 1325.00,
-        quantity: 50,
-        lotSize: 1,
-        strategy: '15m ORB Breakout + Institutional Volume Surge',
-        status: 'ACTIVE',
-        outcome: 'ACTIVE',
-        riskReward: '1 : 2.8',
-        signalTime: '09:30 AM'
-      },
-      {
-        signalId: 'SIG-TCS-02',
-        instrument: 'TCS',
-        direction: 'BUY',
-        marketPrice: 4160.00,
-        entryPrice: 4160.00,
-        stopLoss: 4132.00,
-        target1: 4205.00,
-        target2: 4245.00,
-        target3: 4280.00,
-        quantity: 15,
-        lotSize: 1,
-        strategy: 'Trend Continuation + 50 EMA Support Bounce',
-        status: 'ACTIVE',
-        outcome: 'ACTIVE',
-        riskReward: '1 : 3.0',
-        signalTime: '09:35 AM'
-      },
-      {
-        signalId: 'SIG-HDFCBANK-03',
-        instrument: 'HDFCBANK',
-        direction: 'BUY',
-        marketPrice: 1748.00,
-        entryPrice: 1748.00,
-        stopLoss: 1736.00,
-        target1: 1765.00,
-        target2: 1782.00,
-        target3: 1795.00,
-        quantity: 40,
-        lotSize: 1,
-        strategy: 'Classic Pivot Point R1 Breakout + Bank Nifty Edge',
-        status: 'ACTIVE',
-        outcome: 'ACTIVE',
-        riskReward: '1 : 2.6',
-        signalTime: '09:40 AM'
-      },
-      {
-        signalId: 'SIG-INFY-04',
-        instrument: 'INFY',
-        direction: 'BUY',
-        marketPrice: 1872.00,
-        entryPrice: 1872.00,
-        stopLoss: 1858.00,
-        target1: 1895.00,
-        target2: 1918.00,
-        target3: 1935.00,
-        quantity: 35,
-        lotSize: 1,
-        strategy: 'Supertrend Bullish Reversal + VWAP Cross',
-        status: 'ACTIVE',
-        outcome: 'ACTIVE',
-        riskReward: '1 : 2.5',
-        signalTime: '09:45 AM'
-      },
-      {
-        signalId: 'SIG-ICICIBANK-05',
-        instrument: 'ICICIBANK',
-        direction: 'BUY',
-        marketPrice: 1262.00,
-        entryPrice: 1262.00,
-        stopLoss: 1251.00,
-        target1: 1278.00,
-        target2: 1294.00,
-        target3: 1305.00,
-        quantity: 45,
-        lotSize: 1,
-        strategy: '20 EMA Momentum Support with Higher Highs',
-        status: 'ACTIVE',
-        outcome: 'ACTIVE',
-        riskReward: '1 : 2.7',
-        signalTime: '09:50 AM'
-      },
-      {
-        signalId: 'SIG-SBIN-06',
-        instrument: 'SBIN',
-        direction: 'BUY',
-        marketPrice: 818.00,
-        entryPrice: 818.00,
-        stopLoss: 810.00,
-        target1: 830.00,
-        target2: 842.00,
-        target3: 850.00,
-        quantity: 60,
-        lotSize: 1,
-        strategy: 'Intraday Bull Flag Breakout + PSU Bank Surge',
-        status: 'ACTIVE',
-        outcome: 'ACTIVE',
-        riskReward: '1 : 2.7',
-        signalTime: '09:55 AM'
-      },
-      {
-        signalId: 'SIG-TATAMOTORS-07',
-        instrument: 'TATAMOTORS',
-        direction: 'BUY',
-        marketPrice: 945.00,
-        entryPrice: 945.00,
-        stopLoss: 934.00,
-        target1: 960.00,
-        target2: 978.00,
-        target3: 990.00,
-        quantity: 50,
-        lotSize: 1,
-        strategy: 'Auto Sector Momentum + Volume Consolidation Breakout',
-        status: 'ACTIVE',
-        outcome: 'ACTIVE',
-        riskReward: '1 : 2.8',
-        signalTime: '10:00 AM'
-      },
-      {
-        signalId: 'SIG-LT-08',
-        instrument: 'LT',
-        direction: 'BUY',
-        marketPrice: 3680.00,
-        entryPrice: 3680.00,
-        stopLoss: 3645.00,
-        target1: 3730.00,
-        target2: 3780.00,
-        target3: 3820.00,
-        quantity: 15,
-        lotSize: 1,
-        strategy: 'Heavy Capex Leader + Daily Supertrend Confirmation',
-        status: 'ACTIVE',
-        outcome: 'ACTIVE',
-        riskReward: '1 : 2.8',
-        signalTime: '10:05 AM'
-      }
+    const setupConfigs = [
+      { id: 'SIG-RELIANCE-01', sym: 'RELIANCE', strat: '15m ORB Breakout + Institutional Volume Surge', time: '09:30 AM', qty: 50, rr: '1 : 2.8' },
+      { id: 'SIG-TCS-02', sym: 'TCS', strat: 'Trend Continuation + 50 EMA Support Bounce', time: '09:35 AM', qty: 25, rr: '1 : 3.0' },
+      { id: 'SIG-HDFCBANK-03', sym: 'HDFCBANK', strat: 'Classic Pivot Point R1 Breakout + Bank Nifty Edge', time: '09:40 AM', qty: 60, rr: '1 : 2.6' },
+      { id: 'SIG-INFY-04', sym: 'INFY', strat: 'Supertrend Bullish Reversal + VWAP Cross', time: '09:45 AM', qty: 45, rr: '1 : 2.5' },
+      { id: 'SIG-ICICIBANK-05', sym: 'ICICIBANK', strat: '20 EMA Momentum Support with Higher Highs', time: '09:50 AM', qty: 35, rr: '1 : 2.7' },
+      { id: 'SIG-SBIN-06', sym: 'SBIN', strat: 'Intraday Bull Flag Breakout + PSU Bank Surge', time: '09:55 AM', qty: 40, rr: '1 : 2.7' },
+      { id: 'SIG-TATAMOTORS-07', sym: 'TATAMOTORS', strat: 'Auto Sector Momentum + Volume Consolidation Breakout', time: '10:00 AM', qty: 100, rr: '1 : 2.8' },
+      { id: 'SIG-LT-08', sym: 'LT', strat: 'Heavy Capex Leader + Daily Supertrend Confirmation', time: '10:05 AM', qty: 15, rr: '1 : 2.8' }
     ];
+
+    return setupConfigs.map(cfg => {
+      const match = (masterStocks && masterStocks.find(s => s.symbol === cfg.sym)) || TOP_MEGA_CAPS.find(s => s.symbol === cfg.sym) || { cmp: 1000 };
+      const rawCmp = Number(match.cmp || match.price || 1000);
+      const cmp = getLiveTickedPrice(cfg.sym, rawCmp);
+      const riskDist = Number((cmp * 0.007).toFixed(2));
+      const sl = Number((cmp - riskDist).toFixed(2));
+      const t1 = Number((cmp + (riskDist * 1.6)).toFixed(2));
+      const t2 = Number((cmp + (riskDist * 2.5)).toFixed(2));
+      const t3 = Number((cmp + (riskDist * 3.6)).toFixed(2));
+
+      return {
+        signalId: cfg.id,
+        instrument: cfg.sym,
+        direction: 'BUY',
+        marketPrice: cmp,
+        entryPrice: cmp,
+        stopLoss: sl,
+        target1: t1,
+        target2: t2,
+        target3: t3,
+        quantity: cfg.qty,
+        lotSize: 1,
+        strategy: cfg.strat,
+        status: 'ACTIVE',
+        outcome: 'ACTIVE',
+        riskReward: cfg.rr,
+        signalTime: cfg.time
+      };
+    });
   }
 
   // --- MARKET CONTEXT GENERATOR ---
@@ -1176,89 +1143,11 @@
         return new Response(JSON.stringify(resData), { status: 200, headers: { 'Content-Type': 'application/json' } });
       }
 
-      // Real-time NSE Micro-Tick Engine (Calculates dynamic live ticks every 2s)
-      function getLiveTickedPrice(symbol, baseCmp) {
-        const now = Date.now();
-        const tickCycle = Math.floor(now / 2000);
-        const hash = symbol.split('').reduce((acc, c, i) => acc + c.charCodeAt(0) * (i + 1), 0);
-        const phase = (tickCycle * 0.65) + (hash % 19);
-        const pctDelta = Math.sin(phase) * 0.22 + (Math.cos(phase * 1.3) * 0.08);
-        let liveCmp = Number((baseCmp * (1 + (pctDelta / 100))).toFixed(2));
-        liveCmp = Math.round(liveCmp * 20) / 20; // Exact NSE ₹0.05 tick increment
-        return Number(liveCmp.toFixed(2));
-      }
-
-      // Helper to format any stock for the Live Terminal Watchlist
-      function formatStockForWatchlist(s) {
-        const baseCmp = Number(s.cmp || s.price || 100);
-        const cmp = getLiveTickedPrice(s.symbol || 'STOCK', baseCmp);
-        const basePct = (s.pct !== undefined ? s.pct : (s.changePercent !== undefined ? s.changePercent : 0.8));
-        const pctDiff = Number(((cmp - baseCmp) / (baseCmp || 1) * 100).toFixed(2));
-        const changePercent = Number((basePct + pctDiff).toFixed(2));
-        const isUp = changePercent >= 0;
-        const change = Number((cmp * (changePercent / 100)).toFixed(2));
-        const dayHigh = Number(Math.max(s.high || s.dayHigh || cmp * 1.012, cmp).toFixed(2));
-        const dayLow = Number(Math.min(s.low || s.dayLow || cmp * 0.988, cmp).toFixed(2));
-        const pivot = Number(((dayHigh + dayLow + cmp) / 3).toFixed(2));
-        const r1 = Number((2 * pivot - dayLow).toFixed(2));
-        const r2 = Number((pivot + (dayHigh - dayLow)).toFixed(2));
-        const r3 = Number((dayHigh + 2 * (pivot - dayLow)).toFixed(2));
-        const s1 = Number((2 * pivot - dayHigh).toFixed(2));
-        const s2 = Number((pivot - (dayHigh - dayLow)).toFixed(2));
-        const s3 = Number((dayLow - 2 * (dayHigh - pivot)).toFixed(2));
-
-        const riskDistance = Number((cmp * 0.007).toFixed(2));
-        const isBullish = isUp;
-        const action = isBullish ? 'BUY (LONG)' : 'SELL (SHORT)';
-        const badgeClass = isBullish ? 'badge-buy' : 'badge-sell';
-
-        const slVal = isBullish ? Number((cmp - riskDistance).toFixed(2)) : Number((cmp + riskDistance).toFixed(2));
-        const t1Val = isBullish ? Number((cmp + (riskDistance * 1.6)).toFixed(2)) : Number((cmp - (riskDistance * 1.6)).toFixed(2));
-        const t2Val = isBullish ? Number((cmp + (riskDistance * 2.5)).toFixed(2)) : Number((cmp - (riskDistance * 2.5)).toFixed(2));
-        const t3Val = isBullish ? Number((cmp + (riskDistance * 3.6)).toFixed(2)) : Number((cmp - (riskDistance * 3.6)).toFixed(2));
-
-        return {
-          id: (s.symbol || 'STOCK').toLowerCase(),
-          symbol: (s.symbol || 'STOCK').toUpperCase(),
-          name: s.name || `${s.symbol} Ltd`,
-          sector: s.sector || 'Equities',
-          action,
-          badgeClass,
-          cmp,
-          prevClose: Number((cmp - change).toFixed(2)),
-          dayHigh,
-          dayLow,
-          change,
-          changePercent,
-          pivot,
-          r1, r2, r3, s1, s2, s3,
-          entryAggressive: isBullish ? `₹${cmp.toFixed(2)} – ₹${(cmp * 1.002).toFixed(2)}` : `Below ₹${(cmp * 0.998).toFixed(2)}`,
-          entryBreakout: isBullish ? `Above ₹${(dayHigh * 1.001).toFixed(2)}` : `Sell on Rise @ ₹${(cmp * 1.002).toFixed(2)}`,
-          entryPullback: isBullish ? `₹${(cmp * 0.997).toFixed(2)} – ₹${cmp.toFixed(2)}` : `Rejection @ ₹${(cmp * 1.004).toFixed(2)}`,
-          stopLoss: `₹${slVal.toFixed(2)}`,
-          target1: `₹${t1Val.toFixed(2)}`,
-          target2: `₹${t2Val.toFixed(2)}`,
-          target3: `₹${t3Val.toFixed(2)}`,
-          entryVal: cmp,
-          stopLossVal: slVal,
-          target1Val: t1Val,
-          target2Val: t2Val,
-          target3Val: t3Val,
-          riskReward: '1 : 2.5',
-          vwapStatus: isBullish ? 'Bullish (Holding Above VWAP)' : 'Bearish (Rejected Below VWAP)',
-          rsi14: isBullish ? '62.4 (Bullish Momentum)' : '42.1 (Oversold / Weak)',
-          emaTrend: isBullish ? '9 EMA > 20 EMA Golden Cross' : '9 EMA < 20 EMA Death Cross',
-          supertrend: isBullish ? `Green Bullish (Support @ ₹${slVal.toFixed(2)})` : `Red Bearish (Cap @ ₹${slVal.toFixed(2)})`,
-          catalyst: isBullish ? 'Institutional volume accumulation & strong trend continuation.' : 'Distribution pattern near resistance with weak volume.',
-          lastTickTime: new Date().toISOString()
-        };
-      }
-
       // GET /api/stocks
       if (pathname.endsWith('/stocks')) {
         const context = getMarketContext();
         const setups = getTodaySetups();
-        const formattedStocks = masterStocks.slice(0, 50).map(formatStockForWatchlist);
+        const formattedStocks = masterStocks.map(formatStockForWatchlist);
         const resData = {
           success: true,
           marketContext: context,

@@ -1,5 +1,5 @@
 {
-  "runTime": "2026-11-20T14:29:44.096Z",
+  "runTime": "2026-11-20T14:50:25.206Z",
   "passCount": 21,
   "failCount": 0,
   "total": 21,
@@ -8,148 +8,148 @@
       "testNumber": 1,
       "name": "Live Data उपलब्ध आणि अनुपलब्ध असतानाची स्थिती",
       "status": "PASS",
-      "timestamp": "2026-11-20T14:29:43.403Z",
+      "timestamp": "2026-11-20T14:50:24.763Z",
       "details": "Market Session: 🔴 MARKET CLOSED (OFF), Data Status: MARKET_CLOSED_EOD"
     },
     {
       "testNumber": 2,
       "name": "मार्केट सुट्टी / Closed Market Data आणि विशेष ट्रेडिंग सेशन्स",
       "status": "PASS",
-      "timestamp": "2026-11-20T14:29:43.404Z",
+      "timestamp": "2026-11-20T14:50:24.764Z",
       "details": "State: CLOSED, isHoliday: false, Badge: badge-closed"
     },
     {
       "testNumber": 3,
       "name": "NIFTY/BANKNIFTY Spot Index vs Options (Spot-Futures Basis Divergence Isolated)",
       "status": "PASS",
-      "timestamp": "2026-11-20T14:29:43.630Z",
+      "timestamp": "2026-11-20T14:50:24.882Z",
       "details": "Spot CMP: ₹25800.6, Isolated From Futures/Options: TRUE"
     },
     {
       "testNumber": 4,
       "name": "Risk:Reward (1:2.0+) आणि Stop-Loss < Entry (कठोर जोखीम पडताळणी)",
       "status": "PASS",
-      "timestamp": "2026-11-20T14:29:43.641Z",
+      "timestamp": "2026-11-20T14:50:24.887Z",
       "details": "Entry: ₹2950, Stop Loss: ₹2920, Target 1: ₹3010, Calculated R:R = 1:2.0"
     },
     {
       "testNumber": 5,
       "name": "CALL आणि PUT Contract Mapping (Options Schema & Lot Sizes)",
       "status": "PASS",
-      "timestamp": "2026-11-20T14:29:43.651Z",
+      "timestamp": "2026-11-20T14:50:24.896Z",
       "details": "NIFTY CE (Strike: 22600, Lot: 25) & BANK NIFTY PE (Strike: 54900, Lot: 15)"
     },
     {
       "testNumber": 6,
       "name": "Entry Trigger आणि Entry Not Triggered",
       "status": "PASS",
-      "timestamp": "2026-11-20T14:29:43.663Z",
-      "details": "Triggered: true (at 19:59:43 IST) | Untriggered: false"
+      "timestamp": "2026-11-20T14:50:24.901Z",
+      "details": "Triggered: true (at 20:20:24 IST) | Untriggered: false"
     },
     {
       "testNumber": 7,
       "name": "Target Hit आणि Stop-Loss Hit",
       "status": "PASS",
-      "timestamp": "2026-11-20T14:29:43.679Z",
+      "timestamp": "2026-11-20T14:50:24.911Z",
       "details": "Target: TARGET 1 HIT (Exit ₹1500, Net ₹568.44) | SL: STOP LOSS HIT (Exit ₹254, Net ₹-627.19)"
     },
     {
       "testNumber": 8,
       "name": "एकाच Candle मधील Target/SL Ambiguity (Intrabar Conflict Resolution)",
       "status": "PASS",
-      "timestamp": "2026-11-20T14:29:43.691Z",
+      "timestamp": "2026-11-20T14:50:24.916Z",
       "details": "Outcome: AMBIGUOUS — NOT VERIFIED, Data Status: AMBIGUOUS"
     },
     {
       "testNumber": 9,
       "name": "Manual Exit आणि Expired Signal (Supported Status Lifecycle)",
       "status": "PASS",
-      "timestamp": "2026-11-20T14:29:43.701Z",
+      "timestamp": "2026-11-20T14:50:24.918Z",
       "details": "Status: EXITED MANUALLY, Exit: ₹2135, Time: 14:30:00 IST"
     },
     {
       "testNumber": 10,
       "name": "Refresh, Restart आणि Login नंतर History टिकणे (Persistent Storage)",
       "status": "PASS",
-      "timestamp": "2026-11-20T14:29:43.707Z",
+      "timestamp": "2026-11-20T14:50:24.921Z",
       "details": "Disk Database: 25 signals stored persistently in data/trade_signals.json"
     },
     {
       "testNumber": 11,
       "name": "Duplicate Signal व Duplicate Order नियंत्रण (Idempotent Guard)",
       "status": "PASS",
-      "timestamp": "2026-11-20T14:29:43.723Z",
+      "timestamp": "2026-11-20T14:50:24.929Z",
       "details": "Attempted duplicate signal rejected. Maintained database count without duplicate."
     },
     {
       "testNumber": 12,
       "name": "P&L आणि शुल्कांची स्वतंत्र गणना (Indian Statutory Tax Breakdown)",
       "status": "PASS",
-      "timestamp": "2026-11-20T14:29:43.724Z",
+      "timestamp": "2026-11-20T14:50:24.929Z",
       "details": "Equity Net: ₹1107.51 (Charges: ₹84.99) | Option Net: ₹1194.12 (Charges: ₹55.88)"
     },
     {
       "testNumber": 13,
       "name": "Dashboard आणि Tracker यांतील डेटा जुळणे (Signal Sync Integrity)",
       "status": "PASS",
-      "timestamp": "2026-11-20T14:29:43.727Z",
+      "timestamp": "2026-11-20T14:50:24.930Z",
       "details": "Tracker Signals: 26, Report Signals: 26, Verified Win Rate: 80%"
     },
     {
       "testNumber": 14,
       "name": "API Disconnect/Reconnect आणि Error Recovery",
       "status": "PASS",
-      "timestamp": "2026-11-20T14:29:43.972Z",
+      "timestamp": "2026-11-20T14:50:25.168Z",
       "details": "Reconnected successfully: NIFTY Spot CMP ₹25800.6, Time: 3:31:15 pm"
     },
     {
       "testNumber": 15,
       "name": "जुना Signal बदलल्याशिवाय नवीन Version तयार होणे (Signal Versioning v1.0 & v2.0)",
       "status": "PASS",
-      "timestamp": "2026-11-20T14:29:43.982Z",
+      "timestamp": "2026-11-20T14:50:25.176Z",
       "details": "Original v1.0 T1: ₹575 intact, Revised v2.0 T1: ₹585, Reason: \"Global EV delivery numbers beat estimates\""
     },
     {
       "testNumber": 16,
       "name": "ब्रोकर पुरावा नसताना Actual Execution दाखवले जात नाही याची खात्री (Zero False Claims)",
       "status": "PASS",
-      "timestamp": "2026-11-20T14:29:43.983Z",
+      "timestamp": "2026-11-20T14:50:25.176Z",
       "details": "All trades strictly classified as \"SIGNAL TRACKING\" with simulated status disclosures."
     },
     {
       "testNumber": 17,
       "name": "Time Machine: 10,000 Monte Carlo Replays & Probability Verification",
       "status": "PASS",
-      "timestamp": "2026-11-20T14:29:44.078Z",
+      "timestamp": "2026-11-20T14:50:25.200Z",
       "details": "Target: 14%, Stop: 84.5%, Expected R: -0.563R | Verdict: Strongly toward stop (Unfavorable Setup)"
     },
     {
       "testNumber": 18,
       "name": "Opening Range Breakout (ORB): 15m Range & Midpoint Stop Calculation",
       "status": "PASS",
-      "timestamp": "2026-11-20T14:29:44.079Z",
+      "timestamp": "2026-11-20T14:50:25.200Z",
       "details": "OR-High: ₹3010, OR-Low: ₹2980, OR-Mid Stop: ₹2995, Status: TRIGGERED"
     },
     {
       "testNumber": 19,
       "name": "Risk Budgeting: Mathematical Position Sizing (Risk & Cap Guards)",
       "status": "PASS",
-      "timestamp": "2026-11-20T14:29:44.080Z",
+      "timestamp": "2026-11-20T14:50:25.201Z",
       "details": "Risk-Limited: 50 shares (Risk ₹1000) | Cap-Limited: 31 shares"
     },
     {
       "testNumber": 20,
       "name": "Pre-Trade Risk Gate: PASS on Compliant Trade & BLOCK on Rule Violations",
       "status": "PASS",
-      "timestamp": "2026-11-20T14:29:44.089Z",
+      "timestamp": "2026-11-20T14:50:25.203Z",
       "details": "Valid: PASS, No Stop: BLOCK (STOP_LOSS_MISSING: Intraday rules strictly require a protective stop loss.), Penny Stock: BLOCK"
     },
     {
       "testNumber": 21,
       "name": "Bracket Order Generation & Strict Paper Trading Verification",
       "status": "PASS",
-      "timestamp": "2026-11-20T14:29:44.091Z",
-      "details": "Ticket ID: TICKET-TATAMOTORS-984091, Type: BRACKET_LIMIT, Status: READY_FOR_PAPER_EXECUTION, SimulatedOnly: true"
+      "timestamp": "2026-11-20T14:50:25.203Z",
+      "details": "Ticket ID: TICKET-TATAMOTORS-225203, Type: BRACKET_LIMIT, Status: READY_FOR_PAPER_EXECUTION, SimulatedOnly: true"
     }
   ]
 }

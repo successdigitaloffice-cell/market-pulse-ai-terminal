@@ -307,32 +307,32 @@ function calculateLevels(high, low, close) {
 
 // Baseline realistic reference quotes for major tracked equities (prevents arbitrary fallbacks)
 const BASELINE_STOCK_PRICES = {
-  reliance: { price: 1158.90, prevClose: 1170.30, high: 1185.50, low: 1153.20, volume: 5410000 },
-  tcs: { price: 2125.00, prevClose: 2156.00, high: 2195.10, low: 2120.90, volume: 1542000 },
-  hdfcbank: { price: 704.90, prevClose: 707.25, high: 711.85, low: 700.35, volume: 8940000 },
-  icicibank: { price: 1340.00, prevClose: 1355.00, high: 1357.90, low: 1334.50, volume: 6120000 },
-  infy: { price: 1020.00, prevClose: 1023.40, high: 1033.80, low: 1010.65, volume: 4320000 },
-  sbin: { price: 941.00, prevClose: 959.10, high: 962.00, low: 938.50, volume: 9304000 },
-  tatamotors: { price: 404.50, prevClose: 408.20, high: 412.00, low: 401.50, volume: 6512000 },
-  itc: { price: 257.90, prevClose: 259.40, high: 261.20, low: 256.00, volume: 11204000 },
-  bhartiartl: { price: 1778.70, prevClose: 1792.00, high: 1805.00, low: 1765.00, volume: 3410000 },
-  lt: { price: 3627.50, prevClose: 3650.00, high: 3680.00, low: 3610.00, volume: 1250000 },
-  sunpharma: { price: 1845.00, prevClose: 1860.00, high: 1872.00, low: 1838.00, volume: 1420000 },
-  maruti: { price: 12450.00, prevClose: 12580.00, high: 12690.00, low: 12380.00, volume: 450000 },
-  titan: { price: 3410.00, prevClose: 3440.00, high: 3465.00, low: 3390.00, volume: 890000 },
-  bajfinance: { price: 7120.00, prevClose: 7190.00, high: 7240.00, low: 7080.00, volume: 780000 },
-  jswsteel: { price: 1173.00, prevClose: 1168.00, high: 1187.60, low: 1163.60, volume: 1840000 },
-  tatasteel: { price: 172.24, prevClose: 174.10, high: 175.50, low: 171.00, volume: 15400000 },
-  adanient: { price: 2435.00, prevClose: 2470.00, high: 2488.00, low: 2420.00, volume: 1650000 },
-  coalindia: { price: 404.80, prevClose: 409.00, high: 412.50, low: 402.00, volume: 5400000 },
-  ntpc: { price: 310.00, prevClose: 313.50, high: 316.00, low: 308.00, volume: 7200000 },
-  ongc: { price: 220.00, prevClose: 222.80, high: 224.50, low: 218.00, volume: 8900000 },
-  techm: { price: 1471.00, prevClose: 1514.15, high: 1498.00, low: 1442.50, volume: 2210000 },
-  zomato: { price: 323.00, prevClose: 328.00, high: 332.00, low: 320.00, volume: 12400000 },
-  suzlon: { price: 39.57, prevClose: 40.10, high: 40.80, low: 39.20, volume: 28400000 },
-  irfc: { price: 77.50, prevClose: 78.40, high: 79.20, low: 76.80, volume: 14500000 },
-  hal: { price: 4760.00, prevClose: 4820.00, high: 4880.00, low: 4720.00, volume: 920000 },
-  bel: { price: 373.90, prevClose: 378.00, high: 382.00, low: 371.00, volume: 8900000 }
+  reliance: { price: 1285.50, prevClose: 1271.30, high: 1292.00, low: 1272.00, volume: 8410000 },
+  tcs: { price: 4160.00, prevClose: 4121.50, high: 4185.00, low: 4125.00, volume: 2142000 },
+  hdfcbank: { price: 1748.00, prevClose: 1736.60, high: 1756.00, low: 1735.00, volume: 14240000 },
+  icicibank: { price: 1262.00, prevClose: 1253.20, high: 1268.00, low: 1250.00, volume: 11520000 },
+  infy: { price: 1872.00, prevClose: 1853.40, high: 1888.00, low: 1855.00, volume: 6720000 },
+  sbin: { price: 818.00, prevClose: 810.80, high: 824.00, low: 811.00, volume: 16804000 },
+  tatamotors: { price: 945.00, prevClose: 932.20, high: 955.00, low: 932.00, volume: 13112000 },
+  itc: { price: 482.50, prevClose: 483.70, high: 486.00, low: 481.00, volume: 9204000 },
+  bhartiartl: { price: 1610.00, prevClose: 1598.00, high: 1622.00, low: 1598.00, volume: 4810000 },
+  lt: { price: 3680.00, prevClose: 3638.00, high: 3710.00, low: 3640.00, volume: 2850000 },
+  sunpharma: { price: 1780.00, prevClose: 1765.00, high: 1795.00, low: 1765.00, volume: 2620000 },
+  maruti: { price: 11950.00, prevClose: 11830.00, high: 12050.00, low: 11840.00, volume: 850000 },
+  titan: { price: 3290.00, prevClose: 3266.00, high: 3315.00, low: 3260.00, volume: 1290000 },
+  bajfinance: { price: 6850.00, prevClose: 6785.00, high: 6920.00, low: 6780.00, volume: 1480000 },
+  jswsteel: { price: 968.00, prevClose: 957.50, high: 976.00, low: 955.00, volume: 5240000 },
+  tatasteel: { price: 154.50, prevClose: 152.70, high: 156.00, low: 152.50, volume: 28400000 },
+  adanient: { price: 2940.00, prevClose: 2905.00, high: 2975.00, low: 2905.00, volume: 3950000 },
+  coalindia: { price: 428.00, prevClose: 424.80, high: 432.00, low: 424.00, volume: 7400000 },
+  ntpc: { price: 378.00, prevClose: 374.50, high: 382.00, low: 374.00, volume: 12400000 },
+  ongc: { price: 252.00, prevClose: 248.80, high: 256.00, low: 248.00, volume: 18900000 },
+  techm: { price: 1675.00, prevClose: 1656.00, high: 1690.00, low: 1652.00, volume: 3110000 },
+  zomato: { price: 265.00, prevClose: 262.00, high: 268.00, low: 261.00, volume: 22400000 },
+  suzlon: { price: 68.50, prevClose: 67.20, high: 69.80, low: 66.80, volume: 48400000 },
+  irfc: { price: 162.00, prevClose: 160.50, high: 164.50, low: 159.00, volume: 24500000 },
+  hal: { price: 4480.00, prevClose: 4420.00, high: 4520.00, low: 4410.00, volume: 1820000 },
+  bel: { price: 295.00, prevClose: 292.00, high: 298.00, low: 291.00, volume: 14900000 }
 };
 
 // Persistent in-memory cache for last verified exchange ticks
@@ -340,10 +340,20 @@ const lastKnownStockQuotes = new Map();
 
 // Generate institutional setup for a stock based on live price
 function buildStockSetup(cfg, quote) {
-  if (quote && quote.price) {
-    lastKnownStockQuotes.set(cfg.id, quote);
+  const baseline = BASELINE_STOCK_PRICES[cfg.id];
+  let effectiveQuote = quote || lastKnownStockQuotes.get(cfg.id) || baseline;
+
+  // Strict Price Sanity Check: reject corrupted/split-mismatched external quotes (> 30% error)
+  if (effectiveQuote && baseline && baseline.price) {
+    const ratio = effectiveQuote.price / baseline.price;
+    if (ratio < 0.70 || ratio > 1.35) {
+      effectiveQuote = baseline;
+    }
   }
-  const effectiveQuote = quote || lastKnownStockQuotes.get(cfg.id) || BASELINE_STOCK_PRICES[cfg.id];
+
+  if (effectiveQuote && effectiveQuote.price) {
+    lastKnownStockQuotes.set(cfg.id, effectiveQuote);
+  }
 
   const cmp = Number(effectiveQuote.price.toFixed(2));
   const prevClose = Number((effectiveQuote.prevClose || cmp).toFixed(2));

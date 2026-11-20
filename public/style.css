@@ -1067,6 +1067,24 @@ body {
   100% { background: var(--bg-card); }
 }
 
+[data-theme="white"] .tick-flash-up {
+  animation: flash-green-white 0.9s ease-out !important;
+}
+
+[data-theme="white"] .tick-flash-down {
+  animation: flash-red-white 0.9s ease-out !important;
+}
+
+@keyframes flash-green-white {
+  0% { background: #dcfce7 !important; border-color: #16a34a !important; box-shadow: 0 0 16px rgba(34, 197, 94, 0.3) !important; }
+  100% { background: #ffffff !important; border-color: #cbd5e1 !important; box-shadow: 0 4px 14px rgba(15, 23, 42, 0.04) !important; }
+}
+
+@keyframes flash-red-white {
+  0% { background: #fee2e2 !important; border-color: #dc2626 !important; box-shadow: 0 0 16px rgba(239, 68, 68, 0.3) !important; }
+  100% { background: #ffffff !important; border-color: #cbd5e1 !important; box-shadow: 0 4px 14px rgba(15, 23, 42, 0.04) !important; }
+}
+
 /* Rules Box */
 .rules-box {
   padding: 18px 20px;

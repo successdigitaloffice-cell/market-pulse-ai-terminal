@@ -839,7 +839,181 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // 7. Render Stock Watchlist Cards with Real-Time Accuracy & Signal Cross-Reference
+  // 7. Render Stock Watchlist Cards with Real-Time Accuracy & In-Place Live Ticks
+  function updateStockCardInPlace(card, s) {
+    const cmp = Number(s.cmp || s.price || 100);
+    const oldPrice = prevPrices[s.symbol];
+    prevPrices[s.symbol] = cmp;
+
+    const cmpEl = card.querySelector('.stock-cmp-val');
+    if (cmpEl) {
+      cmpEl.textContent = `₹${cmp.toLocaleString('en-IN', { minimumFractionDigits: 2 })}`;
+    }
+
+    const changePercent = Number(s.changePercent != null ? s.changePercent : (s.pct != null ? s.pct : 0));
+    const changeVal = Number(s.change != null ? s.change : 0);
+    const isUp = changePercent >= 0;
+    const changeColor = isUp ? 'green' : 'red';
+
+    const chgEl = card.querySelector('.stock-change-val');
+    if (chgEl) {
+      chgEl.className = `stock-change-val ${changeColor}`;
+      chgEl.textContent = `${isUp ? '+' : ''}${changePercent.toFixed(2)}% (${isUp ? '+' : ''}${changeVal.toFixed(2)})`;
+    }
+
+    // Dynamic Live Tick Flash
+    if (oldPrice != null && Math.abs(oldPrice - cmp) > 0.01) {
+      card.classList.remove('tick-flash-up', 'tick-flash-down');
+      void card.offsetWidth; // Force CSS reflow
+      const flashClass = cmp > oldPrice ? 'tick-flash-up' : 'tick-flash-down';
+      card.classList.add(flashClass);
+      setTimeout(() => {
+        card.classList.remove(flashClass);
+      }, 950);
+    }
+  }
+
+  function buildStockCardElement(s, activeSignals) {
+    const action = s.action || s.signal || (s.pct >= 0 ? 'BUY (LONG)' : 'SELL (SHORT)');
+    const isBuy = action.includes('BUY');
+    const badgeClass = isBuy ? 'badge-buy' : 'badge-sell';
+    const actionColor = isBuy ? 'green' : 'red';
+    const changePercent = Number(s.changePercent != null ? s.changePercent : (s.pct != null ? s.pct : 0));
+    const changeVal = Number(s.change != null ? s.change : 0);
+    const isUp = changePercent >= 0;
+    const changeColor = isUp ? 'green' : 'red';
+
+    const cmp = Number(s.cmp || s.price || 100);
+    const dayLow = Number(s.dayLow != null ? s.dayLow : (s.low != null ? s.low : cmp * 0.985));
+    const dayHigh = Number(s.dayHigh != null ? s.dayHigh : (s.high != null ? s.high : cmp * 1.015));
+    const pivot = Number(s.pivot != null ? s.pivot : (dayHigh + dayLow + cmp) / 3);
+    const r1 = Number(s.r1 != null ? s.r1 : 2 * pivot - dayLow);
+    const s1 = Number(s.s1 != null ? s.s1 : 2 * pivot - dayHigh);
+
+    const entryAggressive = s.entryAggressive || (`₹${cmp.toFixed(2)} – ₹${(cmp * 1.002).toFixed(2)}`);
+    const stopLoss = s.stopLoss || (`₹${(cmp * (isBuy ? 0.992 : 1.008)).toFixed(2)}`);
+    const target1 = s.target1 || (`₹${(cmp * (isBuy ? 1.015 : 0.985)).toFixed(2)}`);
+    const target2 = s.target2 || (`₹${(cmp * (isBuy ? 1.028 : 0.972)).toFixed(2)}`);
+    const rsi14 = s.rsi14 || `${s.rsi || (isBuy ? 62.4 : 44.2)} (${isBuy ? 'Bullish' : 'Oversold'})`;
+    const vwapStatus = s.vwapStatus || (isBuy ? 'Bullish (Holding Above VWAP)' : 'Bearish (Rejected Below VWAP)');
+    const riskReward = s.riskReward || '1 : 2.5';
+    const catalyst = s.catalyst || 'Institutional volume accumulation & technical breakout.';
+
+    prevPrices[s.symbol] = cmp;
+
+    const matchingSig = activeSignals.find(sig => 
+      (sig.instrument && sig.instrument.toUpperCase().includes(s.symbol)) || 
+      s.symbol === sig.instrument?.toUpperCase()
+    );
+    const signalBadgeHtml = matchingSig 
+      ? `<div class="watchlist-sig-tag">
+           <span class="tag-sig-id">⚡ ${matchingSig.signalId}</span>
+           <span class="tag-sig-status">${matchingSig.outcome || 'WAITING'}</span>
+           <button class="btn-wl-to-tracker" data-sig-id="${matchingSig.signalId}" title="View in Tracker">Tracker ➜</button>
+         </div>`
+      : '';
+
+    const card = document.createElement('div');
+    card.className = 'stock-card';
+    card.setAttribute('data-symbol', s.symbol);
+    card.innerHTML = `
+      <div class="card-top">
+        <div class="stock-title">
+          <span class="stock-sym">${s.symbol}</span>
+          <span class="stock-name">${s.name || s.symbol} • ${s.sector || 'Equities'}</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:8px;">
+          <div style="text-align:right;">
+            <div class="stock-cmp-val">₹${cmp.toLocaleString('en-IN', { minimumFractionDigits: 2 })}</div>
+            <div style="font-family:var(--font-mono);font-size:0.75rem;font-weight:700;" class="stock-change-val ${changeColor}">${isUp ? '+' : ''}${changePercent.toFixed(2)}% (${isUp ? '+' : ''}${changeVal.toFixed(2)})</div>
+          </div>
+          <span class="badge-action ${badgeClass}">${action}</span>
+        </div>
+      </div>
+
+      ${signalBadgeHtml}
+
+      <div style="display:flex;justify-content:space-between;font-size:0.72rem;color:var(--text-muted);font-family:var(--font-mono);margin-bottom:8px;">
+        <span>Day Low: ₹${dayLow.toLocaleString('en-IN', { minimumFractionDigits: 2 })}</span>
+        <span>Classic Pivot: ₹${pivot.toLocaleString('en-IN', { minimumFractionDigits: 2 })}</span>
+        <span>Day High: ₹${dayHigh.toLocaleString('en-IN', { minimumFractionDigits: 2 })}</span>
+      </div>
+
+      <div class="card-prices-grid">
+        <div class="price-item">
+          <span class="lbl">Entry Trigger</span>
+          <span class="val ${actionColor}">${entryAggressive}</span>
+        </div>
+        <div class="price-item">
+          <span class="lbl">Stop Loss</span>
+          <span class="val red">${stopLoss}</span>
+        </div>
+        <div class="price-item">
+          <span class="lbl">Targets (T1 / T2 / T3)</span>
+          <span class="val green">${target1} | ${target2}</span>
+        </div>
+      </div>
+
+      <div class="card-indicators-bar">
+        <span class="indicator-pill">🎯 R1: ₹${r1.toFixed(2)} | S1: ₹${s1.toFixed(2)}</span>
+        <span class="indicator-pill">📊 RSI(14): ${rsi14}</span>
+        <span class="indicator-pill">⚡ VWAP: ${vwapStatus.includes('Bullish') ? 'Above VWAP' : 'Below VWAP'}</span>
+        <span class="indicator-pill">⚖️ R:R ${riskReward}</span>
+      </div>
+
+      <p class="card-catalyst">💡 <strong>Catalyst:</strong> ${catalyst}</p>
+
+      <div class="card-bottom-actions">
+        <button class="btn-wl-to-analysis" data-symbol="${s.symbol}" title="${s.name || s.symbol} चे १५ कलमी सविस्तर विश्लेषण पहा">
+          📊 १५ कलमी सविस्तर विश्लेषण पहा ➜
+        </button>
+      </div>
+    `;
+
+    // Attach card listeners
+    const trkBtn = card.querySelector('.btn-wl-to-tracker');
+    if (trkBtn) {
+      trkBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const sigId = trkBtn.getAttribute('data-sig-id');
+        window.switchMainTab('tracker');
+        const searchInput = document.getElementById('searchFilter');
+        if (searchInput) {
+          searchInput.value = sigId;
+          searchInput.dispatchEvent(new Event('input'));
+        }
+      });
+    }
+
+    const anaBtn = card.querySelector('.btn-wl-to-analysis');
+    if (anaBtn) {
+      anaBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const sym = anaBtn.getAttribute('data-symbol');
+        if (window.stocksAnalysis && typeof window.stocksAnalysis.searchFor === 'function') {
+          window.stocksAnalysis.searchFor(sym);
+        } else {
+          window.switchMainTab('analysis');
+        }
+      });
+    }
+
+    card.style.cursor = 'pointer';
+    card.addEventListener('click', (e) => {
+      if (e.target.closest('.btn-wl-to-tracker') || e.target.closest('.btn-wl-to-analysis')) return;
+      const sym = card.getAttribute('data-symbol');
+      if (sym) {
+        if (window.stocksAnalysis && typeof window.stocksAnalysis.searchFor === 'function') {
+          window.stocksAnalysis.searchFor(sym);
+        } else {
+          window.switchMainTab('analysis');
+        }
+      }
+    });
+
+    return card;
+  }
+
   function renderStockCards(stocks, activeSignals = []) {
     if (!stockCardsContainer) return;
 
@@ -863,156 +1037,25 @@ document.addEventListener('DOMContentLoaded', () => {
       filtered = stocks.filter(s => trendingSyms.includes(s.symbol) || ['suzlon', 'zomato', 'tatamotors', 'hal', 'bel', 'irfc'].includes(s.id));
     }
 
-    stockCardsContainer.innerHTML = '';
+    const currentRenderedCards = stockCardsContainer.querySelectorAll('.stock-card');
+    const firstSymbolNow = filtered[0]?.symbol;
+    const firstSymbolRendered = currentRenderedCards[0]?.getAttribute('data-symbol');
+    const needsFullRebuild = currentRenderedCards.length !== filtered.length || firstSymbolRendered !== firstSymbolNow;
 
-    filtered.forEach(s => {
-      const action = s.action || s.signal || (s.pct >= 0 ? 'BUY (LONG)' : 'SELL (SHORT)');
-      const isBuy = action.includes('BUY');
-      const badgeClass = isBuy ? 'badge-buy' : 'badge-sell';
-      const actionColor = isBuy ? 'green' : 'red';
-      const changePercent = Number(s.changePercent != null ? s.changePercent : (s.pct != null ? s.pct : 0));
-      const changeVal = Number(s.change != null ? s.change : 0);
-      const isUp = changePercent >= 0;
-      const changeColor = isUp ? 'green' : 'red';
-
-      const cmp = Number(s.cmp || s.price || 100);
-      const dayLow = Number(s.dayLow != null ? s.dayLow : (s.low != null ? s.low : cmp * 0.985));
-      const dayHigh = Number(s.dayHigh != null ? s.dayHigh : (s.high != null ? s.high : cmp * 1.015));
-      const pivot = Number(s.pivot != null ? s.pivot : (dayHigh + dayLow + cmp) / 3);
-      const r1 = Number(s.r1 != null ? s.r1 : 2 * pivot - dayLow);
-      const s1 = Number(s.s1 != null ? s.s1 : 2 * pivot - dayHigh);
-
-      const entryAggressive = s.entryAggressive || (`₹${cmp.toFixed(2)} – ₹${(cmp * 1.002).toFixed(2)}`);
-      const stopLoss = s.stopLoss || (`₹${(cmp * (isBuy ? 0.992 : 1.008)).toFixed(2)}`);
-      const target1 = s.target1 || (`₹${(cmp * (isBuy ? 1.015 : 0.985)).toFixed(2)}`);
-      const target2 = s.target2 || (`₹${(cmp * (isBuy ? 1.028 : 0.972)).toFixed(2)}`);
-      const rsi14 = s.rsi14 || `${s.rsi || (isBuy ? 62.4 : 44.2)} (${isBuy ? 'Bullish' : 'Oversold'})`;
-      const vwapStatus = s.vwapStatus || (isBuy ? 'Bullish (Holding Above VWAP)' : 'Bearish (Rejected Below VWAP)');
-      const riskReward = s.riskReward || '1 : 2.5';
-      const catalyst = s.catalyst || 'Institutional volume accumulation & technical breakout.';
-
-      // Check if price ticked
-      const oldPrice = prevPrices[s.symbol];
-      let tickAnimClass = '';
-      if (oldPrice != null && oldPrice !== cmp) {
-        tickAnimClass = cmp > oldPrice ? 'tick-flash-up' : 'tick-flash-down';
-      }
-      prevPrices[s.symbol] = cmp;
-
-      // Cross reference with activeSignals (Section 3 & 5)
-      const matchingSig = activeSignals.find(sig => 
-        (sig.instrument && sig.instrument.toUpperCase().includes(s.symbol)) || 
-        s.symbol === sig.instrument?.toUpperCase()
-      );
-      const signalBadgeHtml = matchingSig 
-        ? `<div class="watchlist-sig-tag">
-             <span class="tag-sig-id">⚡ ${matchingSig.signalId}</span>
-             <span class="tag-sig-status">${matchingSig.outcome || 'WAITING'}</span>
-             <button class="btn-wl-to-tracker" data-sig-id="${matchingSig.signalId}" title="View in Tracker">Tracker ➜</button>
-           </div>`
-        : '';
-
-      const card = document.createElement('div');
-      card.className = `stock-card ${tickAnimClass}`;
-      card.innerHTML = `
-        <div class="card-top">
-          <div class="stock-title">
-            <span class="stock-sym">${s.symbol}</span>
-            <span class="stock-name">${s.name || s.symbol} • ${s.sector || 'Equities'}</span>
-          </div>
-          <div style="display:flex;align-items:center;gap:8px;">
-            <div style="text-align:right;">
-              <div class="stock-cmp-val">₹${cmp.toLocaleString('en-IN', { minimumFractionDigits: 2 })}</div>
-              <div style="font-family:var(--font-mono);font-size:0.75rem;font-weight:700;" class="${changeColor}">${isUp ? '+' : ''}${changePercent.toFixed(2)}% (${isUp ? '+' : ''}${changeVal.toFixed(2)})</div>
-            </div>
-            <span class="badge-action ${badgeClass}">${action}</span>
-          </div>
-        </div>
-
-        ${signalBadgeHtml}
-
-        <div style="display:flex;justify-content:space-between;font-size:0.72rem;color:var(--text-muted);font-family:var(--font-mono);margin-bottom:8px;">
-          <span>Day Low: ₹${dayLow.toLocaleString('en-IN', { minimumFractionDigits: 2 })}</span>
-          <span>Classic Pivot: ₹${pivot.toLocaleString('en-IN', { minimumFractionDigits: 2 })}</span>
-          <span>Day High: ₹${dayHigh.toLocaleString('en-IN', { minimumFractionDigits: 2 })}</span>
-        </div>
-
-        <div class="card-prices-grid">
-          <div class="price-item">
-            <span class="lbl">Entry Trigger</span>
-            <span class="val ${actionColor}">${entryAggressive}</span>
-          </div>
-          <div class="price-item">
-            <span class="lbl">Stop Loss</span>
-            <span class="val red">${stopLoss}</span>
-          </div>
-          <div class="price-item">
-            <span class="lbl">Targets (T1 / T2 / T3)</span>
-            <span class="val green">${target1} | ${target2}</span>
-          </div>
-        </div>
-
-        <div class="card-indicators-bar">
-          <span class="indicator-pill">🎯 R1: ₹${r1.toFixed(2)} | S1: ₹${s1.toFixed(2)}</span>
-          <span class="indicator-pill">📊 RSI(14): ${rsi14}</span>
-          <span class="indicator-pill">⚡ VWAP: ${vwapStatus.includes('Bullish') ? 'Above VWAP' : 'Below VWAP'}</span>
-          <span class="indicator-pill">⚖️ R:R ${riskReward}</span>
-        </div>
-
-        <p class="card-catalyst">💡 <strong>Catalyst:</strong> ${catalyst}</p>
-
-        <div class="card-bottom-actions">
-          <button class="btn-wl-to-analysis" data-symbol="${s.symbol}" title="${s.name || s.symbol} चे १५ कलमी सविस्तर विश्लेषण पहा">
-            📊 १५ कलमी सविस्तर विश्लेषण पहा ➜
-          </button>
-        </div>
-      `;
-      stockCardsContainer.appendChild(card);
-    });
-
-    // Attach listeners for Watchlist -> Tracker navigation
-    stockCardsContainer.querySelectorAll('.btn-wl-to-tracker').forEach(btn => {
-      btn.addEventListener('click', (e) => {
-        e.stopPropagation();
-        const sigId = e.currentTarget.getAttribute('data-sig-id');
-        window.switchMainTab('tracker');
-        const searchInput = document.getElementById('searchFilter');
-        if (searchInput) {
-          searchInput.value = sigId;
-          searchInput.dispatchEvent(new Event('input'));
+    if (needsFullRebuild) {
+      stockCardsContainer.innerHTML = '';
+      filtered.forEach(s => {
+        const card = buildStockCardElement(s, activeSignals);
+        stockCardsContainer.appendChild(card);
+      });
+    } else {
+      filtered.forEach((s, idx) => {
+        const card = currentRenderedCards[idx];
+        if (card) {
+          updateStockCardInPlace(card, s);
         }
       });
-    });
-
-    // Attach listeners for Watchlist -> Analysis navigation
-    stockCardsContainer.querySelectorAll('.btn-wl-to-analysis').forEach(btn => {
-      btn.addEventListener('click', (e) => {
-        e.stopPropagation();
-        const sym = e.currentTarget.getAttribute('data-symbol');
-        if (window.stocksAnalysis && typeof window.stocksAnalysis.searchFor === 'function') {
-          window.stocksAnalysis.searchFor(sym);
-        } else {
-          window.switchMainTab('analysis');
-        }
-      });
-    });
-
-    // Clicking the card body directly opens that stock in Stocks Analysis
-    stockCardsContainer.querySelectorAll('.stock-card').forEach(card => {
-      card.style.cursor = 'pointer';
-      card.addEventListener('click', (e) => {
-        if (e.target.closest('.btn-wl-to-tracker') || e.target.closest('.btn-wl-to-analysis')) return;
-        const symEl = card.querySelector('.stock-sym');
-        if (symEl) {
-          const sym = symEl.textContent.trim();
-          if (window.stocksAnalysis && typeof window.stocksAnalysis.searchFor === 'function') {
-            window.stocksAnalysis.searchFor(sym);
-          } else {
-            window.switchMainTab('analysis');
-          }
-        }
-      });
-    });
+    }
   }
 
   // Filter Buttons
@@ -1098,9 +1141,9 @@ document.addEventListener('DOMContentLoaded', () => {
     } catch (_) {}
   }
 
-  // Initial Load + Auto-refresh every 3.5 seconds
+  // Initial Load + Auto-refresh every 2.2 seconds (Real-time Live Ticks)
   loadMarketData();
-  setInterval(loadMarketData, 3500);
+  setInterval(loadMarketData, 2200);
 
   // 7. Handle Chat / "HII" Command
   function formatMarkdown(text) {

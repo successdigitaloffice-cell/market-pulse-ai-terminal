@@ -69,23 +69,7 @@ const mockDoc = {
     return matches;
   },
   querySelector: (sel) => mockDoc.querySelectorAll(sel)[0] || null,
-  createElement: (tag) => ({
-    tagName: tag.toUpperCase(),
-    style: {},
-    classList: {
-      _set: new Set(),
-      add: function(c) { this._set.add(c); },
-      remove: function(c) { this._set.delete(c); },
-      contains: function(c) { return this._set.has(c); }
-    },
-    innerHTML: '',
-    textContent: '',
-    children: [],
-    appendChild: function(c) { this.children.push(c); },
-    querySelectorAll: () => [],
-    querySelector: () => null,
-    addEventListener: () => {}
-  }),
+  createElement: (tag) => getEl('created_' + Math.random().toString(36).slice(2), tag),
   body: getEl('body'),
   documentElement: getEl('html'),
   addEventListener: (evt, h) => {

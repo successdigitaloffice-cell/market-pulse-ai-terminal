@@ -1152,9 +1152,46 @@ document.addEventListener('DOMContentLoaded', () => {
     } catch (_) {}
   }
 
-  // Initial Load + Auto-refresh every 2.2 seconds (Real-time Live Ticks)
+  // Initial Load + Auto-refresh every 1.5 seconds (Real-time Live Ticks)
   loadMarketData();
-  setInterval(loadMarketData, 2200);
+  setInterval(loadMarketData, 1500);
+
+  // Continuous Real-Time In-Place Micro-Tick Engine (Every 1.2s for active live exchange feel)
+  setInterval(() => {
+    if (!stockCardsContainer || !cachedStocksList || cachedStocksList.length === 0) return;
+    const cards = stockCardsContainer.querySelectorAll('.stock-card');
+    if (!cards || cards.length === 0) return;
+
+    cards.forEach(card => {
+      const sym = card.getAttribute('data-symbol');
+      if (!sym) return;
+      const stock = cachedStocksList.find(s => s.symbol === sym);
+      if (!stock) return;
+
+      const baseCmp = Number(stock.price || stock.cmp || 100);
+      let newCmp;
+      if (window.StandaloneMarketEngine && typeof window.StandaloneMarketEngine.getLiveTickedPrice === 'function') {
+        newCmp = window.StandaloneMarketEngine.getLiveTickedPrice(sym, baseCmp);
+      } else {
+        const hash = sym.split('').reduce((acc, c, i) => acc + c.charCodeAt(0) * (i + 1), 0);
+        const cycle = Math.floor(Date.now() / 1500);
+        const wave = Math.sin((cycle * 0.95) + (hash % 23));
+        const delta = (wave > 0 ? 0.05 : -0.05);
+        newCmp = Number((baseCmp + delta).toFixed(2));
+      }
+
+      if (newCmp && !isNaN(newCmp)) {
+        const updatedStock = { ...stock, cmp: newCmp, price: newCmp };
+        const prevCls = Number(stock.prevClose || baseCmp);
+        const change = Number((newCmp - prevCls).toFixed(2));
+        const pct = prevCls > 0 ? Number(((change / prevCls) * 100).toFixed(2)) : 0;
+        updatedStock.change = change;
+        updatedStock.changePercent = pct;
+        updatedStock.pct = pct;
+        updateStockCardInPlace(card, updatedStock);
+      }
+    });
+  }, 1200);
 
   // 7. Handle Chat / "HII" Command
   function formatMarkdown(text) {

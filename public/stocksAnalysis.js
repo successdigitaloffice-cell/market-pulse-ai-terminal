@@ -1253,6 +1253,37 @@
     getCurrentSymbol: () => currentSymbol
   };
 
+  // Continuous real-time live tick engine for currently analyzed stock
+  setInterval(() => {
+    if (!currentAnalysisData || !currentSymbol) return;
+    const cmpEl = document.querySelector('.sa-cmp-val');
+    const chgPill = document.querySelector('.sa-change-pill');
+    if (!cmpEl || !chgPill) return;
+
+    const baseCmp = Number(currentAnalysisData.cmp || currentAnalysisData.price || 100);
+    let newCmp;
+    if (window.StandaloneMarketEngine && typeof window.StandaloneMarketEngine.getLiveTickedPrice === 'function') {
+      newCmp = window.StandaloneMarketEngine.getLiveTickedPrice(currentSymbol, baseCmp);
+    } else {
+      const cycle = Math.floor(Date.now() / 1500);
+      const hash = currentSymbol.split('').reduce((acc, c, i) => acc + c.charCodeAt(0) * (i + 1), 0);
+      const wave = Math.sin((cycle * 0.95) + (hash % 23));
+      const delta = (wave > 0 ? 0.05 : -0.05);
+      newCmp = Number((baseCmp + delta).toFixed(2));
+    }
+
+    if (newCmp && !isNaN(newCmp)) {
+      const prevClose = Number(currentAnalysisData.prevClose || baseCmp);
+      const change = Number((newCmp - prevClose).toFixed(2));
+      const pct = prevClose > 0 ? Number(((change / prevClose) * 100).toFixed(2)) : 0;
+      const isUp = change >= 0;
+
+      cmpEl.textContent = `₹${newCmp.toFixed(2)}`;
+      chgPill.className = `sa-change-pill ${isUp ? 'up' : 'down'}`;
+      chgPill.innerHTML = `${isUp ? '▲ +' : '▼ '}${change.toFixed(2)} (${isUp ? '+' : ''}${pct}%)`;
+    }
+  }, 1400);
+
   // Initial auto-load if starting on analysis view
   document.addEventListener('DOMContentLoaded', () => {
     // Check if URL has ?tab=analysis

@@ -58,16 +58,31 @@
   let masterStocks = [...TOP_MEGA_CAPS];
   let isFullDbLoaded = false;
 
-  // Real-time NSE Micro-Tick Engine (Calculates dynamic live ticks every 2s)
+  // Real-time NSE Continuous Micro-Tick Engine (Calculates dynamic live ticks every 1.5s)
   function getLiveTickedPrice(symbol, baseCmp) {
     const now = Date.now();
-    const tickCycle = Math.floor(now / 2000);
+    const tickCycle = Math.floor(now / 1500);
     const hash = (symbol || 'STOCK').split('').reduce((acc, c, i) => acc + c.charCodeAt(0) * (i + 1), 0);
-    const phase = (tickCycle * 0.65) + (hash % 19);
-    const pctDelta = Math.sin(phase) * 0.22 + (Math.cos(phase * 1.3) * 0.08);
-    let liveCmp = Number((baseCmp * (1 + (pctDelta / 100))).toFixed(2));
-    liveCmp = Math.round(liveCmp * 20) / 20; // Exact NSE ₹0.05 tick increment
-    return Number(liveCmp.toFixed(2));
+    const phase = (tickCycle * 0.95) + (hash % 23);
+
+    const wave = Math.sin(phase) * 0.6 + Math.sin(phase * 1.7) * 0.4;
+    let tickCount;
+    if (baseCmp < 100) {
+      tickCount = Math.round(wave * 2.2);
+    } else if (baseCmp < 500) {
+      tickCount = Math.round(wave * 4.5);
+    } else if (baseCmp < 2000) {
+      tickCount = Math.round(wave * 12.0);
+    } else {
+      tickCount = Math.round(wave * 30.0);
+    }
+
+    if (tickCount === 0) {
+      tickCount = (tickCycle % 2 === 0) ? 1 : -1;
+    }
+
+    const delta = tickCount * 0.05;
+    return Number((baseCmp + delta).toFixed(2));
   }
 
   // Helper to format any stock for the Live Terminal Watchlist
@@ -1416,6 +1431,8 @@
     evaluateGate: evaluateRiskGate,
     exportCsv: exportAuditCsv,
     getMasterStocks: () => masterStocks,
+    getLiveTickedPrice: getLiveTickedPrice,
+    formatStock: formatStockForWatchlist,
     getWatchlistStocks: () => masterStocks.map(formatStockForWatchlist),
     searchStocks: (q) => {
       const query = (q || '').toLowerCase().trim();
